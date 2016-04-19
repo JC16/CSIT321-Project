@@ -36,7 +36,7 @@ public class mainAppWindow {
 	private void initialize() {
 		frmGoogleScholarTool = new JFrame();
 		frmGoogleScholarTool.setFont(new Font("Dialog", Font.BOLD, 12));
-		frmGoogleScholarTool.setTitle("Google Scholar Tool");
+		frmGoogleScholarTool.setTitle("Google Scholar Tool test");
 		frmGoogleScholarTool.setBounds(100, 100, 780, 485);
 		frmGoogleScholarTool.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
