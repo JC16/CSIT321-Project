@@ -10,6 +10,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import java.awt.BorderLayout;
 import javax.swing.JTextField;
+import org.openqa.selenium.*;
 
 public class mainAppWindow {
 
