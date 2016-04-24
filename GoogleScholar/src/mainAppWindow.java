@@ -11,8 +11,14 @@ import javax.swing.JLabel;
 import java.awt.BorderLayout;
 import javax.swing.JTextField;
 import org.openqa.selenium.*;
+import org.openqa.selenium.WebDriver;
+
+import org.openqa.selenium.phantomjs.PhantomJSDriver;
+import org.testng.annotations.Test;
+import org.openqa.selenium.Dimension;
 import javax.swing.JButton;
 import java.awt.Choice;
+
 
 public class mainAppWindow {
 
@@ -29,6 +35,43 @@ public class mainAppWindow {
 				try {
 					mainAppWindow window = new mainAppWindow();
 					window.frmGoogleScholarTool.setVisible(true);
+					
+					System.setProperty("phantomjs.binary.path", "C:\\phantomjs\\bin\\phantomjs.exe");
+					WebDriver driver = new PhantomJSDriver();
+					
+					//set invisible window size (needs to be done because browser is headless)
+					Dimension size = new Dimension(1150,550);
+					driver.manage().window().setSize(size);
+					
+					//go to website
+					driver.get("http://www.ram-bay.com");
+					
+					//print title
+					System.out.println(driver.getTitle());
+					
+					//find html element with id = "signin" and click on it
+					driver.findElement(By.id("signin")).click();
+					
+					//get title of new page
+					System.out.println(driver.getTitle());
+					
+					//go back to homepage
+					driver.get("http://www.ram-bay.com");
+
+					//find html element with id = "rego" and click on it
+					driver.findElement(By.linkText("Register")).click();
+					
+					//get title of new page
+					System.out.println(driver.getTitle());
+					
+					//go to google scholar
+					driver.get("http://scholar.google.com");
+					
+					//get title of new page					
+					System.out.println(driver.getTitle());
+					
+					
+					
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
