@@ -8,13 +8,13 @@ import javax.swing.JMenuItem;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
-import java.awt.BorderLayout;
+
 import javax.swing.JTextField;
 import org.openqa.selenium.*;
 import org.openqa.selenium.WebDriver;
 
 import org.openqa.selenium.phantomjs.PhantomJSDriver;
-import org.testng.annotations.Test;
+
 import org.openqa.selenium.Dimension;
 import javax.swing.JButton;
 import java.awt.Choice;
