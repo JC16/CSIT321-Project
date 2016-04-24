@@ -11,11 +11,14 @@ import javax.swing.JLabel;
 import java.awt.BorderLayout;
 import javax.swing.JTextField;
 import org.openqa.selenium.*;
+import javax.swing.JButton;
+import java.awt.Choice;
 
 public class mainAppWindow {
 
 	private JFrame frmGoogleScholarTool;
 	private JTextField textField;
+	private JTextField textField_1;
 
 	/**
 	 * Launch the application.
@@ -47,7 +50,7 @@ public class mainAppWindow {
 		frmGoogleScholarTool = new JFrame();
 		frmGoogleScholarTool.setFont(new Font("Dialog", Font.BOLD, 12));
 		frmGoogleScholarTool.setTitle("Google Scholar Tool");
-		frmGoogleScholarTool.setBounds(100, 100, 780, 485);
+		frmGoogleScholarTool.setBounds(100, 100, 999, 646);
 		frmGoogleScholarTool.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		JMenuBar menuBar = new JMenuBar();
@@ -65,6 +68,12 @@ public class mainAppWindow {
 			}
 		});
 		mnNewMenu.add(mntmExit);
+		
+		JMenu mnHelp = new JMenu("Help");
+		menuBar.add(mnHelp);
+		
+		JMenuItem mntmAbout = new JMenuItem("About");
+		mnHelp.add(mntmAbout);
 		frmGoogleScholarTool.getContentPane().setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("Journal Title:");
@@ -76,5 +85,33 @@ public class mainAppWindow {
 		textField.setBounds(122, 29, 374, 20);
 		frmGoogleScholarTool.getContentPane().add(textField);
 		textField.setColumns(10);
+		
+		JLabel lblIssn = new JLabel("ISSN:");
+		lblIssn.setBounds(77, 68, 56, 16);
+		frmGoogleScholarTool.getContentPane().add(lblIssn);
+		
+		textField_1 = new JTextField();
+		textField_1.setBounds(122, 65, 374, 22);
+		frmGoogleScholarTool.getContentPane().add(textField_1);
+		textField_1.setColumns(10);
+		
+		JButton btnSearch = new JButton("Search");
+		btnSearch.setBounds(523, 26, 97, 25);
+		frmGoogleScholarTool.getContentPane().add(btnSearch);
+		
+		JButton btnClearAll = new JButton("Clear all");
+		btnClearAll.setBounds(523, 64, 97, 25);
+		frmGoogleScholarTool.getContentPane().add(btnClearAll);
+		
+		Choice choice = new Choice();
+		choice.add("Google Scholar");
+		choice.add("Scopus");
+		choice.add("ISI Web of Science");
+		choice.setBounds(122, 104, 133, 22);
+		frmGoogleScholarTool.getContentPane().add(choice);
+		
+		JLabel lblData = new JLabel("Data source:");
+		lblData.setBounds(40, 110, 73, 16);
+		frmGoogleScholarTool.getContentPane().add(lblData);
 	}
 }
