@@ -10,6 +10,8 @@ import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+
 import org.openqa.selenium.*;
 import org.openqa.selenium.WebDriver;
 
@@ -18,6 +20,7 @@ import org.openqa.selenium.phantomjs.PhantomJSDriver;
 import org.openqa.selenium.Dimension;
 import javax.swing.JButton;
 import java.awt.Choice;
+import java.awt.Color;
 
 
 public class mainAppWindow {
@@ -54,6 +57,7 @@ public class mainAppWindow {
 	private final JTextField textField_3 = new JTextField();
 	private final JLabel lblAnd = new JLabel("to");
 	private final JTextField textField_4 = new JTextField();
+	private final JLabel lblResult = new JLabel("Result",SwingConstants.CENTER);
 	
 	
 	
@@ -257,5 +261,11 @@ public class mainAppWindow {
 		frmGoogleScholarTool.getContentPane().add(lblAnd);
 		
 		frmGoogleScholarTool.getContentPane().add(textField_4);
+		lblResult.setForeground(Color.BLACK);
+		lblResult.setBackground(new Color(255, 255, 255));
+		lblResult.setOpaque(true);
+		lblResult.setBounds(6, 227, 987, 16);
+		
+		frmGoogleScholarTool.getContentPane().add(lblResult);
 	}
 }
