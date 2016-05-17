@@ -5,12 +5,16 @@ import java.awt.Font;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 
 import org.openqa.selenium.*;
 import org.openqa.selenium.WebDriver;
@@ -19,10 +23,15 @@ import org.openqa.selenium.phantomjs.PhantomJSDriver;
 
 import org.openqa.selenium.Dimension;
 import javax.swing.JButton;
+import javax.swing.JComponent;
+
 import java.awt.Choice;
 import java.awt.Color;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
+import java.awt.TextArea;
+import javax.swing.JTable;
 
 
 public class mainAppWindow {
@@ -100,42 +109,42 @@ public class mainAppWindow {
 					mainAppWindow window = new mainAppWindow();
 					window.frmGoogleScholarTool.setVisible(true);
 					
-					System.setProperty("phantomjs.binary.path", "C:\\phantomjs\\bin\\phantomjs.exe");
-					WebDriver driver = new PhantomJSDriver();
-					
-					//set invisible window size (needs to be done because browser is headless)
-					Dimension size = new Dimension(1150,550);
-					driver.manage().window().setSize(size);
-					
-					//go to website
-					driver.get("http://www.ram-bay.com");
-					
-					//print title
-					System.out.println(driver.getTitle());
-					
-					//find html element with id = "signin" and click on it
-					driver.findElement(By.id("signin")).click();
-					
-					//get title of new page
-					System.out.println(driver.getTitle());
-					
-					//go back to homepage
-					driver.get("http://www.ram-bay.com");
-
-					//find html element with id = "rego" and click on it
-					driver.findElement(By.linkText("Register")).click();
-					
-					//get title of new page
-					System.out.println(driver.getTitle());
-					
-					//go to google scholar
-					driver.get("http://scholar.google.com");
-					
-					//get title of new page					
-					System.out.println(driver.getTitle());
-					
-					
-					
+//					System.setProperty("phantomjs.binary.path", "C:\\phantomjs\\bin\\phantomjs.exe");
+//					WebDriver driver = new PhantomJSDriver();
+//					
+//					//set invisible window size (needs to be done because browser is headless)
+//					Dimension size = new Dimension(1150,550);
+//					driver.manage().window().setSize(size);
+//					
+//					//go to website
+//					driver.get("http://www.ram-bay.com");
+//					
+//					//print title
+//					System.out.println(driver.getTitle());
+//					
+//					//find html element with id = "signin" and click on it
+//					driver.findElement(By.id("signin")).click();
+//					
+//					//get title of new page
+//					System.out.println(driver.getTitle());
+//					
+//					//go back to homepage
+//					driver.get("http://www.ram-bay.com");
+//
+//					//find html element with id = "rego" and click on it
+//					driver.findElement(By.linkText("Register")).click();
+//					
+//					//get title of new page
+//					System.out.println(driver.getTitle());
+//					
+//					//go to google scholar
+//					driver.get("http://scholar.google.com");
+//					
+//					//get title of new page					
+//					System.out.println(driver.getTitle());
+//					
+//					
+//					
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -267,7 +276,7 @@ public class mainAppWindow {
 		choice.add("Google Scholar");
 		choice.add("Scopus");
 		choice.add("ISI Web of Science");
-		choice.setBounds(149, 182, 133, 22);
+		choice.setBounds(149, 182, 157, 22);
 		frmGoogleScholarTool.getContentPane().add(choice);
 		
 		JLabel lblData = new JLabel("Data source:");
@@ -366,8 +375,77 @@ public class mainAppWindow {
 		hIAnnualLabel.setBounds(440, 329, 61, 16);
 		
 		frmGoogleScholarTool.getContentPane().add(hIAnnualLabel);
-		btnHelp.setBounds(902, 150, 91, 29);
+		btnHelp.setBounds(896, 150, 97, 29);
+		
+		btnHelp.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				
+				String help = "Journal Title: Enter the name of Journal you want to look up \n"
+							+ "Jounral ISSN: Enter the ISSN of Journal you want to look up\n"
+							+ "Exclude words: Enter any addtional words that most not appear in the return papers\n"
+							+ "Year of publication: Enter the range of the year which the paper had been publish\n"
+							+ "Data Source: The Data source for searching inforamtion";
+				
+				JOptionPane.showMessageDialog(frmGoogleScholarTool, help);
+			}
+			
+		});
+		
 		
 		frmGoogleScholarTool.getContentPane().add(btnHelp);
+		
+		JScrollPane scroll = new JScrollPane();
+		scroll.setBounds(43, 368, 929, 216);
+		frmGoogleScholarTool.getContentPane().add(scroll);
+		
+		JTable table = new JTable();
+		
+		scroll.setViewportView(table);
+		
+		DefaultTableModel TableModel = new DefaultTableModel()
+		{
+			public Class<?> getColumnClass(int column)
+			{
+				switch(column)
+				{
+					case 0:
+						return String.class;
+					case 1:
+						return String.class;
+					case 2:
+						return String.class;
+					case 3:
+						return String.class;
+					case 4:
+						return String.class;
+						
+					default:
+							return String.class;
+				}
+			}
+		};
+		
+		addColumn(TableModel,table);
+		
 	}
+	
+	 
+	public void addColumn(DefaultTableModel TableModel, JTable table)
+	{
+		table.setModel(TableModel);
+		TableModel.addColumn("Cites");
+		TableModel.addColumn("Per year");
+		TableModel.addColumn("Rank");
+		TableModel.addColumn("Author");
+		TableModel.addColumn("Title");
+		TableModel.addColumn("Year");
+		TableModel.addColumn("Publication");
+		TableModel.addColumn("Publisher");
+		TableModel.addColumn("Type");
+	}
+	
+	
 }
