@@ -96,9 +96,6 @@ public class mainAppWindow {
 	private final JButton btnHelp = new JButton("Help");
 	
 	
-	
-	
-	
 	/**
 	 * Launch the application.
 	 */
@@ -109,42 +106,7 @@ public class mainAppWindow {
 					mainAppWindow window = new mainAppWindow();
 					window.frmGoogleScholarTool.setVisible(true);
 					
-//					System.setProperty("phantomjs.binary.path", "C:\\phantomjs\\bin\\phantomjs.exe");
-//					WebDriver driver = new PhantomJSDriver();
-//					
-//					//set invisible window size (needs to be done because browser is headless)
-//					Dimension size = new Dimension(1150,550);
-//					driver.manage().window().setSize(size);
-//					
-//					//go to website
-//					driver.get("http://www.ram-bay.com");
-//					
-//					//print title
-//					System.out.println(driver.getTitle());
-//					
-//					//find html element with id = "signin" and click on it
-//					driver.findElement(By.id("signin")).click();
-//					
-//					//get title of new page
-//					System.out.println(driver.getTitle());
-//					
-//					//go back to homepage
-//					driver.get("http://www.ram-bay.com");
-//
-//					//find html element with id = "rego" and click on it
-//					driver.findElement(By.linkText("Register")).click();
-//					
-//					//get title of new page
-//					System.out.println(driver.getTitle());
-//					
-//					//go to google scholar
-//					driver.get("http://scholar.google.com");
-//					
-//					//get title of new page					
-//					System.out.println(driver.getTitle());
-//					
-//					
-//					
+			
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -221,6 +183,19 @@ public class mainAppWindow {
 		
 		mnView.add(mntmJournalImpact);
 		
+		mntmAuthorImapct.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				frmGoogleScholarTool.setVisible(false);
+				
+				authorSearch frame = new authorSearch();
+				frame.setVisible(true);
+				
+			}});
+		
+		
 		mnView.add(mntmAuthorImapct);
 		
 		mnView.add(mntmGeneralCitationSearch);
@@ -236,11 +211,6 @@ public class mainAppWindow {
 		menuBar.add(mnHelp);
 		
 		mnHelp.add(mntmAboutThisProgram);
-		
-		
-		
-		
-		
 		
 		
 		frmGoogleScholarTool.getContentPane().setLayout(null);
