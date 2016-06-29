@@ -10,6 +10,9 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.Choice;
@@ -34,9 +37,9 @@ public class authorSearch extends JFrame {
 	private final JMenuItem mntmDelete = new JMenuItem("Delete");
 	private final JMenuItem mntmCopyResult = new JMenuItem("Copy Result");
 	private final JMenu mnView = new JMenu("View");
-	private final JMenuItem mntmJournalImpact = new JMenuItem("Journal Impact");
-	private final JMenuItem mntmAuthorImapct = new JMenuItem("Author Imapct");
-	private final JMenuItem mntmGeneralCitationSearch = new JMenuItem("General citation search");
+	private final JMenuItem mntmJournalImpact = new JMenuItem("Journal Search");
+	private final JMenuItem mntmAuthorImapct = new JMenuItem("Author Search");
+	private final JMenuItem mntmGeneralCitationSearch = new JMenuItem("General Search");
 	private final JMenu mnTool = new JMenu("Tool");
 	private final JMenuItem mntmNewMenuItem_2 = new JMenuItem("Clear data");
 	private final JMenuItem mntmClearCache = new JMenuItem("Clear Cache");
@@ -111,7 +114,7 @@ public class authorSearch extends JFrame {
 //		contentPane.setLayout(new BorderLayout(0, 0));
 //		setContentPane(contentPane);
 		
-		setTitle("Search Author Impact");
+		setTitle("Author Search");
 		
 		setJMenuBar(menuBar);
 		
@@ -137,9 +140,46 @@ public class authorSearch extends JFrame {
 		
 		menuBar.add(mnView);
 		
+		mntmJournalImpact.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+					
+				panel.setVisible(false);
+				
+				JournalSearch jurFrame = new JournalSearch();
+				jurFrame.setVisible(true);
+				
+			}});
+		
 		mnView.add(mntmJournalImpact);
 		
+		mntmAuthorImapct.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+					
+				panel.setVisible(false);
+				
+				authorSearch frame = new authorSearch();
+				frame.setVisible(true);
+				
+			}});
+		
+		
 		mnView.add(mntmAuthorImapct);
+		
+		mntmGeneralCitationSearch.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+					
+				panel.setVisible(false);
+				
+				GeneralSearch GFrame = new GeneralSearch();
+				GFrame.setVisible(true);
+				
+			}});
 		
 		mnView.add(mntmGeneralCitationSearch);
 		
