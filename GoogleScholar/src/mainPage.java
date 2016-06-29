@@ -25,6 +25,7 @@ public class mainPage extends JFrame {
 
 	private JFrame frmGoogleScholarTool;
 
+	
 	//Menu Bar and Menu Item
 	private final JMenuBar menuBar = new JMenuBar();
 	private final JMenu mnFile = new JMenu("File");
@@ -38,9 +39,9 @@ public class mainPage extends JFrame {
 	private final JMenuItem mntmDelete = new JMenuItem("Delete");
 	private final JMenuItem mntmCopyResult = new JMenuItem("Copy Result");
 	private final JMenu mnView = new JMenu("View");
-	private final JMenuItem mntmJournalImpact = new JMenuItem("Journal Impact");
-	private final JMenuItem mntmAuthorImapct = new JMenuItem("Author Imapct");
-	private final JMenuItem mntmGeneralCitationSearch = new JMenuItem("General citation search");
+	private final JMenuItem mntmJournalImpact = new JMenuItem("Journal Search");
+	private final JMenuItem mntmAuthorImapct = new JMenuItem("Author Search");
+	private final JMenuItem mntmGeneralCitationSearch = new JMenuItem("General Search");
 	private final JMenu mnTool = new JMenu("Tool");
 	private final JMenuItem mntmNewMenuItem_2 = new JMenuItem("Clear data");
 	private final JMenuItem mntmClearCache = new JMenuItem("Clear Cache");
@@ -48,9 +49,9 @@ public class mainPage extends JFrame {
 	private final JMenu mnHelp = new JMenu("Help");
 	private final JMenuItem mntmAboutThisProgram = new JMenuItem("About this program");
 	private final JLabel lblGoogleScholarSearch = new JLabel("Google Scholar Search Tool");
-	private final JButton btnNewButton = new JButton("New button");
-	private final JButton btnNewButton_1 = new JButton("New button");
-	private final JButton btnNewButton_2 = new JButton("New button");
+	private final JButton btnNewButton = new JButton("Search By Jounral");
+	private final JButton btnNewButton_1 = new JButton("Search By Author");
+	private final JButton btnNewButton_2 = new JButton("Search By General Information");
 
 	/**
 	 * Launch the application.
@@ -60,7 +61,7 @@ public class mainPage extends JFrame {
 			public void run() {
 				try {
 					mainPage frame = new mainPage();
-					frame.setVisible(true);
+					frame.frmGoogleScholarTool.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -126,13 +127,25 @@ public class mainPage extends JFrame {
 		
 		menuBar.add(mnView);
 		
+		mntmJournalImpact.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+					
+				frmGoogleScholarTool.setVisible(false);
+				
+				JournalSearch jurFrame = new JournalSearch();
+				jurFrame.setVisible(true);
+				
+			}});
+		
 		mnView.add(mntmJournalImpact);
 		
 		mntmAuthorImapct.addActionListener(new ActionListener(){
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
+					
 				frmGoogleScholarTool.setVisible(false);
 				
 				authorSearch frame = new authorSearch();
@@ -142,6 +155,18 @@ public class mainPage extends JFrame {
 		
 		
 		mnView.add(mntmAuthorImapct);
+		
+		mntmGeneralCitationSearch.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+					
+				frmGoogleScholarTool.setVisible(false);
+				
+				GeneralSearch GFrame = new GeneralSearch();
+				GFrame.setVisible(true);
+				
+			}});
 		
 		mnView.add(mntmGeneralCitationSearch);
 		
@@ -163,12 +188,40 @@ public class mainPage extends JFrame {
 		lblGoogleScholarSearch.setBounds(313, 42, 449, 147);
 		
 		frmGoogleScholarTool.getContentPane().add(lblGoogleScholarSearch);
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				frmGoogleScholarTool.setVisible(false);
+				
+				JournalSearch jurFrame = new JournalSearch();
+				jurFrame.setVisible(true);
+			}
+		});
 		btnNewButton.setBounds(63, 238, 217, 203);
 		
 		frmGoogleScholarTool.getContentPane().add(btnNewButton);
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				frmGoogleScholarTool.setVisible(false);
+				
+				authorSearch AFrame = new authorSearch();
+				AFrame.setVisible(true);
+				
+			}
+		});
 		btnNewButton_1.setBounds(387, 238, 217, 203);
 		
 		frmGoogleScholarTool.getContentPane().add(btnNewButton_1);
+		btnNewButton_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frmGoogleScholarTool.setVisible(false);
+				
+				GeneralSearch GFrame = new GeneralSearch();
+				GFrame.setVisible(true);
+				
+			}
+		});
 		btnNewButton_2.setBounds(725, 241, 217, 203);
 		
 		frmGoogleScholarTool.getContentPane().add(btnNewButton_2);
