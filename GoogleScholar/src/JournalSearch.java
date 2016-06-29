@@ -34,7 +34,7 @@ import java.awt.TextArea;
 import javax.swing.JTable;
 
 
-public class mainAppWindow {
+public class JournalSearch extends JFrame {
 
 	private JFrame frmGoogleScholarTool;
 	private JTextField textField;
@@ -53,9 +53,9 @@ public class mainAppWindow {
 	private final JMenuItem mntmDelete = new JMenuItem("Delete");
 	private final JMenuItem mntmCopyResult = new JMenuItem("Copy Result");
 	private final JMenu mnView = new JMenu("View");
-	private final JMenuItem mntmJournalImpact = new JMenuItem("Journal Impact");
-	private final JMenuItem mntmAuthorImapct = new JMenuItem("Author Imapct");
-	private final JMenuItem mntmGeneralCitationSearch = new JMenuItem("General citation search");
+	private final JMenuItem mntmJournalImpact = new JMenuItem("Journal Search");
+	private final JMenuItem mntmAuthorImapct = new JMenuItem("Author Search");
+	private final JMenuItem mntmGeneralCitationSearch = new JMenuItem("General Search");
 	private final JMenu mnTool = new JMenu("Tool");
 	private final JMenuItem mntmNewMenuItem_2 = new JMenuItem("Clear data");
 	private final JMenuItem mntmClearCache = new JMenuItem("Clear Cache");
@@ -99,11 +99,11 @@ public class mainAppWindow {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					mainAppWindow window = new mainAppWindow();
+					JournalSearch window = new JournalSearch();
 					window.frmGoogleScholarTool.setVisible(true);
 					
 			
@@ -117,23 +117,24 @@ public class mainAppWindow {
 	/**
 	 * Create the application.
 	 */
-	public mainAppWindow() {
+	public JournalSearch() {
 		initialize();
+		frmGoogleScholarTool.setVisible(true);
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		textField_4.setBounds(323, 144, 67, 28);
+		textField_4.setBounds(323, 144, 56, 28);
 		textField_4.setColumns(10);
 		textField_3.setBounds(226, 144, 56, 28);
 		textField_3.setColumns(10);
-		textField_2.setBounds(146, 104, 738, 28);
+		textField_2.setBounds(136, 105, 748, 28);
 		textField_2.setColumns(10);
 		frmGoogleScholarTool = new JFrame();
 		frmGoogleScholarTool.setFont(new Font("Dialog", Font.BOLD, 12));
-		frmGoogleScholarTool.setTitle("Google Scholar Tool");
+		frmGoogleScholarTool.setTitle("Journal Search");
 		frmGoogleScholarTool.setBounds(100, 100, 999, 646);
 		frmGoogleScholarTool.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
@@ -181,13 +182,25 @@ public class mainAppWindow {
 		
 		menuBar.add(mnView);
 		
+		mntmJournalImpact.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+					
+				frmGoogleScholarTool.setVisible(false);
+				
+				JournalSearch jurFrame = new JournalSearch();
+				jurFrame.setVisible(true);
+				
+			}});
+		
 		mnView.add(mntmJournalImpact);
 		
 		mntmAuthorImapct.addActionListener(new ActionListener(){
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
+					
 				frmGoogleScholarTool.setVisible(false);
 				
 				authorSearch frame = new authorSearch();
@@ -197,6 +210,18 @@ public class mainAppWindow {
 		
 		
 		mnView.add(mntmAuthorImapct);
+		
+		mntmGeneralCitationSearch.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+					
+				frmGoogleScholarTool.setVisible(false);
+				
+				GeneralSearch GFrame = new GeneralSearch();
+				GFrame.setVisible(true);
+				
+			}});
 		
 		mnView.add(mntmGeneralCitationSearch);
 		
