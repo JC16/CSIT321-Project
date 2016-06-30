@@ -1,40 +1,27 @@
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
+import java.awt.BorderLayout;
+import java.awt.Choice;
+import java.awt.Color;
 import java.awt.Font;
-import javax.swing.JMenuBar;
-import javax.swing.JMenu;
-import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
-
-import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import javax.swing.JLabel;
+import java.awt.event.ActionListener;
 
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumn;
-
-import javax.swing.JButton;
-import javax.swing.JComponent;
-
-import java.awt.Choice;
-import java.awt.Color;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTextPane;
-import java.awt.TextArea;
-import javax.swing.JTable;
-
 
 public class JournalSearch extends JFrame {
 
-	private JFrame frmGoogleScholarTool;
-	private JTextField textField;
-	private JTextField textField_1;
+	private JPanel contentPane;
 
-	//Menu Bar and Menu Item
 	private final JMenuBar menuBar = new JMenuBar();
 	private final JMenu mnFile = new JMenu("File");
 	private final JMenuItem mntmNewMenuItem = new JMenuItem("Import Data");
@@ -56,104 +43,66 @@ public class JournalSearch extends JFrame {
 	private final JMenuItem mntmP = new JMenuItem("Preference");
 	private final JMenu mnHelp = new JMenu("Help");
 	private final JMenuItem mntmAboutThisProgram = new JMenuItem("About this program");
-	private final JLabel lblNewLabel_1 = new JLabel("Year of Publication between");
-	private final JLabel lblNewLabel_2 = new JLabel("Exculde words");
+	private final JPanel panel = new JPanel();
+	private final JLabel lblJournalTitle = new JLabel("Journal Title:");
+	private final JTextField textField = new JTextField();
+	private final JButton button = new JButton("Search");
+	private final JButton button_1 = new JButton("Clear all");
+	private final Choice choice = new Choice();
+	private final JLabel label_2 = new JLabel("Data source:");
+	private final JLabel label_3 = new JLabel("Year of Publication between");
+	private final JLabel lblExculdeTheseAuthors = new JLabel("ISSN:");
 	private final JTextField textField_2 = new JTextField();
 	private final JTextField textField_3 = new JTextField();
-	private final JLabel lblAnd = new JLabel("to");
+	private final JLabel label_5 = new JLabel("to");
 	private final JTextField textField_4 = new JTextField();
-	private final JLabel lblResult = new JLabel("Result",SwingConstants.CENTER);
-	private final JLabel lblNewLabel_3 = new JLabel("Papers:");
-	private final JLabel lblNewLabel_4 = new JLabel("Citation: ");
-	private final JLabel lblYears = new JLabel("Years: ");
-	private final JLabel lblNewLabel_5 = new JLabel("Cites/Year:");
-	private final JLabel PaperLabel = new JLabel("");
-	private final JLabel citationLabel = new JLabel("");
-	private final JLabel yearLabel = new JLabel("");
-	private final JLabel citeYearLabel = new JLabel("");
-	private final JLabel lblNewLabel_6 = new JLabel("Cites/Paper:");
-	private final JLabel lblCites = new JLabel("Cites/Author: ");
-	private final JLabel lblPaperauthor = new JLabel("Paper/Author:");
-	private final JLabel lblAuthorspaper = new JLabel("Authors/Paper:");
-	private final JLabel citesPaperLabel = new JLabel("");
-	private final JLabel citesAuthorLabel = new JLabel("");
-	private final JLabel paperAuthorLabel = new JLabel("");
-	private final JLabel authorPaperLabel = new JLabel("");
-	private final JLabel lblHindex = new JLabel("h-Index:");
-	private final JLabel lblNewLabel_7 = new JLabel("g-Index");
-	private final JLabel lblNewLabel_8 = new JLabel("hI,norm:");
-	private final JLabel lblNewLabel_9 = new JLabel("hI, annual:");
-	private final JLabel hIndexLabel = new JLabel("");
-	private final JLabel gIndexLabel = new JLabel("");
-	private final JLabel hinormLabel = new JLabel("");
-	private final JLabel hIAnnualLabel = new JLabel("");
-	private final JButton btnHelp = new JButton("Help");
-	
+	private final JLabel label_6 = new JLabel("Result", SwingConstants.CENTER);
+	private final JLabel label_7 = new JLabel("Papers:");
+	private final JLabel label_8 = new JLabel("Citation: ");
+	private final JLabel label_9 = new JLabel("Years: ");
+	private final JLabel label_10 = new JLabel("Cites/Year:");
+	private final JLabel label_11 = new JLabel("");
+	private final JLabel label_12 = new JLabel("");
+	private final JLabel label_13 = new JLabel("");
+	private final JLabel label_14 = new JLabel("");
+	private final JLabel label_15 = new JLabel("Cites/Paper:");
+	private final JLabel label_16 = new JLabel("Cites/Author: ");
+	private final JLabel label_17 = new JLabel("Paper/Author:");
+	private final JLabel label_18 = new JLabel("Authors/Paper:");
+	private final JLabel label_19 = new JLabel("");
+	private final JLabel label_20 = new JLabel("");
+	private final JLabel label_21 = new JLabel("");
+	private final JLabel label_22 = new JLabel("");
+	private final JLabel label_23 = new JLabel("h-Index:");
+	private final JLabel label_24 = new JLabel("g-Index");
+	private final JLabel label_25 = new JLabel("hI,norm:");
+	private final JLabel label_26 = new JLabel("hI, annual:");
+	private final JLabel label_27 = new JLabel("");
+	private final JLabel label_28 = new JLabel("");
+	private final JLabel label_29 = new JLabel("");
+	private final JLabel label_30 = new JLabel("");
+	private final JButton button_2 = new JButton("Help");
+	private final JScrollPane scrollPane = new JScrollPane();
+	private final JTextField textField_1 = new JTextField();
+	private final JLabel lblExculdeWords = new JLabel("Exculde words");
 	
 	/**
 	 * Launch the application.
 	 */
-	/*public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					JournalSearch window = new JournalSearch();
-					window.frmGoogleScholarTool.setVisible(true);
-					
-			
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+
+	
 
 	/**
-	 * Create the application.
+	 * Create the frame.
 	 */
 	public JournalSearch() {
-		initialize();
-		frmGoogleScholarTool.setVisible(true);
-	}
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 999, 646);
 
-	/**
-	 * Initialize the contents of the frame.
-	 */
-	private void initialize() {
-		textField_4.setBounds(323, 144, 56, 28);
-		textField_4.setColumns(10);
-		textField_3.setBounds(226, 144, 56, 28);
-		textField_3.setColumns(10);
-		textField_2.setBounds(136, 105, 748, 28);
-		textField_2.setColumns(10);
-		frmGoogleScholarTool = new JFrame();
-		frmGoogleScholarTool.setFont(new Font("Dialog", Font.BOLD, 12));
-		frmGoogleScholarTool.setTitle("Journal Search");
-		frmGoogleScholarTool.setBounds(100, 100, 999, 646);
-		frmGoogleScholarTool.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setTitle("Journal Search");
 		
-		//JMenuBar menuBar = new JMenuBar();
-		frmGoogleScholarTool.setJMenuBar(menuBar);
+		setJMenuBar(menuBar);
 		
-		//JMenu mnNewMenu = new JMenu("File");
-		//menuBar.add(mnNewMenu);
-		
-		/*JMenuItem mntmExit = new JMenuItem("Exit");
-		mntmExit.addActionListener(new ActionListener() 
-		{
-			public void actionPerformed(ActionEvent arg0) 
-			{
-				System.exit(0);
-			}
-		});
-		mnNewMenu.add(mntmExit);
-		
-		JMenu mnHelp = new JMenu("Help");
-		menuBar.add(mnHelp);
-		
-		JMenuItem mntmAbout = new JMenuItem("About");
-		mnHelp.add(mntmAbout);
-		*/
 		menuBar.add(mnFile);
 		
 		mnFile.add(mntmNewMenuItem);
@@ -181,7 +130,7 @@ public class JournalSearch extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 					
-				frmGoogleScholarTool.setVisible(false);
+				panel.setVisible(false);
 				
 				JournalSearch jurFrame = new JournalSearch();
 				jurFrame.setVisible(true);
@@ -195,7 +144,7 @@ public class JournalSearch extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 					
-				frmGoogleScholarTool.setVisible(false);
+				panel.setVisible(false);
 				
 				authorSearch frame = new authorSearch();
 				frame.setVisible(true);
@@ -210,7 +159,7 @@ public class JournalSearch extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 					
-				frmGoogleScholarTool.setVisible(false);
+				panel.setVisible(false);
 				
 				GeneralSearch GFrame = new GeneralSearch();
 				GFrame.setVisible(true);
@@ -231,168 +180,139 @@ public class JournalSearch extends JFrame {
 		
 		mnHelp.add(mntmAboutThisProgram);
 		
+		getContentPane().add(panel, BorderLayout.CENTER);
+		panel.setLayout(null);
+		lblJournalTitle.setFont(new Font("Lucida Grande", Font.PLAIN, 13));
+		lblJournalTitle.setBounds(16, 46, 126, 29);
 		
-		frmGoogleScholarTool.getContentPane().setLayout(null);
-		
-		JLabel lblNewLabel = new JLabel("Journal Title:");
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblNewLabel.setBounds(43, 24, 97, 29);
-		frmGoogleScholarTool.getContentPane().add(lblNewLabel);
-		
-		textField = new JTextField();
-		textField.setBounds(136, 29, 748, 20);
-		frmGoogleScholarTool.getContentPane().add(textField);
+		panel.add(lblJournalTitle);
 		textField.setColumns(10);
+		textField.setBounds(178, 51, 722, 20);
 		
-		JLabel lblIssn = new JLabel("ISSN:");
-		lblIssn.setBounds(43, 68, 56, 16);
-		frmGoogleScholarTool.getContentPane().add(lblIssn);
+		panel.add(textField);
+		button.setBounds(896, 50, 97, 25);
 		
-		textField_1 = new JTextField();
-		textField_1.setBounds(136, 65, 748, 22);
-		frmGoogleScholarTool.getContentPane().add(textField_1);
-		textField_1.setColumns(10);
+		panel.add(button);
+		button_1.setBounds(896, 100, 97, 25);
 		
-		JButton btnSearch = new JButton("Search");
-		btnSearch.setBounds(896, 29, 97, 25);
-		frmGoogleScholarTool.getContentPane().add(btnSearch);
+		panel.add(button_1);
+		choice.setBounds(106, 199, 157, 22);
 		
-		JButton btnClearAll = new JButton("Clear all");
-		btnClearAll.setBounds(896, 86, 97, 25);
-		frmGoogleScholarTool.getContentPane().add(btnClearAll);
+		panel.add(choice);
+		label_2.setBounds(16, 199, 84, 16);
 		
-		Choice choice = new Choice();
-		choice.add("Google Scholar");
-		choice.add("Scopus");
-		choice.add("ISI Web of Science");
-		choice.setBounds(149, 182, 157, 22);
-		frmGoogleScholarTool.getContentPane().add(choice);
+		panel.add(label_2);
+		label_3.setBounds(16, 159, 181, 16);
 		
-		JLabel lblData = new JLabel("Data source:");
-		lblData.setBounds(43, 188, 84, 16);
-		frmGoogleScholarTool.getContentPane().add(lblData);
-		lblNewLabel_1.setBounds(43, 150, 181, 16);
+		panel.add(label_3);
+		lblExculdeTheseAuthors.setFont(new Font("Lucida Grande", Font.PLAIN, 13));
+		lblExculdeTheseAuthors.setBounds(16, 92, 42, 16);
 		
-		frmGoogleScholarTool.getContentPane().add(lblNewLabel_1);
-		lblNewLabel_2.setBounds(43, 110, 97, 16);
+		panel.add(lblExculdeTheseAuthors);
+		textField_2.setColumns(10);
+		textField_2.setBounds(178, 86, 722, 28);
 		
-		frmGoogleScholarTool.getContentPane().add(lblNewLabel_2);
+		panel.add(textField_2);
+		textField_3.setColumns(10);
+		textField_3.setBounds(207, 153, 56, 28);
 		
-		frmGoogleScholarTool.getContentPane().add(textField_2);
+		panel.add(textField_3);
+		label_5.setBounds(275, 159, 61, 16);
 		
-		frmGoogleScholarTool.getContentPane().add(textField_3);
-		lblAnd.setBounds(291, 150, 61, 16);
+		panel.add(label_5);
+		textField_4.setColumns(10);
+		textField_4.setBounds(305, 153, 56, 28);
 		
-		frmGoogleScholarTool.getContentPane().add(lblAnd);
+		panel.add(textField_4);
+		label_6.setOpaque(true);
+		label_6.setForeground(Color.BLACK);
+		label_6.setBackground(Color.WHITE);
+		label_6.setBounds(6, 248, 987, 16);
 		
-		frmGoogleScholarTool.getContentPane().add(textField_4);
-		lblResult.setForeground(Color.BLACK);
-		lblResult.setBackground(new Color(255, 255, 255));
-		lblResult.setOpaque(true);
-		lblResult.setBounds(6, 227, 987, 16);
+		panel.add(label_6);
+		label_7.setBounds(33, 276, 61, 16);
 		
-		frmGoogleScholarTool.getContentPane().add(lblResult);
-		lblNewLabel_3.setBounds(43, 255, 61, 16);
+		panel.add(label_7);
+		label_8.setBounds(33, 300, 61, 16);
 		
-		frmGoogleScholarTool.getContentPane().add(lblNewLabel_3);
-		lblNewLabel_4.setBounds(43, 283, 61, 16);
+		panel.add(label_8);
+		label_9.setBounds(183, 300, 42, 16);
 		
-		frmGoogleScholarTool.getContentPane().add(lblNewLabel_4);
-		lblYears.setBounds(43, 305, 42, 16);
+		panel.add(label_9);
+		label_10.setBounds(34, 328, 70, 16);
 		
-		frmGoogleScholarTool.getContentPane().add(lblYears);
-		lblNewLabel_5.setBounds(43, 329, 70, 16);
+		panel.add(label_10);
+		label_11.setBounds(106, 276, 61, 16);
 		
-		frmGoogleScholarTool.getContentPane().add(lblNewLabel_5);
-		PaperLabel.setBounds(95, 255, 61, 16);
+		panel.add(label_11);
+		label_12.setBounds(116, 300, 61, 16);
 		
-		frmGoogleScholarTool.getContentPane().add(PaperLabel);
-		citationLabel.setBounds(105, 283, 61, 16);
+		panel.add(label_12);
+		label_13.setBounds(116, 328, 61, 16);
 		
-		frmGoogleScholarTool.getContentPane().add(citationLabel);
-		yearLabel.setBounds(95, 305, 61, 16);
+		panel.add(label_13);
+		label_14.setBounds(269, 276, 61, 16);
 		
-		frmGoogleScholarTool.getContentPane().add(yearLabel);
-		citeYearLabel.setBounds(121, 329, 61, 16);
+		panel.add(label_14);
+		label_15.setBounds(183, 276, 84, 16);
 		
-		frmGoogleScholarTool.getContentPane().add(citeYearLabel);
-		lblNewLabel_6.setBounds(175, 255, 84, 16);
+		panel.add(label_15);
+		label_16.setBounds(183, 332, 97, 16);
 		
-		frmGoogleScholarTool.getContentPane().add(lblNewLabel_6);
-		lblCites.setBounds(175, 283, 97, 16);
+		panel.add(label_16);
+		label_17.setBounds(347, 276, 97, 16);
 		
-		frmGoogleScholarTool.getContentPane().add(lblCites);
-		lblPaperauthor.setBounds(175, 305, 97, 16);
+		panel.add(label_17);
+		label_18.setBounds(347, 300, 107, 16);
 		
-		frmGoogleScholarTool.getContentPane().add(lblPaperauthor);
-		lblAuthorspaper.setBounds(175, 329, 107, 16);
+		panel.add(label_18);
+		label_19.setBounds(239, 300, 61, 16);
 		
-		frmGoogleScholarTool.getContentPane().add(lblAuthorspaper);
-		citesPaperLabel.setBounds(259, 255, 61, 16);
+		panel.add(label_19);
+		label_20.setBounds(292, 332, 61, 16);
 		
-		frmGoogleScholarTool.getContentPane().add(citesPaperLabel);
-		citesAuthorLabel.setBounds(269, 283, 61, 16);
+		panel.add(label_20);
+		label_21.setBounds(449, 328, 61, 16);
 		
-		frmGoogleScholarTool.getContentPane().add(citesAuthorLabel);
-		paperAuthorLabel.setBounds(279, 305, 61, 16);
+		panel.add(label_21);
+		label_22.setBounds(463, 276, 61, 16);
 		
-		frmGoogleScholarTool.getContentPane().add(paperAuthorLabel);
-		authorPaperLabel.setBounds(289, 329, 61, 16);
+		panel.add(label_22);
+		label_23.setBounds(347, 332, 61, 16);
 		
-		frmGoogleScholarTool.getContentPane().add(authorPaperLabel);
-		lblHindex.setBounds(366, 255, 61, 16);
+		panel.add(label_23);
+		label_24.setBounds(566, 276, 61, 16);
 		
-		frmGoogleScholarTool.getContentPane().add(lblHindex);
-		lblNewLabel_7.setBounds(366, 283, 61, 16);
+		panel.add(label_24);
+		label_25.setBounds(566, 300, 61, 16);
 		
-		frmGoogleScholarTool.getContentPane().add(lblNewLabel_7);
-		lblNewLabel_8.setBounds(366, 305, 61, 16);
+		panel.add(label_25);
+		label_26.setBounds(566, 328, 78, 16);
 		
-		frmGoogleScholarTool.getContentPane().add(lblNewLabel_8);
-		lblNewLabel_9.setBounds(366, 329, 78, 16);
+		panel.add(label_26);
+		label_27.setBounds(449, 300, 61, 16);
 		
-		frmGoogleScholarTool.getContentPane().add(lblNewLabel_9);
-		hIndexLabel.setBounds(430, 255, 61, 16);
+		panel.add(label_27);
+		label_28.setBounds(639, 276, 61, 16);
 		
-		frmGoogleScholarTool.getContentPane().add(hIndexLabel);
-		gIndexLabel.setBounds(430, 283, 61, 16);
+		panel.add(label_28);
+		label_29.setBounds(639, 300, 61, 16);
 		
-		frmGoogleScholarTool.getContentPane().add(gIndexLabel);
-		hinormLabel.setBounds(430, 305, 61, 16);
+		panel.add(label_29);
+		label_30.setBounds(639, 332, 61, 16);
 		
-		frmGoogleScholarTool.getContentPane().add(hinormLabel);
-		hIAnnualLabel.setBounds(440, 329, 61, 16);
+		panel.add(label_30);
+		button_2.setBounds(896, 173, 97, 29);
 		
-		frmGoogleScholarTool.getContentPane().add(hIAnnualLabel);
-		btnHelp.setBounds(896, 150, 97, 29);
+		panel.add(button_2);
+		scrollPane.setBounds(16, 367, 964, 216);
 		
-		btnHelp.addActionListener(new ActionListener(){
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				
-				String help = "Journal Title: Enter the name of Journal you want to look up \n"
-							+ "Jounral ISSN: Enter the ISSN of Journal you want to look up\n"
-							+ "Exclude words: Enter any addtional words that most not appear in the return papers\n"
-							+ "Year of publication: Enter the range of the year which the paper had been publish\n"
-							+ "Data Source: The Data source for searching inforamtion";
-				
-				JOptionPane.showMessageDialog(frmGoogleScholarTool, help);
-			}
-			
-		});
+		panel.add(scrollPane);
 		
-		
-		frmGoogleScholarTool.getContentPane().add(btnHelp);
-		
-		JScrollPane scroll = new JScrollPane();
-		scroll.setBounds(43, 368, 929, 216);
-		frmGoogleScholarTool.getContentPane().add(scroll);
 		
 		JTable table = new JTable();
 		
-		scroll.setViewportView(table);
+		scrollPane.setViewportView(table);
 		
 		DefaultTableModel TableModel = new DefaultTableModel()
 		{
@@ -418,10 +338,16 @@ public class JournalSearch extends JFrame {
 		};
 		
 		addColumn(TableModel,table);
+		textField_1.setColumns(10);
+		textField_1.setBounds(178, 119, 722, 28);
+		
+		panel.add(textField_1);
+		lblExculdeWords.setFont(new Font("Lucida Grande", Font.PLAIN, 13));
+		lblExculdeWords.setBounds(16, 125, 107, 16);
+		
+		panel.add(lblExculdeWords);
 		
 	}
-	
-	 
 	public void addColumn(DefaultTableModel TableModel, JTable table)
 	{
 		table.setModel(TableModel);
@@ -435,6 +361,4 @@ public class JournalSearch extends JFrame {
 		TableModel.addColumn("Publisher");
 		TableModel.addColumn("Type");
 	}
-	
-	
 }

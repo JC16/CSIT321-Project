@@ -146,7 +146,7 @@ public class mainPage extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 					
-				frmGoogleScholarTool.setVisible(false);
+				frmGoogleScholarTool.getContentPane().setVisible(false);
 				
 				authorSearch frame = new authorSearch();
 				frame.setVisible(true);
@@ -226,42 +226,5 @@ public class mainPage extends JFrame {
 		
 		frmGoogleScholarTool.getContentPane().add(btnNewButton_2);
 		
-		DefaultTableModel TableModel = new DefaultTableModel()
-		{
-			public Class<?> getColumnClass(int column)
-			{
-				switch(column)
-				{
-					case 0:
-						return String.class;
-					case 1:
-						return String.class;
-					case 2:
-						return String.class;
-					case 3:
-						return String.class;
-					case 4:
-						return String.class;
-						
-					default:
-							return String.class;
-				}
-			}
-		};
-		
-	}
-	
-	 
-	public void addColumn(DefaultTableModel TableModel, JTable table)
-	{
-		TableModel.addColumn("Cites");
-		TableModel.addColumn("Per year");
-		TableModel.addColumn("Rank");
-		TableModel.addColumn("Author");
-		TableModel.addColumn("Title");
-		TableModel.addColumn("Year");
-		TableModel.addColumn("Publication");
-		TableModel.addColumn("Publisher");
-		TableModel.addColumn("Type");
 	}
 }
