@@ -8,6 +8,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 
@@ -273,10 +274,69 @@ public class JournalSearch extends JFrame {
 				
 				String issn = issntf.getText();
 				
-				String exclude = excl.getText();	
+				String exclude = excl.getText();
+				
+				try
+				{
+					
+						
+						String[] titleArray = {"", "","","","","","","","",""};
+						String[] authorArray = {"", "","","","","","","","",""};
+						int count = 0;
+						String url = "https://scholar.google.com.au/scholar?q=" + title + "&btnG=&hl=en&as_sdt=0%2C5";
+						Document doc = Jsoup.connect(url).userAgent("Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:25.0) Gecko/20100101 Firefox/25.0")  
+						           .referrer("http://www.google.com")   
+						           .timeout(12000) 
+						           .followRedirects(true)
+						           .get();
+						//System.out.println(doc.title());
+						
+						
+						Elements gstitle = doc.getElementsByTag("h3");
+						
+						for (Element link:gstitle)
+			            {
+			            	String lnk = link.getElementsByTag("a").text();
+			            	if (lnk.length()!=0) {
+			            		titleArray[count] = lnk;
+			            		count++;
+			            		
+			            	}
+			            }
+						
+						gstitle = doc.getElementsByClass("gs_a");
+						count = 0;
+						
+						for (Element link2:gstitle)
+			            {
+			            	String lnk = link2.tagName("a").text();
+			            	if (lnk.length()!=0) {
+			            		authorArray[count] = lnk;
+			            		count++;
+			            	}
+			            }
+						
+						
+						
+						for(int x = 0; x < titleArray.length; x++)
+						{
+							TableModel.addRow(new Object[]{false, "col1", "col2", "col3", authorArray[x], titleArray[x]});
+						}
+						
+						
+						
+						
+					
+				}
+				catch (Exception e)
+				{
+			        e.printStackTrace();
+			    }
+				
+					
 				
 				
-				TableModel.addRow(new Object[]{false, "row1", "row2"});
+				
 				
 				
 				
