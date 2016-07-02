@@ -268,6 +268,16 @@ public class JournalSearch extends JFrame {
 			public void actionPerformed(ActionEvent arg0) 
 			{
 				//search button
+				
+				int rowCount = TableModel.getRowCount();
+				//Remove rows one by one from the end of the table
+				for (int x = rowCount - 1; x >= 0; x--) 
+				{
+				    TableModel.removeRow(x);
+				}
+				
+				
+				
 				String title = journalt.getText();
 				title = title.replace(' ', '+');
 				//System.out.println(title);
