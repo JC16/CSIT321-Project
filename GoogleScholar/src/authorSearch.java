@@ -145,10 +145,10 @@ public class authorSearch extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 					
-				panel.setVisible(false);
+				dispose();
 				
 				JournalSearch jurFrame = new JournalSearch();
-				jurFrame.setVisible(true);
+				
 				
 			}});
 		
@@ -159,10 +159,7 @@ public class authorSearch extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 					
-				panel.setVisible(false);
-				
-				authorSearch frame = new authorSearch();
-				frame.setVisible(true);
+				//do nothing
 				
 			}});
 		
@@ -174,10 +171,10 @@ public class authorSearch extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 					
-				panel.setVisible(false);
+				dispose();
 				
-				GeneralSearch GFrame = new GeneralSearch();
-				GFrame.setVisible(true);
+				//GeneralSearch GFrame = new GeneralSearch();
+				
 				
 			}});
 		

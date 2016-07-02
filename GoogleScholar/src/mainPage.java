@@ -132,10 +132,11 @@ public class mainPage extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 					
-				frmGoogleScholarTool.setVisible(false);
+				//frmGoogleScholarTool.setVisible(false);
+				frmGoogleScholarTool.dispose();
 				
 				JournalSearch jurFrame = new JournalSearch();
-				jurFrame.setVisible(true);
+				
 				
 			}});
 		
@@ -146,7 +147,8 @@ public class mainPage extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 					
-				frmGoogleScholarTool.setVisible(false);
+				
+				frmGoogleScholarTool.dispose();
 				
 				authorSearch frame = new authorSearch();
 				frame.setVisible(true);
@@ -162,9 +164,10 @@ public class mainPage extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 					
 				frmGoogleScholarTool.setVisible(false);
+				frmGoogleScholarTool.dispose();
 				
-				GeneralSearch GFrame = new GeneralSearch();
-				GFrame.setVisible(true);
+				//GeneralSearch GFrame = new GeneralSearch();
+				//GFrame.setVisible(true);
 				
 			}});
 		
@@ -191,10 +194,10 @@ public class mainPage extends JFrame {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				frmGoogleScholarTool.setVisible(false);
+				frmGoogleScholarTool.dispose();
 				
 				JournalSearch jurFrame = new JournalSearch();
-				jurFrame.setVisible(true);
+				
 			}
 		});
 		btnNewButton.setBounds(63, 238, 217, 203);
@@ -203,7 +206,7 @@ public class mainPage extends JFrame {
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				frmGoogleScholarTool.setVisible(false);
+				frmGoogleScholarTool.dispose();
 				
 				authorSearch AFrame = new authorSearch();
 				AFrame.setVisible(true);
@@ -215,10 +218,10 @@ public class mainPage extends JFrame {
 		frmGoogleScholarTool.getContentPane().add(btnNewButton_1);
 		btnNewButton_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				frmGoogleScholarTool.setVisible(false);
+				frmGoogleScholarTool.dispose();
 				
-				GeneralSearch GFrame = new GeneralSearch();
-				GFrame.setVisible(true);
+				//GeneralSearch GFrame = new GeneralSearch();
+				
 				
 			}
 		});
