@@ -32,13 +32,19 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
 import java.awt.TextArea;
 import javax.swing.JTable;
-
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 
 public class JournalSearch extends JFrame {
 
 	private JFrame frmGoogleScholarTool;
 	private JTextField journalt;
 	private JTextField issntf;
+	
+	private JTable table = new JTable();
+	private DefaultTableModel TableModel;
 
 	//Menu Bar and Menu Item
 	private final JMenuBar menuBar = new JMenuBar();
@@ -135,7 +141,7 @@ public class JournalSearch extends JFrame {
 		frmGoogleScholarTool = new JFrame();
 		frmGoogleScholarTool.setFont(new Font("Dialog", Font.BOLD, 12));
 		frmGoogleScholarTool.setTitle("Journal Search");
-		frmGoogleScholarTool.setBounds(100, 100, 1030, 646);
+		frmGoogleScholarTool.setBounds(100, 100, 1030, 669);
 		frmGoogleScholarTool.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		//JMenuBar menuBar = new JMenuBar();
@@ -270,7 +276,7 @@ public class JournalSearch extends JFrame {
 				String exclude = excl.getText();	
 				
 				
-				
+				TableModel.addRow(new Object[]{"row1", "row2"});
 				
 				
 				
@@ -280,11 +286,11 @@ public class JournalSearch extends JFrame {
 				
 			}
 		});
-		btnSearch.setBounds(896, 29, 97, 25);
+		btnSearch.setBounds(896, 29, 97, 20);
 		frmGoogleScholarTool.getContentPane().add(btnSearch);
 		
 		JButton btnClearAll = new JButton("Clear all");
-		btnClearAll.setBounds(896, 86, 97, 25);
+		btnClearAll.setBounds(894, 66, 97, 20);
 		frmGoogleScholarTool.getContentPane().add(btnClearAll);
 		
 		Choice choice = new Choice();
@@ -390,7 +396,7 @@ public class JournalSearch extends JFrame {
 		hIAnnualLabel.setBounds(440, 329, 61, 16);
 		
 		frmGoogleScholarTool.getContentPane().add(hIAnnualLabel);
-		btnHelp.setBounds(896, 150, 97, 29);
+		btnHelp.setBounds(896, 95, 91, 20);
 		
 		btnHelp.addActionListener(new ActionListener(){
 
@@ -416,11 +422,11 @@ public class JournalSearch extends JFrame {
 		scroll.setBounds(43, 368, 929, 216);
 		frmGoogleScholarTool.getContentPane().add(scroll);
 		
-		JTable table = new JTable();
+		
 		
 		scroll.setViewportView(table);
 		
-		DefaultTableModel TableModel = new DefaultTableModel()
+		TableModel = new DefaultTableModel()
 		{
 			public Class<?> getColumnClass(int column)
 			{
