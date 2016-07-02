@@ -293,7 +293,8 @@ public class JournalSearch extends JFrame {
 						String[] titleArray = {"", "","","","","","","","",""};
 						String[] authorArray = {"", "","","","","","","","",""};
 						int count = 0;
-						String url = "https://scholar.google.com.au/scholar?q=" + title + "&btnG=&hl=en&as_sdt=0%2C5";
+						
+						String url = "https://scholar.google.com.au/scholar?as_q="+ title +"&as_epq=&as_oq=&as_eq=&as_occt=title&as_sauthors=&as_publication=&as_ylo=&as_yhi=&btnG=&hl=en&as_sdt=0%2C5";
 						Document doc = Jsoup.connect(url).userAgent("Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:25.0) Gecko/20100101 Firefox/25.0")  
 						           .referrer("http://www.google.com")   
 						           .timeout(12000) 
