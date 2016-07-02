@@ -276,7 +276,7 @@ public class JournalSearch extends JFrame {
 				String exclude = excl.getText();	
 				
 				
-				TableModel.addRow(new Object[]{"row1", "row2"});
+				TableModel.addRow(new Object[]{false, "row1", "row2"});
 				
 				
 				
@@ -293,6 +293,8 @@ public class JournalSearch extends JFrame {
 		btnClearAll.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) 
 			{
+				//clear all button
+				
 				int rowCount = TableModel.getRowCount();
 				//Remove rows one by one from the end of the table
 				for (int x = rowCount - 1; x >= 0; x--) 
@@ -444,7 +446,7 @@ public class JournalSearch extends JFrame {
 				switch(column)
 				{
 					case 0:
-						return String.class;
+						return Boolean.class;
 					case 1:
 						return String.class;
 					case 2:
@@ -452,6 +454,8 @@ public class JournalSearch extends JFrame {
 					case 3:
 						return String.class;
 					case 4:
+						return String.class;
+					case 5:
 						return String.class;
 						
 					default:
@@ -468,6 +472,7 @@ public class JournalSearch extends JFrame {
 	public void addColumn(DefaultTableModel TableModel, JTable table)
 	{
 		table.setModel(TableModel);
+		TableModel.addColumn("Select");
 		TableModel.addColumn("Cites");
 		TableModel.addColumn("Per year");
 		TableModel.addColumn("Rank");
