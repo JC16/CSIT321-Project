@@ -292,31 +292,27 @@ public class JournalSearch extends JFrame {
 						//System.out.println(doc.title());
 						
 						
-						Elements gstitle = doc.getElementsByTag("h3");
+						Elements gstitle = gstitle = doc.getElementsByClass("gs_ri");
 						
 						for (Element link:gstitle)
 			            {
-			            	String lnk = link.getElementsByTag("a").text();
-			            	if (lnk.length()!=0) {
+			            	String lnk = link.getElementsByClass("gs_rt").tagName("a").text();
+			            	lnk = lnk.replace("[PDF]", "");
+			            	lnk = lnk.replace("[HTML]", "");
+			            	lnk = lnk.replace("[BOOK][B]", "");
+			            	lnk = lnk.replace("[CITATION][C]", "");
+			            	lnk = lnk.trim();
+			            	//lnk = lnk.replaceAll("[B]", "");
+			            	String lnk2 = link.getElementsByClass("gs_a").tagName("div").text();
+			            	if (lnk.length()!=0 && lnk2.length() !=0 ) {
 			            		titleArray[count] = lnk;
-			            		count++;
-			            		
-			            	}
-			            }
-						
-						gstitle = doc.getElementsByClass("gs_a");
-						count = 0;
-						
-						for (Element link2:gstitle)
-			            {
-			            	String lnk = link2.tagName("a").text();
-			            	if (lnk.length()!=0) {
-			            		authorArray[count] = lnk;
-			            		count++;
-			            	}
+			            		authorArray[count] = lnk2;
+			            		count++;			            		
+			            	}		            	
 			            }
 						
 						
+												
 						
 						for(int x = 0; x < titleArray.length; x++)
 						{
