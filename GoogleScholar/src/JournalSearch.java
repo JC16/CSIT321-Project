@@ -320,7 +320,7 @@ public class JournalSearch extends JFrame {
 						
 						for(int x = 0; x < titleArray.length; x++)
 						{
-							TableModel.addRow(new Object[]{false, "col1", "col2", "col3", authorArray[x], titleArray[x]});
+							TableModel.addRow(new Object[]{false, "column1", "col2", "col3", authorArray[x], titleArray[x]});
 						}
 						
 						
