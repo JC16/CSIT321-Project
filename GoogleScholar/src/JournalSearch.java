@@ -8,6 +8,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 
@@ -32,13 +33,19 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
 import java.awt.TextArea;
 import javax.swing.JTable;
-
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 
 public class JournalSearch extends JFrame {
 
 	private JFrame frmGoogleScholarTool;
-	private JTextField textField;
-	private JTextField textField_1;
+	private JTextField journalt;
+	private JTextField issntf;
+	
+	private JTable table = new JTable();
+	private DefaultTableModel TableModel;
 
 	//Menu Bar and Menu Item
 	private final JMenuBar menuBar = new JMenuBar();
@@ -64,7 +71,7 @@ public class JournalSearch extends JFrame {
 	private final JMenuItem mntmAboutThisProgram = new JMenuItem("About this program");
 	private final JLabel lblNewLabel_1 = new JLabel("Year of Publication between");
 	private final JLabel lblNewLabel_2 = new JLabel("Exculde words");
-	private final JTextField textField_2 = new JTextField();
+	private final JTextField excl = new JTextField();
 	private final JTextField textField_3 = new JTextField();
 	private final JLabel lblAnd = new JLabel("to");
 	private final JTextField textField_4 = new JTextField();
@@ -130,12 +137,12 @@ public class JournalSearch extends JFrame {
 		textField_4.setColumns(10);
 		textField_3.setBounds(226, 144, 56, 28);
 		textField_3.setColumns(10);
-		textField_2.setBounds(136, 105, 748, 28);
-		textField_2.setColumns(10);
+		excl.setBounds(136, 105, 748, 28);
+		excl.setColumns(10);
 		frmGoogleScholarTool = new JFrame();
 		frmGoogleScholarTool.setFont(new Font("Dialog", Font.BOLD, 12));
 		frmGoogleScholarTool.setTitle("Journal Search");
-		frmGoogleScholarTool.setBounds(100, 100, 999, 646);
+		frmGoogleScholarTool.setBounds(100, 100, 1030, 669);
 		frmGoogleScholarTool.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		//JMenuBar menuBar = new JMenuBar();
@@ -187,10 +194,7 @@ public class JournalSearch extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 					
-				frmGoogleScholarTool.setVisible(false);
-				
-				JournalSearch jurFrame = new JournalSearch();
-				jurFrame.setVisible(true);
+				//do nothing
 				
 			}});
 		
@@ -218,8 +222,8 @@ public class JournalSearch extends JFrame {
 					
 				frmGoogleScholarTool.setVisible(false);
 				
-				GeneralSearch GFrame = new GeneralSearch();
-				GFrame.setVisible(true);
+				//GeneralSearch GFrame = new GeneralSearch();
+				
 				
 			}});
 		
@@ -245,26 +249,127 @@ public class JournalSearch extends JFrame {
 		lblNewLabel.setBounds(43, 24, 97, 29);
 		frmGoogleScholarTool.getContentPane().add(lblNewLabel);
 		
-		textField = new JTextField();
-		textField.setBounds(136, 29, 748, 20);
-		frmGoogleScholarTool.getContentPane().add(textField);
-		textField.setColumns(10);
+		journalt = new JTextField();
+		journalt.setBounds(136, 29, 748, 20);
+		frmGoogleScholarTool.getContentPane().add(journalt);
+		journalt.setColumns(10);
 		
 		JLabel lblIssn = new JLabel("ISSN:");
 		lblIssn.setBounds(43, 68, 56, 16);
 		frmGoogleScholarTool.getContentPane().add(lblIssn);
 		
-		textField_1 = new JTextField();
-		textField_1.setBounds(136, 65, 748, 22);
-		frmGoogleScholarTool.getContentPane().add(textField_1);
-		textField_1.setColumns(10);
+		issntf = new JTextField();
+		issntf.setBounds(136, 65, 748, 22);
+		frmGoogleScholarTool.getContentPane().add(issntf);
+		issntf.setColumns(10);
 		
 		JButton btnSearch = new JButton("Search");
-		btnSearch.setBounds(896, 29, 97, 25);
+		btnSearch.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) 
+			{
+				//search button
+				
+				int rowCount = TableModel.getRowCount();
+				//Remove rows one by one from the end of the table
+				for (int x = rowCount - 1; x >= 0; x--) 
+				{
+				    TableModel.removeRow(x);
+				}
+				
+				
+				
+				String title = journalt.getText();
+				title = title.replace(' ', '+');
+				//System.out.println(title);
+				
+				String issn = issntf.getText();
+				
+				String exclude = excl.getText();
+				
+				try
+				{
+					
+						
+						String[] titleArray = {"", "","","","","","","","",""};
+						String[] authorArray = {"", "","","","","","","","",""};
+						int count = 0;
+						String url = "https://scholar.google.com.au/scholar?q=" + title + "&btnG=&hl=en&as_sdt=0%2C5";
+						Document doc = Jsoup.connect(url).userAgent("Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:25.0) Gecko/20100101 Firefox/25.0")  
+						           .referrer("http://www.google.com")   
+						           .timeout(12000) 
+						           .followRedirects(true)
+						           .get();
+						//System.out.println(doc.title());
+						
+						
+						Elements gstitle = gstitle = doc.getElementsByClass("gs_ri");
+						
+						for (Element link:gstitle)
+			            {
+			            	String lnk = link.getElementsByClass("gs_rt").tagName("a").text();
+			            	lnk = lnk.replace("[PDF]", "");
+			            	lnk = lnk.replace("[HTML]", "");
+			            	lnk = lnk.replace("[BOOK][B]", "");
+			            	lnk = lnk.replace("[CITATION][C]", "");
+			            	lnk = lnk.trim();
+			            	//lnk = lnk.replaceAll("[B]", "");
+			            	String lnk2 = link.getElementsByClass("gs_a").tagName("div").text();
+			            	if (lnk.length()!=0 && lnk2.length() !=0 ) {
+			            		titleArray[count] = lnk;
+			            		authorArray[count] = lnk2;
+			            		count++;			            		
+			            	}		            	
+			            }
+						
+						
+												
+						
+						for(int x = 0; x < titleArray.length; x++)
+						{
+							TableModel.addRow(new Object[]{false, "column1", "col2", "col3", authorArray[x], titleArray[x]});
+						}
+						
+						
+						
+						
+					
+				}
+				catch (Exception e)
+				{
+			        e.printStackTrace();
+			    }
+				
+					
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+			}
+		});
+		btnSearch.setBounds(896, 29, 97, 20);
 		frmGoogleScholarTool.getContentPane().add(btnSearch);
 		
 		JButton btnClearAll = new JButton("Clear all");
-		btnClearAll.setBounds(896, 86, 97, 25);
+		btnClearAll.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) 
+			{
+				//clear all button
+				
+				int rowCount = TableModel.getRowCount();
+				//Remove rows one by one from the end of the table
+				for (int x = rowCount - 1; x >= 0; x--) 
+				{
+				    TableModel.removeRow(x);
+				}
+			}
+		});
+		btnClearAll.setBounds(894, 66, 97, 20);
 		frmGoogleScholarTool.getContentPane().add(btnClearAll);
 		
 		Choice choice = new Choice();
@@ -284,7 +389,7 @@ public class JournalSearch extends JFrame {
 		
 		frmGoogleScholarTool.getContentPane().add(lblNewLabel_2);
 		
-		frmGoogleScholarTool.getContentPane().add(textField_2);
+		frmGoogleScholarTool.getContentPane().add(excl);
 		
 		frmGoogleScholarTool.getContentPane().add(textField_3);
 		lblAnd.setBounds(291, 150, 61, 16);
@@ -370,7 +475,7 @@ public class JournalSearch extends JFrame {
 		hIAnnualLabel.setBounds(440, 329, 61, 16);
 		
 		frmGoogleScholarTool.getContentPane().add(hIAnnualLabel);
-		btnHelp.setBounds(896, 150, 97, 29);
+		btnHelp.setBounds(896, 95, 91, 20);
 		
 		btnHelp.addActionListener(new ActionListener(){
 
@@ -396,18 +501,18 @@ public class JournalSearch extends JFrame {
 		scroll.setBounds(43, 368, 929, 216);
 		frmGoogleScholarTool.getContentPane().add(scroll);
 		
-		JTable table = new JTable();
+		
 		
 		scroll.setViewportView(table);
 		
-		DefaultTableModel TableModel = new DefaultTableModel()
+		TableModel = new DefaultTableModel()
 		{
 			public Class<?> getColumnClass(int column)
 			{
 				switch(column)
 				{
 					case 0:
-						return String.class;
+						return Boolean.class;
 					case 1:
 						return String.class;
 					case 2:
@@ -415,6 +520,8 @@ public class JournalSearch extends JFrame {
 					case 3:
 						return String.class;
 					case 4:
+						return String.class;
+					case 5:
 						return String.class;
 						
 					default:
@@ -431,6 +538,7 @@ public class JournalSearch extends JFrame {
 	public void addColumn(DefaultTableModel TableModel, JTable table)
 	{
 		table.setModel(TableModel);
+		TableModel.addColumn("Select");
 		TableModel.addColumn("Cites");
 		TableModel.addColumn("Per year");
 		TableModel.addColumn("Rank");
