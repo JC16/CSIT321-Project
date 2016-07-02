@@ -37,8 +37,8 @@ import javax.swing.JTable;
 public class JournalSearch extends JFrame {
 
 	private JFrame frmGoogleScholarTool;
-	private JTextField textField;
-	private JTextField textField_1;
+	private JTextField journalt;
+	private JTextField issntf;
 
 	//Menu Bar and Menu Item
 	private final JMenuBar menuBar = new JMenuBar();
@@ -64,7 +64,7 @@ public class JournalSearch extends JFrame {
 	private final JMenuItem mntmAboutThisProgram = new JMenuItem("About this program");
 	private final JLabel lblNewLabel_1 = new JLabel("Year of Publication between");
 	private final JLabel lblNewLabel_2 = new JLabel("Exculde words");
-	private final JTextField textField_2 = new JTextField();
+	private final JTextField excl = new JTextField();
 	private final JTextField textField_3 = new JTextField();
 	private final JLabel lblAnd = new JLabel("to");
 	private final JTextField textField_4 = new JTextField();
@@ -130,12 +130,12 @@ public class JournalSearch extends JFrame {
 		textField_4.setColumns(10);
 		textField_3.setBounds(226, 144, 56, 28);
 		textField_3.setColumns(10);
-		textField_2.setBounds(136, 105, 748, 28);
-		textField_2.setColumns(10);
+		excl.setBounds(136, 105, 748, 28);
+		excl.setColumns(10);
 		frmGoogleScholarTool = new JFrame();
 		frmGoogleScholarTool.setFont(new Font("Dialog", Font.BOLD, 12));
 		frmGoogleScholarTool.setTitle("Journal Search");
-		frmGoogleScholarTool.setBounds(100, 100, 999, 646);
+		frmGoogleScholarTool.setBounds(100, 100, 1030, 646);
 		frmGoogleScholarTool.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		//JMenuBar menuBar = new JMenuBar();
@@ -242,21 +242,44 @@ public class JournalSearch extends JFrame {
 		lblNewLabel.setBounds(43, 24, 97, 29);
 		frmGoogleScholarTool.getContentPane().add(lblNewLabel);
 		
-		textField = new JTextField();
-		textField.setBounds(136, 29, 748, 20);
-		frmGoogleScholarTool.getContentPane().add(textField);
-		textField.setColumns(10);
+		journalt = new JTextField();
+		journalt.setBounds(136, 29, 748, 20);
+		frmGoogleScholarTool.getContentPane().add(journalt);
+		journalt.setColumns(10);
 		
 		JLabel lblIssn = new JLabel("ISSN:");
 		lblIssn.setBounds(43, 68, 56, 16);
 		frmGoogleScholarTool.getContentPane().add(lblIssn);
 		
-		textField_1 = new JTextField();
-		textField_1.setBounds(136, 65, 748, 22);
-		frmGoogleScholarTool.getContentPane().add(textField_1);
-		textField_1.setColumns(10);
+		issntf = new JTextField();
+		issntf.setBounds(136, 65, 748, 22);
+		frmGoogleScholarTool.getContentPane().add(issntf);
+		issntf.setColumns(10);
 		
 		JButton btnSearch = new JButton("Search");
+		btnSearch.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) 
+			{
+				//search button
+				String title = journalt.getText();
+				title = title.replace(' ', '+');
+				//System.out.println(title);
+				
+				String issn = issntf.getText();
+				
+				String exclude = excl.getText();	
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+			}
+		});
 		btnSearch.setBounds(896, 29, 97, 25);
 		frmGoogleScholarTool.getContentPane().add(btnSearch);
 		
@@ -281,7 +304,7 @@ public class JournalSearch extends JFrame {
 		
 		frmGoogleScholarTool.getContentPane().add(lblNewLabel_2);
 		
-		frmGoogleScholarTool.getContentPane().add(textField_2);
+		frmGoogleScholarTool.getContentPane().add(excl);
 		
 		frmGoogleScholarTool.getContentPane().add(textField_3);
 		lblAnd.setBounds(291, 150, 61, 16);
