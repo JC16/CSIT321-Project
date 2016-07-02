@@ -290,6 +290,17 @@ public class JournalSearch extends JFrame {
 		frmGoogleScholarTool.getContentPane().add(btnSearch);
 		
 		JButton btnClearAll = new JButton("Clear all");
+		btnClearAll.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) 
+			{
+				int rowCount = TableModel.getRowCount();
+				//Remove rows one by one from the end of the table
+				for (int x = rowCount - 1; x >= 0; x--) 
+				{
+				    TableModel.removeRow(x);
+				}
+			}
+		});
 		btnClearAll.setBounds(894, 66, 97, 20);
 		frmGoogleScholarTool.getContentPane().add(btnClearAll);
 		
