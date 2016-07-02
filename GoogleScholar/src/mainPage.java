@@ -220,7 +220,8 @@ public class mainPage extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				frmGoogleScholarTool.dispose();
 				
-				//GeneralSearch GFrame = new GeneralSearch();
+				GeneralSearch GFrame = new GeneralSearch();
+				GFrame.setVisible(true);
 				
 				
 			}
