@@ -150,10 +150,10 @@ public class GeneralSearch extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 					
-				panel.setVisible(false);
+				dispose();
 				
 				JournalSearch jurFrame = new JournalSearch();
-				jurFrame.setVisible(true);
+				
 				
 			}});
 		
@@ -164,7 +164,7 @@ public class GeneralSearch extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 					
-				panel.setVisible(false);
+				dispose();
 				
 				authorSearch frame = new authorSearch();
 				frame.setVisible(true);
@@ -179,10 +179,7 @@ public class GeneralSearch extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 					
-				panel.setVisible(false);
-				
-				GeneralSearch GFrame = new GeneralSearch();
-				GFrame.setVisible(true);
+				//do nothing
 				
 			}});
 		mnView.add(mntmGeneralCitationSearch);

@@ -166,8 +166,8 @@ public class mainPage extends JFrame {
 				frmGoogleScholarTool.setVisible(false);
 				frmGoogleScholarTool.dispose();
 				
-				//GeneralSearch GFrame = new GeneralSearch();
-				//GFrame.setVisible(true);
+				GeneralSearch GFrame = new GeneralSearch();
+				GFrame.setVisible(true);
 				
 			}});
 		

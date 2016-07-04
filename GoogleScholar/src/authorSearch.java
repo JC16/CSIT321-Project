@@ -173,8 +173,8 @@ public class authorSearch extends JFrame {
 					
 				dispose();
 				
-				//GeneralSearch GFrame = new GeneralSearch();
-				
+				GeneralSearch GFrame = new GeneralSearch();
+				GFrame.setVisible(true);
 				
 			}});
 		

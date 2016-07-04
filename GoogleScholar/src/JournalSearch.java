@@ -205,7 +205,7 @@ public class JournalSearch extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 					
-				frmGoogleScholarTool.setVisible(false);
+				frmGoogleScholarTool.dispose();
 				
 				authorSearch frame = new authorSearch();
 				frame.setVisible(true);
@@ -220,9 +220,10 @@ public class JournalSearch extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 					
-				frmGoogleScholarTool.setVisible(false);
+				frmGoogleScholarTool.dispose();
 				
-				//GeneralSearch GFrame = new GeneralSearch();
+				GeneralSearch GFrame = new GeneralSearch();
+				GFrame.setVisible(true);
 				
 				
 			}});
