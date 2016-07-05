@@ -9,6 +9,8 @@ import javax.swing.JOptionPane;
 
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 
@@ -101,6 +103,7 @@ public class JournalSearch extends JFrame {
 	private final JLabel hinormLabel = new JLabel("");
 	private final JLabel hIAnnualLabel = new JLabel("");
 	private final JButton btnHelp = new JButton("Help");
+	private static Pattern yearPattern = Pattern.compile(" ([12][0-9][0-9][0-9])( |$)");
 	
 	
 	/**
@@ -324,11 +327,24 @@ public class JournalSearch extends JFrame {
 			            }
 						
 						
-												
 						
+						
+						
+												
 						for(int x = 0; x < titleArray.length; x++)
 						{
-							TableModel.addRow(new Object[]{false, "column1", "col2", "col3", authorArray[x], titleArray[x]});
+							Matcher matcher = yearPattern.matcher(authorArray[x]);
+							
+							String year = "";
+							if (matcher.find())
+							{
+								year = matcher.group();
+							}
+							else
+							{
+								year = "n/a";
+							}
+							TableModel.addRow(new Object[]{false, "column1", "col2", "col3", authorArray[x], titleArray[x], year});
 						}
 						
 						
