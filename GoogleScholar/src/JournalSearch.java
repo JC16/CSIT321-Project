@@ -44,7 +44,7 @@ public class JournalSearch extends JFrame {
 
 	private JFrame frmGoogleScholarTool;
 	private JTextField journalt;
-	private JTextField issntf;
+	private JTextField withphr;
 	
 	private JTable table = new JTable();
 	private DefaultTableModel TableModel;
@@ -74,9 +74,9 @@ public class JournalSearch extends JFrame {
 	private final JLabel lblNewLabel_1 = new JLabel("Year of Publication between");
 	private final JLabel lblNewLabel_2 = new JLabel("Exculde words");
 	private final JTextField excl = new JTextField();
-	private final JTextField textField_3 = new JTextField();
+	private final JTextField ylo = new JTextField();
 	private final JLabel lblAnd = new JLabel("to");
-	private final JTextField textField_4 = new JTextField();
+	private final JTextField yhi = new JTextField();
 	private final JLabel lblResult = new JLabel("Result",SwingConstants.CENTER);
 	private final JLabel lblNewLabel_3 = new JLabel("Papers:");
 	private final JLabel lblNewLabel_4 = new JLabel("Citation: ");
@@ -136,10 +136,10 @@ public class JournalSearch extends JFrame {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		textField_4.setBounds(323, 144, 56, 28);
-		textField_4.setColumns(10);
-		textField_3.setBounds(226, 144, 56, 28);
-		textField_3.setColumns(10);
+		yhi.setBounds(323, 144, 56, 28);
+		yhi.setColumns(10);
+		ylo.setBounds(226, 144, 56, 28);
+		ylo.setColumns(10);
 		excl.setBounds(136, 105, 748, 28);
 		excl.setColumns(10);
 		frmGoogleScholarTool = new JFrame();
@@ -258,14 +258,14 @@ public class JournalSearch extends JFrame {
 		frmGoogleScholarTool.getContentPane().add(journalt);
 		journalt.setColumns(10);
 		
-		JLabel lblIssn = new JLabel("ISSN:");
-		lblIssn.setBounds(43, 68, 56, 16);
+		JLabel lblIssn = new JLabel("With exact phrase:");
+		lblIssn.setBounds(22, 68, 104, 19);
 		frmGoogleScholarTool.getContentPane().add(lblIssn);
 		
-		issntf = new JTextField();
-		issntf.setBounds(136, 65, 748, 22);
-		frmGoogleScholarTool.getContentPane().add(issntf);
-		issntf.setColumns(10);
+		withphr = new JTextField();
+		withphr.setBounds(136, 65, 748, 22);
+		frmGoogleScholarTool.getContentPane().add(withphr);
+		withphr.setColumns(10);
 		
 		JButton btnSearch = new JButton("Search");
 		btnSearch.addActionListener(new ActionListener() {
@@ -281,14 +281,22 @@ public class JournalSearch extends JFrame {
 				}
 				
 				
-				
+				//get journal title
 				String title = journalt.getText();
 				title = title.replace(' ', '+');
-				//System.out.println(title);
 				
-				String issn = issntf.getText();
+				//get phrase
+				String phrase = withphr.getText();
+				phrase = phrase.replace(' ', '+');
 				
+				//get year low and year high
+				String yrlow = ylo.getText();
+				String yrhi = yhi.getText();
+				
+				
+				//exclude words
 				String exclude = excl.getText();
+				exclude = exclude.replace(' ', '+');
 				
 				try
 				{
@@ -298,7 +306,7 @@ public class JournalSearch extends JFrame {
 						String[] authorArray = {"", "","","","","","","","",""};
 						int count = 0;
 						
-						String url = "https://scholar.google.com.au/scholar?as_q="+ title +"&as_epq=&as_oq=&as_eq=&as_occt=title&as_sauthors=&as_publication=&as_ylo=&as_yhi=&btnG=&hl=en&as_sdt=0%2C5";
+						String url = "https://scholar.google.com.au/scholar?as_q="+ title +"&as_epq=" + phrase + "&as_oq=&as_eq=" + exclude + "&as_occt=title&as_sauthors=&as_publication=&as_ylo=" + yrlow + "&as_yhi=" + yrhi + "&btnG=&hl=en&as_sdt=0%2C5";
 						Document doc = Jsoup.connect(url).userAgent("Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:25.0) Gecko/20100101 Firefox/25.0")  
 						           .referrer("http://www.google.com")   
 						           .timeout(12000) 
@@ -409,12 +417,12 @@ public class JournalSearch extends JFrame {
 		
 		frmGoogleScholarTool.getContentPane().add(excl);
 		
-		frmGoogleScholarTool.getContentPane().add(textField_3);
+		frmGoogleScholarTool.getContentPane().add(ylo);
 		lblAnd.setBounds(291, 150, 61, 16);
 		
 		frmGoogleScholarTool.getContentPane().add(lblAnd);
 		
-		frmGoogleScholarTool.getContentPane().add(textField_4);
+		frmGoogleScholarTool.getContentPane().add(yhi);
 		lblResult.setForeground(Color.BLACK);
 		lblResult.setBackground(new Color(255, 255, 255));
 		lblResult.setOpaque(true);
