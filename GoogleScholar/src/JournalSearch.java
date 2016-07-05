@@ -344,7 +344,7 @@ public class JournalSearch extends JFrame {
 							{
 								year = "n/a";
 							}
-							TableModel.addRow(new Object[]{false, "column1", "col2", "col3", authorArray[x], titleArray[x], year});
+							TableModel.addRow(new Object[]{false, "col3", authorArray[x], titleArray[x], year});
 						}
 						
 						
@@ -558,8 +558,6 @@ public class JournalSearch extends JFrame {
 		table.setModel(TableModel);
 		TableModel.addColumn("Select");
 		TableModel.addColumn("Cites");
-		TableModel.addColumn("Per year");
-		TableModel.addColumn("Rank");
 		TableModel.addColumn("Author");
 		TableModel.addColumn("Title");
 		TableModel.addColumn("Year");
