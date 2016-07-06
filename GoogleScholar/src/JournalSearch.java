@@ -172,7 +172,8 @@ public class JournalSearch extends JFrame {
 	}
 	
 	
-	public JournalSearch() {
+	public JournalSearch() 
+	{
 		initialize();
 		frmGoogleScholarTool.setVisible(true);
 	}
@@ -388,10 +389,12 @@ public class JournalSearch extends JFrame {
 						count = 0;
 						int count2 = 0;
 						
-						outer: for(;;){
+						outer: for(;;)
+						{
 							
 						
-						for (Element element : elements) {
+						for (Element element : elements)
+						{
 						gstitle = element.select(".gs_fl a[href]");
 						for(Element link : gstitle)
 						{
@@ -436,6 +439,7 @@ public class JournalSearch extends JFrame {
 						
 						
 					
+				}
 				}
 				catch (Exception e)
 				{
