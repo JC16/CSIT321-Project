@@ -389,8 +389,7 @@ public class JournalSearch extends JFrame {
 						count = 0;
 						int count2 = 0;
 						
-						outer: for(;;)
-						{
+						
 							
 						
 						for (Element element : elements)
@@ -439,8 +438,7 @@ public class JournalSearch extends JFrame {
 						
 						
 					
-				}
-				}
+				}				
 				catch (Exception e)
 				{
 			        e.printStackTrace();
