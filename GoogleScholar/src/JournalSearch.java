@@ -133,6 +133,8 @@ public class JournalSearch extends JFrame {
 	 * Create the application.
 	 */
 	
+	//test commit
+	
 	/**
 	 *  GET DATA FROM JTABLE
 	 * */
