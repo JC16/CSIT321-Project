@@ -104,6 +104,7 @@ public class JournalSearch extends JFrame {
 	private final JLabel hIAnnualLabel = new JLabel("");
 	private final JButton btnHelp = new JButton("Help");
 	private static Pattern yearPattern = Pattern.compile(" ([12][0-9][0-9][0-9])( |$)");
+	private static Pattern citeidPattern = Pattern.compile("/scholar\\?cites=([\\d]*)\\&");
 	
 	
 	/**
@@ -259,7 +260,7 @@ public class JournalSearch extends JFrame {
 		journalt.setColumns(10);
 		
 		JLabel lblIssn = new JLabel("With exact phrase:");
-		lblIssn.setBounds(22, 68, 104, 19);
+		lblIssn.setBounds(14, 65, 112, 23);
 		frmGoogleScholarTool.getContentPane().add(lblIssn);
 		
 		withphr = new JTextField();
@@ -301,9 +302,13 @@ public class JournalSearch extends JFrame {
 				try
 				{
 					
-						
+						//make these dynamic later
 						String[] titleArray = {"", "","","","","","","","",""};
 						String[] authorArray = {"", "","","","","","","","",""};
+						String[] cbArray = {"", "","","","","","","","",""};
+						
+						
+						
 						int count = 0;
 						
 						String url = "https://scholar.google.com.au/scholar?as_q="+ title +"&as_epq=" + phrase + "&as_oq=&as_eq=" + exclude + "&as_occt=title&as_sauthors=&as_publication=&as_ylo=" + yrlow + "&as_yhi=" + yrhi + "&btnG=&hl=en&as_sdt=0%2C5";
@@ -315,7 +320,8 @@ public class JournalSearch extends JFrame {
 						//System.out.println(doc.title());
 						
 						
-						Elements gstitle = gstitle = doc.getElementsByClass("gs_ri");
+						Elements gstitle = doc.getElementsByClass("gs_ri");
+						Elements elements = doc.select("div.gs_r");
 						
 						for (Element link:gstitle)
 			            {
@@ -334,7 +340,29 @@ public class JournalSearch extends JFrame {
 			            	}		            	
 			            }
 						
+						count = 0;
 						
+						for (Element element : elements) {
+						gstitle = element.select(".gs_fl a[href]");
+						for(Element link : gstitle)
+						{
+							String text = link.text();
+							//System.out.println(text);
+							if(text.startsWith("Cited by "))
+							{
+								//System.out.println("test");
+								String cited = text;
+								cited = cited.substring(9);
+								cbArray[count] = cited;
+								count++;
+																
+							}
+							
+							
+						}
+						
+						
+						}
 						
 						
 						
@@ -352,7 +380,7 @@ public class JournalSearch extends JFrame {
 							{
 								year = "n/a";
 							}
-							TableModel.addRow(new Object[]{false, "col3", authorArray[x], titleArray[x], year});
+							TableModel.addRow(new Object[]{false, cbArray[x], authorArray[x], titleArray[x], year});
 						}
 						
 						
