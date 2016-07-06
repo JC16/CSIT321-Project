@@ -9,6 +9,7 @@ import javax.swing.JOptionPane;
 
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.util.TreeMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.awt.event.ActionEvent;
@@ -35,6 +36,9 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
 import java.awt.TextArea;
 import javax.swing.JTable;
+
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -128,6 +132,46 @@ public class JournalSearch extends JFrame {
 	/**
 	 * Create the application.
 	 */
+	
+	/**
+	 *  GET DATA FROM JTABLE
+	 * */
+	private String getCellVal(int x, int y)
+	{
+		return TableModel.getValueAt(x, y).toString();
+	}
+	
+	
+	
+	/**
+	 * Write to EXCELL
+	 * 
+	 * Need to import Apache POI library
+	 * 
+	 * 
+	 * */
+	
+	private void writeToExcel()
+	{
+		
+		//Create workbook
+		XSSFWorkbook wb = new XSSFWorkbook();
+		XSSFSheet ws = wb.createSheet();
+		
+		//Load DATA To TREEMAP
+		
+		TreeMap<String, Object[]> data = new TreeMap();
+		
+		//Get column name from Table
+		data.put("0", new Object[]{TableModel.getColumnName(0),TableModel.getColumnName(1),TableModel.getColumnName(2)});
+		
+		//Get first row information
+		data.put("1", new Object[]{getCellVal(0,0),getCellVal(0,1),getCellVal(0,2)});
+		
+		
+	}
+	
+	
 	public JournalSearch() {
 		initialize();
 		frmGoogleScholarTool.setVisible(true);
