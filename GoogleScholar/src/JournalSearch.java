@@ -46,6 +46,16 @@ import org.jsoup.select.Elements;
 
 public class JournalSearch extends JFrame {
 
+	
+	//test commit
+	
+	private String test;
+	
+	private void testCommit()
+	{
+		
+	}
+	
 	private JFrame frmGoogleScholarTool;
 	private JTextField journalt;
 	private JTextField withphr;
