@@ -109,7 +109,7 @@ public class JournalSearch extends JFrame {
 	private final JButton btnHelp = new JButton("Help");
 	private static Pattern yearPattern = Pattern.compile(" ([12][0-9][0-9][0-9])( |$)");
 	private static Pattern citeidPattern = Pattern.compile("/scholar\\?cites=([\\d]*)\\&");
-	
+	private static Pattern doiPattern = Pattern.compile("id=doi:([^&]*)");
 	
 	/**
 	 * Launch the application.
@@ -350,12 +350,13 @@ public class JournalSearch extends JFrame {
 						String[] titleArray = {"", "","","","","","","","",""};
 						String[] authorArray = {"", "","","","","","","","",""};
 						String[] cbArray = {"", "","","","","","","","",""};
+						String[] doiArray = {"", "","","","","","","","",""};
 						
 						
 						
 						int count = 0;
-						
-						String url = "https://scholar.google.com.au/scholar?as_q="+ title +"&as_epq=" + phrase + "&as_oq=&as_eq=" + exclude + "&as_occt=title&as_sauthors=&as_publication=&as_ylo=" + yrlow + "&as_yhi=" + yrhi + "&btnG=&hl=en&as_sdt=0%2C5";
+						//https://scholar.google.com/scholar?q=lol&hl=en&as_sdt=0,5
+						String url = "https://scholar.google.com/scholar?as_q="+ title +"&as_epq=" + phrase + "&as_oq=&as_eq=" + exclude + "&as_occt=title&as_sauthors=&as_publication=&as_ylo=" + yrlow + "&as_yhi=" + yrhi + "&btnG=&hl=en&as_sdt=0%2C5";
 						Document doc = Jsoup.connect(url).userAgent("Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:25.0) Gecko/20100101 Firefox/25.0")  
 						           .referrer("http://www.google.com")   
 						           .timeout(12000) 
@@ -385,6 +386,10 @@ public class JournalSearch extends JFrame {
 			            }
 						
 						count = 0;
+						int count2 = 0;
+						
+						outer: for(;;){
+							
 						
 						for (Element element : elements) {
 						gstitle = element.select(".gs_fl a[href]");
@@ -394,7 +399,7 @@ public class JournalSearch extends JFrame {
 							//System.out.println(text);
 							if(text.startsWith("Cited by "))
 							{
-								//System.out.println("test");
+								
 								String cited = text;
 								cited = cited.substring(9);
 								cbArray[count] = cited;
@@ -403,9 +408,9 @@ public class JournalSearch extends JFrame {
 							}
 							
 							
+							
 						}
-						
-						
+												
 						}
 						
 						
@@ -424,7 +429,7 @@ public class JournalSearch extends JFrame {
 							{
 								year = "n/a";
 							}
-							TableModel.addRow(new Object[]{false, cbArray[x], authorArray[x], titleArray[x], year});
+							TableModel.addRow(new Object[]{false, cbArray[x], authorArray[x], titleArray[x], year, doiArray[x]});
 						}
 						
 						
@@ -641,7 +646,7 @@ public class JournalSearch extends JFrame {
 		TableModel.addColumn("Author");
 		TableModel.addColumn("Title");
 		TableModel.addColumn("Year");
-		TableModel.addColumn("Publication");
+		TableModel.addColumn("D.O.I.");
 		TableModel.addColumn("Publisher");
 		TableModel.addColumn("Type");
 	}
