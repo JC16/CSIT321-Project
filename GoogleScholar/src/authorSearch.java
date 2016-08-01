@@ -47,14 +47,14 @@ public class authorSearch extends JFrame {
 	private final JMenu mnHelp = new JMenu("Help");
 	private final JMenuItem mntmAboutThisProgram = new JMenuItem("About this program");
 	private final JPanel panel = new JPanel();
-	private final JLabel label = new JLabel("Author Last Name:");
+	private final JLabel lblAuthorNames = new JLabel("Author Name(s):");
 	private final JTextField textField = new JTextField();
 	private final JButton button = new JButton("Search");
 	private final JButton button_1 = new JButton("Clear all");
 	private final Choice choice = new Choice();
 	private final JLabel label_2 = new JLabel("Data source:");
 	private final JLabel label_3 = new JLabel("Year of Publication between");
-	private final JLabel lblExculdeTheseAuthors = new JLabel("Exculde these authors:");
+	private final JLabel lblExculdeTheseAuthors = new JLabel("Published in:");
 	private final JTextField textField_2 = new JTextField();
 	private final JTextField textField_3 = new JTextField();
 	private final JLabel label_5 = new JLabel("to");
@@ -84,7 +84,6 @@ public class authorSearch extends JFrame {
 	private final JLabel label_28 = new JLabel("");
 	private final JLabel label_29 = new JLabel("");
 	private final JLabel label_30 = new JLabel("");
-	private final JButton button_2 = new JButton("Help");
 	private final JScrollPane scrollPane = new JScrollPane();
 	
 	/**
@@ -108,7 +107,7 @@ public class authorSearch extends JFrame {
 	 */
 	public authorSearch() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 999, 646);
+		setBounds(100, 100, 1041, 673);
 //		contentPane = new JPanel();
 //		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 //		contentPane.setLayout(new BorderLayout(0, 0));
@@ -194,18 +193,18 @@ public class authorSearch extends JFrame {
 		
 		getContentPane().add(panel, BorderLayout.CENTER);
 		panel.setLayout(null);
-		label.setFont(new Font("Lucida Grande", Font.PLAIN, 13));
-		label.setBounds(16, 46, 126, 29);
+		lblAuthorNames.setFont(new Font("Lucida Grande", Font.PLAIN, 13));
+		lblAuthorNames.setBounds(16, 46, 126, 29);
 		
-		panel.add(label);
+		panel.add(lblAuthorNames);
 		textField.setColumns(10);
-		textField.setBounds(178, 51, 712, 20);
+		textField.setBounds(131, 51, 712, 20);
 		
 		panel.add(textField);
-		button.setBounds(896, 50, 97, 25);
+		button.setBounds(875, 51, 77, 20);
 		
 		panel.add(button);
-		button_1.setBounds(896, 100, 97, 25);
+		button_1.setBounds(875, 85, 91, 20);
 		
 		panel.add(button_1);
 		choice.setBounds(110, 180, 157, 22);
@@ -218,28 +217,28 @@ public class authorSearch extends JFrame {
 		
 		panel.add(label_3);
 		lblExculdeTheseAuthors.setFont(new Font("Lucida Grande", Font.PLAIN, 13));
-		lblExculdeTheseAuthors.setBounds(16, 92, 150, 16);
+		lblExculdeTheseAuthors.setBounds(16, 86, 84, 16);
 		
 		panel.add(lblExculdeTheseAuthors);
 		textField_2.setColumns(10);
-		textField_2.setBounds(178, 86, 722, 28);
+		textField_2.setBounds(131, 86, 712, 20);
 		
 		panel.add(textField_2);
 		textField_3.setColumns(10);
-		textField_3.setBounds(209, 131, 56, 28);
+		textField_3.setBounds(198, 131, 67, 28);
 		
 		panel.add(textField_3);
-		label_5.setBounds(277, 137, 61, 16);
+		label_5.setBounds(277, 137, 23, 16);
 		
 		panel.add(label_5);
 		textField_4.setColumns(10);
-		textField_4.setBounds(329, 131, 67, 28);
+		textField_4.setBounds(297, 131, 67, 28);
 		
 		panel.add(textField_4);
 		label_6.setOpaque(true);
 		label_6.setForeground(Color.BLACK);
 		label_6.setBackground(Color.WHITE);
-		label_6.setBounds(6, 248, 987, 16);
+		label_6.setBounds(6, 248, 1009, 16);
 		
 		panel.add(label_6);
 		label_7.setBounds(33, 276, 61, 16);
@@ -314,10 +313,7 @@ public class authorSearch extends JFrame {
 		label_30.setBounds(639, 332, 61, 16);
 		
 		panel.add(label_30);
-		button_2.setBounds(896, 173, 97, 29);
-		
-		panel.add(button_2);
-		scrollPane.setBounds(16, 367, 964, 216);
+		scrollPane.setBounds(29, 371, 964, 216);
 		
 		panel.add(scrollPane);
 		

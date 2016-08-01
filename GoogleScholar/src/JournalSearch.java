@@ -40,6 +40,9 @@ import org.jsoup.select.Elements;
 
 public class JournalSearch extends JFrame {
 
+	
+	
+	
 	private JFrame frmGoogleScholarTool;
 	private JTextField journalt;
 	private JTextField withphr;
@@ -105,13 +108,32 @@ public class JournalSearch extends JFrame {
 	private final JLabel hIAnnualLabel = new JLabel("");
 	private final JButton btnHelp = new JButton("Help");
 	private static Pattern yearPattern = Pattern.compile(" ([12][0-9][0-9][0-9])( |$)");
-	
+	private static Pattern citeidPattern = Pattern.compile("/scholar\\?cites=([\\d]*)\\&");
+	private static Pattern doiPattern = Pattern.compile("id=doi:([^&]*)");
 	
 	/**
 	 * Launch the application.
 	 */
-	
-	
+
+	/*public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					JournalSearch window = new JournalSearch();
+					window.frmGoogleScholarTool.setVisible(true);
+					
+			
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the application.
+	 */
+		
 	/**
 	 *  GET DATA FROM JTABLE
 	 * */
@@ -157,7 +179,8 @@ public class JournalSearch extends JFrame {
 	}
 	
 	
-	public JournalSearch() {
+	public JournalSearch() 
+	{
 		initialize();
 		frmGoogleScholarTool.setVisible(true);
 	}
@@ -329,7 +352,7 @@ public class JournalSearch extends JFrame {
 		journalt.setColumns(10);
 		
 		JLabel lblIssn = new JLabel("With exact phrase:");
-		lblIssn.setBounds(22, 68, 104, 19);
+		lblIssn.setBounds(14, 65, 112, 23);
 		frmGoogleScholarTool.getContentPane().add(lblIssn);
 		
 		withphr = new JTextField();
@@ -368,11 +391,17 @@ public class JournalSearch extends JFrame {
 				
 				try
 				{
+
 						String[] titleArray = {"", "","","","","","","","",""};
 						String[] authorArray = {"", "","","","","","","","",""};
-						int count = 0;
+						String[] cbArray = {"", "","","","","","","","",""};
+						String[] doiArray = {"", "","","","","","","","",""};
 						
-						String url = "https://scholar.google.com.au/scholar?as_q="+ title +"&as_epq=" + phrase + "&as_oq=&as_eq=" + exclude + "&as_occt=title&as_sauthors=&as_publication=&as_ylo=" + yrlow + "&as_yhi=" + yrhi + "&btnG=&hl=en&as_sdt=0%2C5";
+						
+						
+						int count = 0;
+						//https://scholar.google.com/scholar?q=lol&hl=en&as_sdt=0,5
+						String url = "https://scholar.google.com/scholar?as_q="+ title +"&as_epq=" + phrase + "&as_oq=&as_eq=" + exclude + "&as_occt=title&as_sauthors=&as_publication=&as_ylo=" + yrlow + "&as_yhi=" + yrhi + "&btnG=&hl=en&as_sdt=0%2C5";
 						Document doc = Jsoup.connect(url).userAgent("Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:25.0) Gecko/20100101 Firefox/25.0")  
 						           .referrer("http://www.google.com")   
 						           .timeout(12000) 
@@ -381,7 +410,8 @@ public class JournalSearch extends JFrame {
 						//System.out.println(doc.title());
 						
 						
-						Elements gstitle = gstitle = doc.getElementsByClass("gs_ri");
+						Elements gstitle = doc.getElementsByClass("gs_ri");
+						Elements elements = doc.select("div.gs_r");
 						
 						for (Element link:gstitle)
 			            {
@@ -398,7 +428,43 @@ public class JournalSearch extends JFrame {
 			            		authorArray[count] = lnk2;
 			            		count++;			            		
 			            	}		            	
-			            }			
+
+			            		
+
+			            }
+						
+						count = 0;
+						int count2 = 0;
+						
+						
+							
+						
+						for (Element element : elements)
+						{
+						gstitle = element.select(".gs_fl a[href]");
+						for(Element link : gstitle)
+						{
+							String text = link.text();
+							//System.out.println(text);
+							if(text.startsWith("Cited by "))
+							{
+								
+								String cited = text;
+								cited = cited.substring(9);
+								cbArray[count] = cited;
+								count++;
+																
+							}
+							
+							
+							
+						}
+												
+						}
+						
+						
+						
+
 						for(int x = 0; x < titleArray.length; x++)
 						{
 							Matcher matcher = yearPattern.matcher(authorArray[x]);
@@ -412,10 +478,15 @@ public class JournalSearch extends JFrame {
 							{
 								year = "n/a";
 							}
+
 							//TableModel.addRow(new Object[]{false, "col3", authorArray[x], titleArray[x], year});
-							TableModel.addRow(new Object[]{false, "col3", authorArray[x], titleArray[x], year,"hello","hello","hello"});
+							//TableModel.addRow(new Object[]{false, "col3", authorArray[x], titleArray[x], year,"hello","hello","hello"});
+
+							TableModel.addRow(new Object[]{false, cbArray[x], authorArray[x], titleArray[x], year, doiArray[x],"hello","hello","hello"});
+
 						}
 				}
+				
 				catch (Exception e)
 				{
 			        e.printStackTrace();
@@ -629,7 +700,7 @@ public class JournalSearch extends JFrame {
 		TableModel.addColumn("Author");
 		TableModel.addColumn("Title");
 		TableModel.addColumn("Year");
-		TableModel.addColumn("Publication");
+		TableModel.addColumn("D.O.I.");
 		TableModel.addColumn("Publisher");
 		TableModel.addColumn("Type");
 	}
