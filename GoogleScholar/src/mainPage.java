@@ -32,6 +32,7 @@ public class mainPage extends JFrame {
 	private final JMenuItem mntmNewMenuItem = new JMenuItem("Import Data");
 	private final JMenuItem mntmNewMenuItem_1 = new JMenuItem("Save as CSV");
 	private final JMenuItem mntmExit = new JMenuItem("Exit");
+	
 	private final JMenu mnEdit = new JMenu("Edit");
 	private final JMenuItem mntmCut = new JMenuItem("Cut");
 	private final JMenuItem mntmCopy = new JMenuItem("Copy");

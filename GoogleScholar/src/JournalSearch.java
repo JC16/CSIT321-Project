@@ -1,48 +1,42 @@
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
+import java.awt.Choice;
+import java.awt.Color;
 import java.awt.Font;
-import javax.swing.JMenuBar;
-import javax.swing.JMenu;
-import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
-
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.util.EnumSet;
+import java.util.Set;
 import java.util.TreeMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.awt.event.ActionEvent;
-import javax.swing.JLabel;
 
+import javax.swing.JButton;
+import javax.swing.JFileChooser;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumn;
+import javax.swing.table.TableModel;
 
-import org.openqa.selenium.*;
-import org.openqa.selenium.WebDriver;
-
-import org.openqa.selenium.phantomjs.PhantomJSDriver;
-
-import org.openqa.selenium.Dimension;
-import javax.swing.JButton;
-import javax.swing.JComponent;
-
-import java.awt.Choice;
-import java.awt.Color;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTextPane;
-import java.awt.TextArea;
-import javax.swing.JTable;
-
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+
 
 public class JournalSearch extends JFrame {
 
@@ -58,7 +52,10 @@ public class JournalSearch extends JFrame {
 	private final JMenu mnFile = new JMenu("File");
 	private final JMenuItem mntmNewMenuItem = new JMenuItem("Import Data");
 	private final JMenuItem mntmNewMenuItem_1 = new JMenuItem("Save as CSV");
+	
 	private final JMenuItem mntmExit = new JMenuItem("Exit");
+	
+	
 	private final JMenu mnEdit = new JMenu("Edit");
 	private final JMenuItem mntmCut = new JMenuItem("Cut");
 	private final JMenuItem mntmCopy = new JMenuItem("Copy");
@@ -113,34 +110,12 @@ public class JournalSearch extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	/*public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					JournalSearch window = new JournalSearch();
-					window.frmGoogleScholarTool.setVisible(true);
-					
-			
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the application.
-	 */
+	
 	
 	/**
 	 *  GET DATA FROM JTABLE
 	 * */
-	private String getCellVal(int x, int y)
-	{
-		return TableModel.getValueAt(x, y).toString();
-	}
-	
-	
+
 	
 	/**
 	 * Write to EXCELL
@@ -150,23 +125,34 @@ public class JournalSearch extends JFrame {
 	 * 
 	 * */
 	
-	private void writeToExcel()
+	private void writeToExcel(JTable table, File file)
 	{
 		
-		//Create workbook
-		XSSFWorkbook wb = new XSSFWorkbook();
-		XSSFSheet ws = wb.createSheet();
-		
-		//Load DATA To TREEMAP
-		
-		TreeMap<String, Object[]> data = new TreeMap();
-		
-		//Get column name from Table
-		data.put("0", new Object[]{TableModel.getColumnName(0),TableModel.getColumnName(1),TableModel.getColumnName(2)});
-		
-		//Get first row information
-		data.put("1", new Object[]{getCellVal(0,0),getCellVal(0,1),getCellVal(0,2)});
-		
+		try{
+			TableModel model = table.getModel();
+			//file.setPosixFilePermisions(f1.toPath(), EnumSet.of(OWNER_READ, OWNER_WRITE, OWNER_EXECUTE, GROUP_READ, GROUP_EXECUTE));
+	        FileWriter excel = new FileWriter(file);
+
+	        for(int i = 0; i < model.getColumnCount(); i++){
+	            excel.write(model.getColumnName(i) + "\t");
+	        }
+
+	        excel.write("\n");
+	        
+	        System.out.println(model.getRowCount());
+	        System.out.println(model.getColumnCount());
+	        
+	        for(int i=0; i< model.getRowCount(); i++) {
+	            for(int j=0; j < model.getColumnCount(); j++) {
+	            	//System.out.println(model.getValueAt(i,j).toString());
+	                excel.write(model.getValueAt(i,j).toString()+"\t");
+	            }
+	            excel.write("\n");
+	        }
+
+	        excel.close();
+
+	    }catch(IOException e){ System.out.println(e); }
 		
 	}
 	
@@ -195,6 +181,7 @@ public class JournalSearch extends JFrame {
 		//JMenuBar menuBar = new JMenuBar();
 		frmGoogleScholarTool.setJMenuBar(menuBar);
 		
+		
 		//JMenu mnNewMenu = new JMenu("File");
 		//menuBar.add(mnNewMenu);
 		
@@ -218,7 +205,46 @@ public class JournalSearch extends JFrame {
 		
 		mnFile.add(mntmNewMenuItem);
 		
+		mntmNewMenuItem_1.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent arg0) 
+			{
+				 JFileChooser fc = new JFileChooser();
+	                int option = fc.showSaveDialog(JournalSearch.this);
+	                if(option == JFileChooser.APPROVE_OPTION){
+	                    String filename = fc.getSelectedFile().getName(); 
+	                    String path = fc.getSelectedFile().getParentFile().getPath();
+
+						int len = filename.length();
+						String ext = "";
+						String file = "";
+
+						if(len > 4){
+							ext = filename.substring(len-4, len);
+						}
+
+						if(ext.equals(".xls")){
+							file = path + "/" + filename; 
+						}else{
+							file = path + "/" + filename + ".xls"; 
+						}
+						//System.out.println(filename);
+						//System.out.println(path);
+						writeToExcel(table, new File(file));
+	                }
+			}
+		});
+		
 		mnFile.add(mntmNewMenuItem_1);
+		
+		mntmExit.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent arg0) 
+			{
+				System.exit(0);
+			}
+		});
+		
 		
 		mnFile.add(mntmExit);
 		
@@ -324,7 +350,6 @@ public class JournalSearch extends JFrame {
 				    TableModel.removeRow(x);
 				}
 				
-				
 				//get journal title
 				String title = journalt.getText();
 				title = title.replace(' ', '+');
@@ -337,15 +362,12 @@ public class JournalSearch extends JFrame {
 				String yrlow = ylo.getText();
 				String yrhi = yhi.getText();
 				
-				
 				//exclude words
 				String exclude = excl.getText();
 				exclude = exclude.replace(' ', '+');
 				
 				try
 				{
-					
-						
 						String[] titleArray = {"", "","","","","","","","",""};
 						String[] authorArray = {"", "","","","","","","","",""};
 						int count = 0;
@@ -376,13 +398,7 @@ public class JournalSearch extends JFrame {
 			            		authorArray[count] = lnk2;
 			            		count++;			            		
 			            	}		            	
-			            }
-						
-						
-						
-						
-						
-												
+			            }			
 						for(int x = 0; x < titleArray.length; x++)
 						{
 							Matcher matcher = yearPattern.matcher(authorArray[x]);
@@ -396,30 +412,15 @@ public class JournalSearch extends JFrame {
 							{
 								year = "n/a";
 							}
-							TableModel.addRow(new Object[]{false, "col3", authorArray[x], titleArray[x], year});
+							//TableModel.addRow(new Object[]{false, "col3", authorArray[x], titleArray[x], year});
+							TableModel.addRow(new Object[]{false, "col3", authorArray[x], titleArray[x], year,"hello","hello","hello"});
 						}
-						
-						
-						
-						
-					
 				}
 				catch (Exception e)
 				{
 			        e.printStackTrace();
 			    }
-				
-					
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
+		
 			}
 		});
 		btnSearch.setBounds(896, 29, 97, 20);
@@ -596,6 +597,21 @@ public class JournalSearch extends JFrame {
 						
 					default:
 							return String.class;
+				
+//				case 0:
+//					return String.class;
+//				case 1:
+//					return String.class;
+//				case 2:
+//					return String.class;
+//				case 3:
+//					return String.class;
+//				case 4:
+//					return String.class;
+//					
+//				default:
+//						return String.class;
+				
 				}
 			}
 		};
