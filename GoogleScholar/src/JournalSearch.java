@@ -7,6 +7,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.Set;
 import java.util.TreeMap;
@@ -104,7 +105,12 @@ public class JournalSearch extends JFrame {
 	private static Pattern yearPattern = Pattern.compile(" ([12][0-9][0-9][0-9])( |$)");
 	private static Pattern citeidPattern = Pattern.compile("/scholar\\?cites=([\\d]*)\\&");
 	private static Pattern doiPattern = Pattern.compile("id=doi:([^&]*)");
-	
+	private ArrayList<String> titleArray = new ArrayList<String>();
+	private  ArrayList<String> authorArray = new ArrayList<String>();
+	private  ArrayList<String> cbArray = new ArrayList<String>();
+	private  ArrayList<String> doiArray = new ArrayList<String>();
+	private  ArrayList<String> gs_cited_by = new ArrayList<String>();
+	private  ArrayList<String> gs_abs = new ArrayList<String>();
 	/**
 	 * Launch the application.
 	 */
@@ -381,61 +387,94 @@ public class JournalSearch extends JFrame {
 				
 				//exclude words
 				String exclude = excl.getText();
-				exclude = exclude.replace(' ', '+');
-				
+//				exclude = exclude.replace(' ', '+');
+//				private String[] titleArray =new String[0];
+//				private String[] authorArray = new String[0];
+//				private String[] cbArray = new String[0];
+//				private String[] doiArray = new String[0];
+//				private String[] gs_cited_by = new String[0];
+//				private String[] gs_abs = new String[0];
+				int count = 0;
+				int tot_j_num=0;
 				try
 				{
+					
+//					
+//					private ArrayList<String> titleArray = new ArrayList<String>();
+//					private  ArrayList<String> authorArray = new ArrayList<String>();
+//					private  ArrayList<String> cbArray = new ArrayList<String>();
+//					private  ArrayList<String> doiArray = new ArrayList<String>();
+//					private  ArrayList<String> gs_cited_by = new ArrayList<String>();
+//					private  ArrayList<String> gs_abs = new ArrayList<String>();
 
-						String[] titleArray = {"", "","","","","","","","",""};
-						String[] authorArray = {"", "","","","","","","","",""};
-						String[] cbArray = {"", "","","","","","","","",""};
-						String[] doiArray = {"", "","","","","","","","",""};
-						String[] gs_cited_by = new String[10];
-						String[] gs_abs = new String[10];
+						do{
 						
+						System.out.println(count);
 						
-						int count = 0;
 						//https://scholar.google.com/scholar?q=lol&hl=en&as_sdt=0,5
-						String url = "https://scholar.google.com/scholar?as_q="+ title +"&as_epq=" + phrase + "&as_oq=&as_eq=" + exclude + "&as_occt=title&as_sauthors=&as_publication=&as_ylo=" + yrlow + "&as_yhi=" + yrhi + "&btnG=&hl=en&as_sdt=0%2C5";
-						Document doc = Jsoup.connect(url).userAgent("Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:25.0) Gecko/20100101 Firefox/25.0")  
+							String url = "https://scholar.google.com/scholar?as_q="+title+"&as_epq="+phrase+"&as_oq=&as_eq="+exclude+"&as_occt=any&as_sauthors=&as_publication=&as_ylo="+yrlow+"&as_yhi="+yrhi+"&start="+count+"&btnG=&hl=en&as_sdt=0%2C5&google_abuse=GOOGLE_ABUSE_EXEMPTION%3DID%3Df44924af39543aff:TM%3D1470099997:C%3Dc:IP%3D203.10.91.86-:S%3DAPGng0sxcpuaPbdkZfpOfmudLAW2Y5x5RA%3B+path%3D/%3B+domain%3Dgoogle.com%3B+expires%3DTue,+02-Aug-2016+04:06:37+GMT";
+						//String url = "https://scholar.google.com/scholar?as_q="+ title +"&as_epq=" + phrase + "&as_oq=&as_eq=" + exclude + "&as_occt=title&as_sauthors=&as_publication=&as_ylo=" + yrlow + "&as_yhi=" + yrhi +"&start="+count+ "&btnG=&hl=en&as_sdt=0%2C5";
+
+							System.out.println(url);
+							Document doc = Jsoup.connect(url).userAgent("Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:25.0) Gecko/20100101 Firefox/25.0")  
 						           .referrer("http://www.google.com")   
 						           .timeout(12000) 
 						           .followRedirects(true)
 						           .get();
-						//System.out.println(doc.title());
-						
+						System.out.println(doc.title());
+						if(count<10){
+				            Element gs_ab_md = doc.getElementById("gs_ab_md");
+				            String Jnum = gs_ab_md.text();
+				            String[] a = Jnum.split("[A-Za-z]+");
+				            String [] tot_temp = a[1].split(",");
+				            String tot_j = "";
+				            for (int j = 0; j < tot_temp.length;j++){
+				                tot_j+=tot_temp[j];
+				            }
+				            tot_j=tot_j.trim();
+
+				            tot_j_num = Integer.parseInt(tot_j);
+				            System.out.println(tot_j_num);
+						}
 						
 						Elements gstitle = doc.getElementsByClass("gs_ri");
 						Elements elements = doc.select("div.gs_r");
 						
 						for (Element link:gstitle)
 			            {
-			            	String lnk = link.getElementsByClass("gs_rt").tagName("a").text();
-			            	lnk = lnk.replace("[PDF]", "");
-			            	lnk = lnk.replace("[HTML]", "");
-			            	lnk = lnk.replace("[BOOK][B]", "");
-			            	lnk = lnk.replace("[CITATION][C]", "");
-			            	lnk = lnk.trim();
+			            	String gs_rt = link.getElementsByClass("gs_rt").tagName("a").text();
+			            	gs_rt = gs_rt.replace("[PDF]", "");
+			            	gs_rt = gs_rt.replace("[HTML]", "");
+			            	gs_rt = gs_rt.replace("[BOOK][B]", "");
+			            	gs_rt = gs_rt.replace("[CITATION][C]", "");
+			            	gs_rt = gs_rt.trim();
 			            	//lnk = lnk.replaceAll("[B]", "");
 			            	String gs_rs = link.getElementsByClass("gs_rs").text();
 			                
-			            	String lnk2 = link.getElementsByClass("gs_a").tagName("div").text();
-			            	if (lnk.length()!=0 && lnk2.length() !=0 ) {
-			            		titleArray[count] = lnk;
-			            		authorArray[count] = lnk2;
-			            		gs_abs[count]= gs_rs;
-			            		count++;			            		
+			            	String gs_a = link.getElementsByClass("gs_a").tagName("div").text();
+			            	
+
+			            	
+
+			            	
+			            	
+			            	
+			            	
+			            	
+			            	if (gs_rt.length()!=0 && gs_a.length() !=0 ) {
+			            		titleArray.add(gs_rt);
+			            		authorArray.add(gs_a);
+			            		gs_abs.add(gs_rs);		            		
 			            	}		            	
 
 
 
 			            }
 						
-						count = 0;
-						int count2 = 0;
+						
+						//int count2 = 0;
 						
 						
-							
 						
 						for (Element element : elements)
 						{
@@ -449,9 +488,8 @@ public class JournalSearch extends JFrame {
 								
 								String cited = text;
 								cited = cited.substring(9);
-								cbArray[count] = cited;
+								cbArray.add(cited);
 								System.out.println(cited);
-								count++;
 																
 							}
 							
@@ -464,7 +502,7 @@ public class JournalSearch extends JFrame {
 						
 						
 						Elements gs_fl_2 = doc.getElementsByClass("gs_fl");
-			            int counter =0;
+			            
 			            Elements gs_select = gs_fl_2.select("a[href]");
 
 			            for (Element all_url: gs_select){
@@ -482,13 +520,12 @@ public class JournalSearch extends JFrame {
 
 			                                find_url = test2[k].indexOf("/scholar?cites=");
 			                                if (find_url!=-1) {
-			                                    gs_cited_by[counter] = "https://scholar.google.com.au/"+test2[k];
+			                                    gs_cited_by.add("https://scholar.google.com.au/"+test2[k]);
 			                                }
 			                            }
 
 			                        }
 			                    }
-			                    counter++;
 			                }
 			            }
 			            
@@ -505,9 +542,15 @@ public class JournalSearch extends JFrame {
 						
 						
 
-						for(int x = 0; x < titleArray.length; x++)
+						
+						count+=10;
+						System.out.println(count);
+						
+				}while(count<20);
+						
+						for(int x = 0; x < titleArray.size(); x++)
 						{
-							Matcher matcher = yearPattern.matcher(authorArray[x]);
+							Matcher matcher = yearPattern.matcher(authorArray.get(x));
 							
 							String year = "";
 							if (matcher.find())
@@ -522,12 +565,12 @@ public class JournalSearch extends JFrame {
 							//TableModel.addRow(new Object[]{false, "col3", authorArray[x], titleArray[x], year});
 							//TableModel.addRow(new Object[]{false, "col3", authorArray[x], titleArray[x], year,"hello","hello","hello"});
 
-							TableModel.addRow(new Object[]{false, cbArray[x], authorArray[x], titleArray[x],year, gs_abs[x],gs_cited_by[x]});
+							TableModel.addRow(new Object[]{false, cbArray.get(x), authorArray.get(x), titleArray.get(x),year, gs_abs.get(x),gs_cited_by.get(x)});
 
 						}
-				}
+						
 				
-				catch (Exception e)
+				}catch (Exception e)
 				{
 			        e.printStackTrace();
 			    }
