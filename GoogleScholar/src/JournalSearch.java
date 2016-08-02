@@ -38,8 +38,6 @@ import org.jsoup.select.Elements;
 public class JournalSearch extends JFrame {
 
 	
-	
-	
 	private JFrame frmGoogleScholarTool;
 	private JTextField journalt;
 	private JTextField withphr;
@@ -54,7 +52,6 @@ public class JournalSearch extends JFrame {
 	private final JMenuItem mntmNewMenuItem_1 = new JMenuItem("Save as CSV");
 	
 	private final JMenuItem mntmExit = new JMenuItem("Exit");
-	
 	
 	private final JMenu mnEdit = new JMenu("Edit");
 	private final JMenuItem mntmCut = new JMenuItem("Cut");
@@ -393,7 +390,8 @@ public class JournalSearch extends JFrame {
 						String[] authorArray = {"", "","","","","","","","",""};
 						String[] cbArray = {"", "","","","","","","","",""};
 						String[] doiArray = {"", "","","","","","","","",""};
-						
+						String[] gs_cited_by = new String[10];
+						String[] gs_abs = new String[10];
 						
 						
 						int count = 0;
@@ -419,14 +417,17 @@ public class JournalSearch extends JFrame {
 			            	lnk = lnk.replace("[CITATION][C]", "");
 			            	lnk = lnk.trim();
 			            	//lnk = lnk.replaceAll("[B]", "");
+			            	String gs_rs = link.getElementsByClass("gs_rs").text();
+			                
 			            	String lnk2 = link.getElementsByClass("gs_a").tagName("div").text();
 			            	if (lnk.length()!=0 && lnk2.length() !=0 ) {
 			            		titleArray[count] = lnk;
 			            		authorArray[count] = lnk2;
+			            		gs_abs[count]= gs_rs;
 			            		count++;			            		
 			            	}		            	
 
-			            		
+
 
 			            }
 						
@@ -449,6 +450,7 @@ public class JournalSearch extends JFrame {
 								String cited = text;
 								cited = cited.substring(9);
 								cbArray[count] = cited;
+								System.out.println(cited);
 								count++;
 																
 							}
@@ -456,8 +458,49 @@ public class JournalSearch extends JFrame {
 							
 							
 						}
-												
+									
 						}
+						
+						
+						
+						Elements gs_fl_2 = doc.getElementsByClass("gs_fl");
+			            int counter =0;
+			            Elements gs_select = gs_fl_2.select("a[href]");
+
+			            for (Element all_url: gs_select){
+			                int find_url = String.valueOf(all_url).indexOf("/scholar?cites=");
+			                if (find_url != -1){
+			                    String temp_url = all_url.toString();
+			                    //temp_html[counter] = temp_url;
+			                    String [] split_half = temp_url.split("<a href=\"");
+			                    for (int o = 0; o < split_half.length;o++){
+			                        if (split_half[o].trim() !="" && split_half[o]!=null){
+			                            //System.out.println(test[o]);
+			                            temp_url = split_half[o];
+			                            String[] test2 = temp_url.split("\"",2);
+			                            for (int k = 0; k < test2.length;k++){
+
+			                                find_url = test2[k].indexOf("/scholar?cites=");
+			                                if (find_url!=-1) {
+			                                    gs_cited_by[counter] = "https://scholar.google.com.au/"+test2[k];
+			                                }
+			                            }
+
+			                        }
+			                    }
+			                    counter++;
+			                }
+			            }
+			            
+			            
+						
+						
+						
+						
+						
+						
+						
+						
 						
 						
 						
@@ -479,7 +522,7 @@ public class JournalSearch extends JFrame {
 							//TableModel.addRow(new Object[]{false, "col3", authorArray[x], titleArray[x], year});
 							//TableModel.addRow(new Object[]{false, "col3", authorArray[x], titleArray[x], year,"hello","hello","hello"});
 
-							TableModel.addRow(new Object[]{false, cbArray[x], authorArray[x], titleArray[x], year, doiArray[x],"hello","hello","hello"});
+							TableModel.addRow(new Object[]{false, cbArray[x], authorArray[x], titleArray[x],year, gs_abs[x],gs_cited_by[x]});
 
 						}
 				}
@@ -697,9 +740,8 @@ public class JournalSearch extends JFrame {
 		TableModel.addColumn("Author");
 		TableModel.addColumn("Title");
 		TableModel.addColumn("Year");
-		TableModel.addColumn("D.O.I.");
-		TableModel.addColumn("Publisher");
-		TableModel.addColumn("Type");
+		TableModel.addColumn("Abstract");
+		TableModel.addColumn("URL");	
 	}
 	
 	
