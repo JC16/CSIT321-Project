@@ -113,7 +113,7 @@ public class authorSearch extends JFrame {
 //		contentPane.setLayout(new BorderLayout(0, 0));
 //		setContentPane(contentPane);
 		
-		setTitle("Author Search");
+		setTitle("Scopus");
 		
 		setJMenuBar(menuBar);
 		

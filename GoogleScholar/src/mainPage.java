@@ -50,8 +50,8 @@ public class mainPage extends JFrame {
 	private final JMenu mnHelp = new JMenu("Help");
 	private final JMenuItem mntmAboutThisProgram = new JMenuItem("About this program");
 	private final JLabel lblGoogleScholarSearch = new JLabel("Google Scholar Search Tool");
-	private final JButton btnNewButton = new JButton("Search By Jounral");
-	private final JButton btnNewButton_1 = new JButton("Search By Author");
+	private final JButton btnNewButton = new JButton("Google Scholar");
+	private final JButton btnNewButton_1 = new JButton("Scopus");
 	private final JButton btnNewButton_2 = new JButton("Search By General Information");
 
 	/**
