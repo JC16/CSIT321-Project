@@ -187,7 +187,7 @@ public class JournalSearch extends JFrame {
 		excl.setColumns(10);
 		frmGoogleScholarTool = new JFrame();
 		frmGoogleScholarTool.setFont(new Font("Dialog", Font.BOLD, 12));
-		frmGoogleScholarTool.setTitle("Journal Search");
+		frmGoogleScholarTool.setTitle("Google Scholar Search");
 		frmGoogleScholarTool.setBounds(100, 100, 1074, 727);
 		frmGoogleScholarTool.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		

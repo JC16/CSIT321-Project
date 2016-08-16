@@ -49,7 +49,7 @@ public class mainPage extends JFrame {
 	private final JMenuItem mntmP = new JMenuItem("Preference");
 	private final JMenu mnHelp = new JMenu("Help");
 	private final JMenuItem mntmAboutThisProgram = new JMenuItem("About this program");
-	private final JLabel lblGoogleScholarSearch = new JLabel("Google Scholar Search Tool");
+	private final JLabel lblGoogleScholarSearch = new JLabel("Scholar Search Tool");
 	private final JButton btnNewButton = new JButton("Google Scholar");
 	private final JButton btnNewButton_1 = new JButton("Scopus");
 	private final JButton btnNewButton_2 = new JButton("Search By General Information");
@@ -81,7 +81,7 @@ public class mainPage extends JFrame {
 		frmGoogleScholarTool = new JFrame();
 		frmGoogleScholarTool.setFont(new Font("Dialog", Font.BOLD, 12));
 		frmGoogleScholarTool.setTitle("Google Scholar Tool");
-		frmGoogleScholarTool.setBounds(100, 100, 999, 646);
+		frmGoogleScholarTool.setBounds(100, 100, 1074, 727);
 		frmGoogleScholarTool.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		//JMenuBar menuBar = new JMenuBar();
@@ -189,7 +189,7 @@ public class mainPage extends JFrame {
 		
 		frmGoogleScholarTool.getContentPane().setLayout(null);
 		lblGoogleScholarSearch.setFont(new Font("Lucida Grande", Font.PLAIN, 30));
-		lblGoogleScholarSearch.setBounds(313, 42, 449, 147);
+		lblGoogleScholarSearch.setBounds(398, 50, 449, 147);
 		
 		frmGoogleScholarTool.getContentPane().add(lblGoogleScholarSearch);
 		btnNewButton.addActionListener(new ActionListener() {
@@ -201,7 +201,7 @@ public class mainPage extends JFrame {
 				
 			}
 		});
-		btnNewButton.setBounds(63, 238, 217, 203);
+		btnNewButton.setBounds(54, 310, 217, 203);
 		
 		frmGoogleScholarTool.getContentPane().add(btnNewButton);
 		btnNewButton_1.addActionListener(new ActionListener() {
@@ -214,7 +214,7 @@ public class mainPage extends JFrame {
 				
 			}
 		});
-		btnNewButton_1.setBounds(387, 238, 217, 203);
+		btnNewButton_1.setBounds(426, 310, 217, 203);
 		
 		frmGoogleScholarTool.getContentPane().add(btnNewButton_1);
 		btnNewButton_2.addActionListener(new ActionListener() {
@@ -227,7 +227,7 @@ public class mainPage extends JFrame {
 				
 			}
 		});
-		btnNewButton_2.setBounds(725, 241, 217, 203);
+		btnNewButton_2.setBounds(813, 310, 217, 203);
 		
 		frmGoogleScholarTool.getContentPane().add(btnNewButton_2);
 		
