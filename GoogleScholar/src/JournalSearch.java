@@ -437,9 +437,15 @@ public class JournalSearch extends JFrame {
 						
 						System.out.println(count);
 						
-						//int proxyPort = 8080;
-						//String proxyAdress = "150.101.163.235";
-						//Proxy proxy = new Proxy(Proxy.Type.HTTP, InetSocketAddress.createUnresolved(proxyAdress, proxyPort));
+						//working proxy list (dont use one ip too much)
+						//220.101.93.3:3128
+						//
+						
+						
+						
+						int proxyPort = 3128;
+						String proxyAdress = "220.101.93.3:3128";
+						Proxy proxy = new Proxy(Proxy.Type.HTTP, InetSocketAddress.createUnresolved(proxyAdress, proxyPort));
 						
 						
 						//https://scholar.google.com/scholar?q=lol&hl=en&as_sdt=0,5
@@ -448,7 +454,7 @@ public class JournalSearch extends JFrame {
 
 							System.out.println(url);
 							Document doc = Jsoup.connect(url).userAgent("Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:25.0) Gecko/20100101 Firefox/25.0")  
-						           //.proxy(proxy)
+						           .proxy(proxy)
 								   .referrer("http://www.google.com")   
 						           .timeout(30000) 
 						           .followRedirects(true)
