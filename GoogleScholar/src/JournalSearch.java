@@ -75,7 +75,7 @@ public class JournalSearch extends JFrame {
 	private final JMenuItem mntmAboutThisProgram = new JMenuItem("About this program");
 	private final JLabel lblNewLabel_1 = new JLabel("Year of Publication between");
 	private final JLabel lblNewLabel_2 = new JLabel("With at least one of the words:");
-	private final JTextField excl = new JTextField();
+	private final JTextField atleastone = new JTextField();
 	private final JTextField ylo = new JTextField();
 	private final JLabel lblAnd = new JLabel("to");
 	private final JTextField yhi = new JTextField();
@@ -93,10 +93,10 @@ public class JournalSearch extends JFrame {
 	private  ArrayList<String> gs_cited_by = new ArrayList<String>();
 	private  ArrayList<String> gs_abs = new ArrayList<String>();
 	private final JLabel lblNewLabel_4 = new JLabel("Without the words:");
-	private final JTextField textField = new JTextField();
+	private final JTextField excl = new JTextField();
 	private final JLabel lblNewLabel_5 = new JLabel("Where my words occur:");
-	private final JRadioButton rdbtnAnywhereInThe = new JRadioButton("Anywhere in the article");
-	private final JRadioButton rdbtnInTheTitle = new JRadioButton("In the title of the article");
+	private final JRadioButton awbtn = new JRadioButton("Anywhere in the article");
+	private final JRadioButton ttlbtn = new JRadioButton("In the title of the article");
 	private final JLabel lblReturnArticlesAuthored = new JLabel("Return articles authored by:");
 	private final JLabel lblNewLabel_6 = new JLabel("Return articles published in:");
 	private final JTextField AuthorField = new JTextField();
@@ -183,8 +183,9 @@ public class JournalSearch extends JFrame {
 		yhi.setColumns(10);
 		ylo.setBounds(248, 280, 56, 28);
 		ylo.setColumns(10);
-		excl.setBounds(248, 99, 638, 28);
-		excl.setColumns(10);
+		
+		atleastone.setBounds(248, 99, 638, 28);
+		atleastone.setColumns(10);
 		frmGoogleScholarTool = new JFrame();
 		frmGoogleScholarTool.setFont(new Font("Dialog", Font.BOLD, 12));
 		frmGoogleScholarTool.setTitle("Google Scholar Search");
@@ -371,13 +372,47 @@ public class JournalSearch extends JFrame {
 				String phrase = withphr.getText();
 				phrase = phrase.replace(' ', '+');
 				
+				
+				//checkboxes
+				String btndot = "";
+				
+				if(awbtn.isSelected() == true)
+				{
+					btndot = "any";
+					
+				}
+				else if(ttlbtn.isSelected() == true)
+				{
+					btndot = "title";					
+				}
+				
+				
+				//published in
+				String category = publishedField.getText();
+				category = category.replace(' ', '+');
+				
+				
+				
+				//authored by
+				String authorlist = AuthorField.getText();
+				authorlist = authorlist.replace(' ', '+');
+				
+				
+				//at least one of the words
+				String atleast = atleastone.getText();
+				atleast = atleast.replace(' ', '+');
+				
 				//get year low and year high
 				String yrlow = ylo.getText();
 				String yrhi = yhi.getText();
 				
 				//exclude words
 				String exclude = excl.getText();
-//				exclude = exclude.replace(' ', '+');
+				exclude = exclude.replace(' ', '+');
+				
+				
+				
+				
 //				private String[] titleArray =new String[0];
 //				private String[] authorArray = new String[0];
 //				private String[] cbArray = new String[0];
@@ -402,13 +437,13 @@ public class JournalSearch extends JFrame {
 						System.out.println(count);
 						
 						//https://scholar.google.com/scholar?q=lol&hl=en&as_sdt=0,5
-							String url = "https://scholar.google.com/scholar?as_q="+title+"&as_epq="+phrase+"&as_oq=&as_eq="+exclude+"&as_occt=any&as_sauthors=&as_publication=&as_ylo="+yrlow+"&as_yhi="+yrhi+"&start="+count+"&btnG=&hl=en&as_sdt=0%2C5&google_abuse=GOOGLE_ABUSE_EXEMPTION%3DID%3Df44924af39543aff:TM%3D1470099997:C%3Dc:IP%3D203.10.91.86-:S%3DAPGng0sxcpuaPbdkZfpOfmudLAW2Y5x5RA%3B+path%3D/%3B+domain%3Dgoogle.com%3B+expires%3DTue,+02-Aug-2016+04:06:37+GMT";
+							String url = "https://scholar.google.com/scholar?as_q="+title+"&as_epq="+phrase+"&as_oq="+ atleast + "&as_eq=" + exclude + "&as_occt=" + btndot +"&as_sauthors=" + authorlist + "&as_publication=" + category + "&as_ylo="+yrlow+"&as_yhi="+yrhi+"&start="+count+"&btnG=&hl=en&as_sdt=0%2C5&google_abuse=GOOGLE_ABUSE_EXEMPTION%3DID%3Df44924af39543aff:TM%3D1470099997:C%3Dc:IP%3D203.10.91.86-:S%3DAPGng0sxcpuaPbdkZfpOfmudLAW2Y5x5RA%3B+path%3D/%3B+domain%3Dgoogle.com%3B+expires%3DTue,+02-Aug-2016+04:06:37+GMT";
 						//String url = "https://scholar.google.com/scholar?as_q="+ title +"&as_epq=" + phrase + "&as_oq=&as_eq=" + exclude + "&as_occt=title&as_sauthors=&as_publication=&as_ylo=" + yrlow + "&as_yhi=" + yrhi +"&start="+count+ "&btnG=&hl=en&as_sdt=0%2C5";
 
 							System.out.println(url);
 							Document doc = Jsoup.connect(url).userAgent("Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:25.0) Gecko/20100101 Firefox/25.0")  
 						           .referrer("http://www.google.com")   
-						           .timeout(12000) 
+						           .timeout(30000) 
 						           .followRedirects(true)
 						           .get();
 						System.out.println(doc.title());
@@ -568,7 +603,7 @@ public class JournalSearch extends JFrame {
 		
 		frmGoogleScholarTool.getContentPane().add(lblNewLabel_2);
 		
-		frmGoogleScholarTool.getContentPane().add(excl);
+		frmGoogleScholarTool.getContentPane().add(atleastone);
 		
 		frmGoogleScholarTool.getContentPane().add(ylo);
 		lblAnd.setBounds(313, 286, 18, 16);
@@ -663,24 +698,24 @@ public class JournalSearch extends JFrame {
 		lblNewLabel_4.setBounds(43, 141, 123, 16);
 		
 		frmGoogleScholarTool.getContentPane().add(lblNewLabel_4);
-		textField.setColumns(10);
-		textField.setBounds(248, 135, 638, 28);
+		excl.setColumns(10);
+		excl.setBounds(248, 135, 638, 28);
 		
-		frmGoogleScholarTool.getContentPane().add(textField);
+		frmGoogleScholarTool.getContentPane().add(excl);
 		lblNewLabel_5.setBounds(43, 173, 153, 16);
 		
 		frmGoogleScholarTool.getContentPane().add(lblNewLabel_5);
-		rdbtnAnywhereInThe.setBounds(248, 175, 181, 23);
+		awbtn.setBounds(248, 175, 181, 23);
+		awbtn.setSelected(true);
+		frmGoogleScholarTool.getContentPane().add(awbtn);
+		ttlbtn.setBounds(437, 175, 181, 23);
 		
-		frmGoogleScholarTool.getContentPane().add(rdbtnAnywhereInThe);
-		rdbtnInTheTitle.setBounds(437, 175, 181, 23);
-		
-		frmGoogleScholarTool.getContentPane().add(rdbtnInTheTitle);
+		frmGoogleScholarTool.getContentPane().add(ttlbtn);
 		lblReturnArticlesAuthored.setBounds(43, 215, 181, 16);
 		
 		ButtonGroup group = new ButtonGroup();
-		group.add(rdbtnAnywhereInThe);
-		group.add(rdbtnInTheTitle);
+		group.add(awbtn);
+		group.add(ttlbtn);
 		
 		frmGoogleScholarTool.getContentPane().add(lblReturnArticlesAuthored);
 		lblNewLabel_6.setBounds(43, 243, 181, 16);
