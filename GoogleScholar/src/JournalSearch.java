@@ -13,7 +13,8 @@ import java.util.Set;
 import java.util.TreeMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
+import java.net.InetSocketAddress;
+import java.net.Proxy;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
@@ -436,13 +437,19 @@ public class JournalSearch extends JFrame {
 						
 						System.out.println(count);
 						
+						//int proxyPort = 8080;
+						//String proxyAdress = "150.101.163.235";
+						//Proxy proxy = new Proxy(Proxy.Type.HTTP, InetSocketAddress.createUnresolved(proxyAdress, proxyPort));
+						
+						
 						//https://scholar.google.com/scholar?q=lol&hl=en&as_sdt=0,5
 							String url = "https://scholar.google.com/scholar?as_q="+title+"&as_epq="+phrase+"&as_oq="+ atleast + "&as_eq=" + exclude + "&as_occt=" + btndot +"&as_sauthors=" + authorlist + "&as_publication=" + category + "&as_ylo="+yrlow+"&as_yhi="+yrhi+"&start="+count+"&btnG=&hl=en&as_sdt=0%2C5&google_abuse=GOOGLE_ABUSE_EXEMPTION%3DID%3Df44924af39543aff:TM%3D1470099997:C%3Dc:IP%3D203.10.91.86-:S%3DAPGng0sxcpuaPbdkZfpOfmudLAW2Y5x5RA%3B+path%3D/%3B+domain%3Dgoogle.com%3B+expires%3DTue,+02-Aug-2016+04:06:37+GMT";
 						//String url = "https://scholar.google.com/scholar?as_q="+ title +"&as_epq=" + phrase + "&as_oq=&as_eq=" + exclude + "&as_occt=title&as_sauthors=&as_publication=&as_ylo=" + yrlow + "&as_yhi=" + yrhi +"&start="+count+ "&btnG=&hl=en&as_sdt=0%2C5";
 
 							System.out.println(url);
 							Document doc = Jsoup.connect(url).userAgent("Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:25.0) Gecko/20100101 Firefox/25.0")  
-						           .referrer("http://www.google.com")   
+						           //.proxy(proxy)
+								   .referrer("http://www.google.com")   
 						           .timeout(30000) 
 						           .followRedirects(true)
 						           .get();
