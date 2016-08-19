@@ -81,7 +81,7 @@ public class JournalSearch extends JFrame {
 	private final JLabel lblAnd = new JLabel("to");
 	private final JTextField yhi = new JTextField();
 	private final JLabel lblResult = new JLabel("Result",SwingConstants.CENTER);
-	private final JLabel lblNewLabel_3 = new JLabel("Number of result found:");
+	private final JLabel lblNewLabel_3 = new JLabel("Results:");
 	private final JLabel PaperLabel = new JLabel("");
 	private final JButton btnHelp = new JButton("Help");
 	private static Pattern yearPattern = Pattern.compile(" ([12][0-9][0-9][0-9])( |$)");
@@ -102,6 +102,7 @@ public class JournalSearch extends JFrame {
 	private final JLabel lblNewLabel_6 = new JLabel("Return articles published in:");
 	private final JTextField AuthorField = new JTextField();
 	private final JTextField publishedField = new JTextField();
+	private JLabel rescount = new JLabel("0");
 	/**
 	 * Launch the application.
 	 */
@@ -368,6 +369,7 @@ public class JournalSearch extends JFrame {
 				//get journal title
 				String title = journalt.getText();
 				title = title.replace(' ', '+');
+				title = title.replace(",", "%2");
 				
 				//get phrase
 				String phrase = withphr.getText();
@@ -444,9 +446,12 @@ public class JournalSearch extends JFrame {
 						
 						
 						int proxyPort = 3128;
-						String proxyAdress = "220.101.93.3:3128";
+						String proxyAdress = "220.101.93.3";
 						Proxy proxy = new Proxy(Proxy.Type.HTTP, InetSocketAddress.createUnresolved(proxyAdress, proxyPort));
 						
+											
+						//randomise the time between searches to help bypass capcha
+						int timeoutnum = 30000; 
 						
 						//https://scholar.google.com/scholar?q=lol&hl=en&as_sdt=0,5
 							String url = "https://scholar.google.com/scholar?as_q="+title+"&as_epq="+phrase+"&as_oq="+ atleast + "&as_eq=" + exclude + "&as_occt=" + btndot +"&as_sauthors=" + authorlist + "&as_publication=" + category + "&as_ylo="+yrlow+"&as_yhi="+yrhi+"&start="+count+"&btnG=&hl=en&as_sdt=0%2C5&google_abuse=GOOGLE_ABUSE_EXEMPTION%3DID%3Df44924af39543aff:TM%3D1470099997:C%3Dc:IP%3D203.10.91.86-:S%3DAPGng0sxcpuaPbdkZfpOfmudLAW2Y5x5RA%3B+path%3D/%3B+domain%3Dgoogle.com%3B+expires%3DTue,+02-Aug-2016+04:06:37+GMT";
@@ -454,9 +459,9 @@ public class JournalSearch extends JFrame {
 
 							System.out.println(url);
 							Document doc = Jsoup.connect(url).userAgent("Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:25.0) Gecko/20100101 Firefox/25.0")  
-						           .proxy(proxy)
+						          .proxy(proxy)
 								   .referrer("http://www.google.com")   
-						           .timeout(30000) 
+						           .timeout(timeoutnum)
 						           .followRedirects(true)
 						           .get();
 						System.out.println(doc.title());
@@ -464,7 +469,7 @@ public class JournalSearch extends JFrame {
 				            Element gs_ab_md = doc.getElementById("gs_ab_md");
 				            String Jnum = gs_ab_md.text();
 				            String[] a = Jnum.split("[A-Za-z]+");
-				            String [] tot_temp = a[1].split(",");
+				            String[] tot_temp = a[1].split(",");
 				            String tot_j = "";
 				            for (int j = 0; j < tot_temp.length;j++){
 				                tot_j+=tot_temp[j];
@@ -473,6 +478,7 @@ public class JournalSearch extends JFrame {
 
 				            tot_j_num = Integer.parseInt(tot_j);
 				            System.out.println(tot_j_num);
+				            rescount.setText("0 / " + tot_j);
 						}
 						
 						Elements gstitle = doc.getElementsByClass("gs_ri");
@@ -518,7 +524,7 @@ public class JournalSearch extends JFrame {
 								String cited = text;
 								cited = cited.substring(9);
 								cbArray.add(cited);
-								System.out.println(cited);
+								
 																
 							}
 							
@@ -559,9 +565,7 @@ public class JournalSearch extends JFrame {
 						count+=10;
 						System.out.println(count);
 						
-				}while(count<100);
-						
-						for(int x = 0; x < titleArray.size(); x++)
+						for(int x = count-10; x < count; x++)
 						{
 							Matcher matcher = yearPattern.matcher(authorArray.get(x));
 							
@@ -579,8 +583,17 @@ public class JournalSearch extends JFrame {
 							//TableModel.addRow(new Object[]{false, "col3", authorArray[x], titleArray[x], year,"hello","hello","hello"});
 
 							TableModel.addRow(new Object[]{false, cbArray.get(x), authorArray.get(x), titleArray.get(x),year, gs_abs.get(x),gs_cited_by.get(x)});
-
+							System.out.println("test");
+							
 						}
+						
+						rescount.setText(Integer.toString(count) + " / " + tot_j_num); 
+						
+						Thread.sleep(3000 + (int)(Math.random() * 8000));
+						
+				}while(count < tot_j_num || count < 20);
+						
+			    //for loop updating tables used to be here. moved it so it would update 10 at a time
 						
 				
 				}catch (Exception e)
@@ -631,7 +644,7 @@ public class JournalSearch extends JFrame {
 		
 		frmGoogleScholarTool.getContentPane().add(lblResult);
 		lblNewLabel_3.setFont(new Font("Lucida Grande", Font.PLAIN, 12));
-		lblNewLabel_3.setBounds(43, 348, 146, 20);
+		lblNewLabel_3.setBounds(43, 348, 52, 20);
 		
 		frmGoogleScholarTool.getContentPane().add(lblNewLabel_3);
 		PaperLabel.setBounds(162, 335, 61, 16);
@@ -742,6 +755,10 @@ public class JournalSearch extends JFrame {
 		publishedField.setBounds(248, 240, 638, 28);
 		
 		frmGoogleScholarTool.getContentPane().add(publishedField);
+		
+		
+		rescount.setBounds(105, 352, 181, 14);
+		frmGoogleScholarTool.getContentPane().add(rescount);
 		
 	}
 	
