@@ -445,9 +445,9 @@ public class JournalSearch extends JFrame {
 						
 						
 						
-						int proxyPort = 3128;
-						String proxyAdress = "220.101.93.3";
-						Proxy proxy = new Proxy(Proxy.Type.HTTP, InetSocketAddress.createUnresolved(proxyAdress, proxyPort));
+						//int proxyPort = 3128;
+						//String proxyAdress = "220.101.93.3";
+						//Proxy proxy = new Proxy(Proxy.Type.HTTP, InetSocketAddress.createUnresolved(proxyAdress, proxyPort));
 						
 											
 						//randomise the time between searches to help bypass capcha
@@ -459,7 +459,7 @@ public class JournalSearch extends JFrame {
 
 							System.out.println(url);
 							Document doc = Jsoup.connect(url).userAgent("Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:25.0) Gecko/20100101 Firefox/25.0")  
-						          .proxy(proxy)
+						         // .proxy(proxy)
 								   .referrer("http://www.google.com")   
 						           .timeout(timeoutnum)
 						           .followRedirects(true)
