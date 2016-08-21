@@ -102,7 +102,9 @@ public class JournalSearch extends JFrame {
 	private final JLabel lblNewLabel_6 = new JLabel("Return articles published in:");
 	private final JTextField AuthorField = new JTextField();
 	private final JTextField publishedField = new JTextField();
-	private JLabel rescount = new JLabel("0");
+	private JLabel rescount = new JLabel("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+	
+	
 	/**
 	 * Launch the application.
 	 */
@@ -181,6 +183,9 @@ public class JournalSearch extends JFrame {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+		
+		rescount.setText("0");
+		
 		yhi.setBounds(336, 280, 56, 28);
 		yhi.setColumns(10);
 		ylo.setBounds(248, 280, 56, 28);
@@ -581,15 +586,21 @@ public class JournalSearch extends JFrame {
 
 							//TableModel.addRow(new Object[]{false, "col3", authorArray[x], titleArray[x], year});
 							//TableModel.addRow(new Object[]{false, "col3", authorArray[x], titleArray[x], year,"hello","hello","hello"});
-
+							
+			
+							rescount.setText(Integer.toString(x) + " / " + tot_j_num); 
+							rescount.paintImmediately(rescount.getVisibleRect());
+							
 							TableModel.addRow(new Object[]{false, cbArray.get(x), authorArray.get(x), titleArray.get(x),year, gs_abs.get(x),gs_cited_by.get(x)});
-							System.out.println("test");
+							table.repaint();
+							
+							System.out.println( authorArray.get(x));
 							
 						}
 						
-						rescount.setText(Integer.toString(count) + " / " + tot_j_num); 
-						
 						Thread.sleep(3000 + (int)(Math.random() * 8000));
+						
+						
 						
 				}while(count < tot_j_num || count < 20);
 						
