@@ -593,8 +593,7 @@ public class JournalSearch extends JFrame {
 							rescount.paintImmediately(rescount.getVisibleRect());
 							
 							
-							TableModel model = table.getModel();
-							table.setModel(model);
+														
 							TableModel.addRow(new Object[]{false, cbArray.get(x), authorArray.get(x), titleArray.get(x),year, gs_abs.get(x),gs_cited_by.get(x)});
 							//table.repaint();
 							
