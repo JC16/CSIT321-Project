@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.Set;
 import java.util.TreeMap;
+import java.util.Vector;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.net.InetSocketAddress;
@@ -47,9 +48,9 @@ public class JournalSearch extends JFrame {
 	private JTextField journalt;
 	private JTextField withphr;
 	
-	private JTable table = new JTable();
+	
 	private DefaultTableModel TableModel;
-
+	private JTable table = new JTable();
 	//Menu Bar and Menu Item
 	private final JMenuBar menuBar = new JMenuBar();
 	private final JMenu mnFile = new JMenu("File");
@@ -591,8 +592,13 @@ public class JournalSearch extends JFrame {
 							rescount.setText(Integer.toString(x) + " / " + tot_j_num); 
 							rescount.paintImmediately(rescount.getVisibleRect());
 							
+							
+							TableModel model = table.getModel();
+							table.setModel(model);
 							TableModel.addRow(new Object[]{false, cbArray.get(x), authorArray.get(x), titleArray.get(x),year, gs_abs.get(x),gs_cited_by.get(x)});
-							table.repaint();
+							//table.repaint();
+							
+												
 							
 							System.out.println( authorArray.get(x));
 							
