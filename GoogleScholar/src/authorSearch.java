@@ -8,10 +8,14 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
+
+import gs.scopus.SearchArticle;
+
 import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.UnsupportedEncodingException;
 
 import javax.swing.JTextField;
 import javax.swing.JButton;
@@ -47,12 +51,10 @@ public class authorSearch extends JFrame {
 	private final JMenu mnHelp = new JMenu("Help");
 	private final JMenuItem mntmAboutThisProgram = new JMenuItem("About this program");
 	private final JPanel panel = new JPanel();
-	private final JLabel lblAuthorNames = new JLabel("Author Name(s):");
-	private final JTextField textField = new JTextField();
-	private final JButton button = new JButton("Search");
+	private final JLabel lblAuthorNames = new JLabel("Title");
+	private final JTextField titleText = new JTextField();
+	private final JButton btnSearch = new JButton("Search");
 	private final JButton button_1 = new JButton("Clear all");
-	private final Choice choice = new Choice();
-	private final JLabel label_2 = new JLabel("Data source:");
 	private final JLabel label_3 = new JLabel("Year of Publication between");
 	private final JLabel lblExculdeTheseAuthors = new JLabel("Published in:");
 	private final JTextField textField_2 = new JTextField();
@@ -86,21 +88,12 @@ public class authorSearch extends JFrame {
 	private final JLabel label_30 = new JLabel("");
 	private final JScrollPane scrollPane = new JScrollPane();
 	
+	SearchArticle scopus = new SearchArticle();
+	
 	/**
 	 * Launch the application.
 	 */
-//	public static void main(String[] args) {
-//		EventQueue.invokeLater(new Runnable() {
-//			public void run() {
-//				try {
-//					authorSearch frame = new authorSearch();
-//					frame.setVisible(true);
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		});
-//	}
+
 
 	/**
 	 * Create the frame.
@@ -197,22 +190,46 @@ public class authorSearch extends JFrame {
 		lblAuthorNames.setBounds(16, 46, 126, 29);
 		
 		panel.add(lblAuthorNames);
-		textField.setColumns(10);
-		textField.setBounds(131, 51, 712, 20);
+		titleText.setColumns(10);
+		titleText.setBounds(131, 51, 712, 20);
 		
-		panel.add(textField);
-		button.setBounds(875, 51, 77, 20);
+		panel.add(titleText);
+		btnSearch.setBounds(875, 51, 77, 20);
 		
-		panel.add(button);
+		btnSearch.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				
+				String searchTitle = titleText.getText();
+				
+				try {
+					scopus.SetKeyWord(searchTitle);
+					scopus.SetApi("12073f3b09b9676bde9e2d7cff098aa0");
+					scopus.SetMAX(100);
+					scopus.Search();
+					scopus.WriteToExcel();
+					scopus.RemoveFile();
+					
+					
+				} catch (UnsupportedEncodingException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			
+			}
+			
+		});
+		
+		
+		panel.add(btnSearch);
 		button_1.setBounds(875, 85, 91, 20);
 		
 		panel.add(button_1);
-		choice.setBounds(110, 180, 157, 22);
-		
-		panel.add(choice);
-		label_2.setBounds(16, 180, 84, 16);
-		
-		panel.add(label_2);
 		label_3.setBounds(16, 137, 181, 16);
 		
 		panel.add(label_3);
