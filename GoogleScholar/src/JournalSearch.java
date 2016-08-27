@@ -151,7 +151,7 @@ public class JournalSearch extends JFrame {
 	        FileWriter excel = new FileWriter(file);
 
 	        for(int i = 0; i < model.getColumnCount(); i++){
-	            excel.write(model.getColumnName(i) + "\t");
+	            excel.write(model.getColumnName(i) + ",");
 	        }
 
 	        excel.write("\n");
@@ -161,8 +161,8 @@ public class JournalSearch extends JFrame {
 	        
 	        for(int i=0; i< model.getRowCount(); i++) {
 	            for(int j=0; j < model.getColumnCount(); j++) {
-	            	//System.out.println(model.getValueAt(i,j).toString());
-	                excel.write(model.getValueAt(i,j).toString()+"\t");
+	            	//("\"" + x.GetYear() + "\"" + ",");
+	                excel.write("\"" +model.getValueAt(i,j).toString()+ "\"" + ",");
 	            }
 	            excel.write("\n");
 	        }
@@ -245,10 +245,10 @@ public class JournalSearch extends JFrame {
 							ext = filename.substring(len-4, len);
 						}
 
-						if(ext.equals(".xls")){
+						if(ext.equals(".csv")){
 							file = path + "/" + filename; 
 						}else{
-							file = path + "/" + filename + ".xls"; 
+							file = path + "/" + filename + ".csv"; 
 						}
 						//System.out.println(filename);
 						//System.out.println(path);
@@ -401,7 +401,6 @@ public class JournalSearch extends JFrame {
 				category = category.replace(' ', '+');
 				
 				
-				
 				//authored by
 				String authorlist = AuthorField.getText();
 				authorlist = authorlist.replace(' ', '+');
@@ -448,8 +447,6 @@ public class JournalSearch extends JFrame {
 						//working proxy list (dont use one ip too much)
 						//220.101.93.3:3128
 						//
-						
-						
 						
 						//int proxyPort = 3128;
 						//String proxyAdress = "220.101.93.3";
@@ -511,10 +508,6 @@ public class JournalSearch extends JFrame {
 
 
 			            }
-						
-						
-						//int count2 = 0;
-						
 						
 						
 						for (Element element : elements)
@@ -592,13 +585,11 @@ public class JournalSearch extends JFrame {
 							rescount.setText(Integer.toString(x) + " / " + tot_j_num); 
 							rescount.paintImmediately(rescount.getVisibleRect());
 							
-							
-														
+		
 							TableModel.addRow(new Object[]{false, cbArray.get(x), authorArray.get(x), titleArray.get(x),year, gs_abs.get(x),gs_cited_by.get(x)});
 							//table.repaint();
 							
 												
-							
 							System.out.println( authorArray.get(x));
 							
 						}
@@ -692,8 +683,6 @@ public class JournalSearch extends JFrame {
 		scroll.setBounds(43, 387, 987, 262);
 		frmGoogleScholarTool.getContentPane().add(scroll);
 		
-		
-		
 		scroll.setViewportView(table);
 		
 		TableModel = new DefaultTableModel()
@@ -717,20 +706,6 @@ public class JournalSearch extends JFrame {
 						
 					default:
 							return String.class;
-				
-//				case 0:
-//					return String.class;
-//				case 1:
-//					return String.class;
-//				case 2:
-//					return String.class;
-//				case 3:
-//					return String.class;
-//				case 4:
-//					return String.class;
-//					
-//				default:
-//						return String.class;
 				
 				}
 			}

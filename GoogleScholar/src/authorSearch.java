@@ -18,17 +18,24 @@ import java.awt.event.ActionListener;
 import java.io.UnsupportedEncodingException;
 
 import javax.swing.JTextField;
+import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import java.awt.Choice;
 import javax.swing.SwingConstants;
 import java.awt.Color;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JRadioButton;
 
 public class authorSearch extends JFrame {
 
 	private JPanel contentPane;
 
+	
+	/**
+	 * Define interface variable
+	 * 
+	 * */
 	private final JMenuBar menuBar = new JMenuBar();
 	private final JMenu mnFile = new JMenu("File");
 	private final JMenuItem mntmNewMenuItem = new JMenuItem("Import Data");
@@ -56,39 +63,28 @@ public class authorSearch extends JFrame {
 	private final JButton btnSearch = new JButton("Search");
 	private final JButton button_1 = new JButton("Clear all");
 	private final JLabel label_3 = new JLabel("Year of Publication between");
-	private final JLabel lblExculdeTheseAuthors = new JLabel("Published in:");
-	private final JTextField textField_2 = new JTextField();
-	private final JTextField textField_3 = new JTextField();
+	private final JLabel lblExculdeTheseAuthors = new JLabel("Author");
+	private final JTextField authorText = new JTextField();
+	private final JTextField YearFrom = new JTextField();
 	private final JLabel label_5 = new JLabel("to");
-	private final JTextField textField_4 = new JTextField();
+	private final JTextField YearTo = new JTextField();
 	private final JLabel label_6 = new JLabel("Result", SwingConstants.CENTER);
-	private final JLabel label_7 = new JLabel("Papers:");
-	private final JLabel label_8 = new JLabel("Citation: ");
-	private final JLabel label_9 = new JLabel("Years: ");
-	private final JLabel label_10 = new JLabel("Cites/Year:");
-	private final JLabel label_11 = new JLabel("");
-	private final JLabel label_12 = new JLabel("");
-	private final JLabel label_13 = new JLabel("");
-	private final JLabel label_14 = new JLabel("");
-	private final JLabel label_15 = new JLabel("Cites/Paper:");
-	private final JLabel label_16 = new JLabel("Cites/Author: ");
-	private final JLabel label_17 = new JLabel("Paper/Author:");
-	private final JLabel label_18 = new JLabel("Authors/Paper:");
-	private final JLabel label_19 = new JLabel("");
-	private final JLabel label_20 = new JLabel("");
-	private final JLabel label_21 = new JLabel("");
-	private final JLabel label_22 = new JLabel("");
-	private final JLabel label_23 = new JLabel("h-Index:");
-	private final JLabel label_24 = new JLabel("g-Index");
-	private final JLabel label_25 = new JLabel("hI,norm:");
-	private final JLabel label_26 = new JLabel("hI, annual:");
-	private final JLabel label_27 = new JLabel("");
-	private final JLabel label_28 = new JLabel("");
-	private final JLabel label_29 = new JLabel("");
-	private final JLabel label_30 = new JLabel("");
 	private final JScrollPane scrollPane = new JScrollPane();
 	
 	SearchArticle scopus = new SearchArticle();
+	private final JLabel lblWhereMyWord = new JLabel("Where my word occur");
+	private final JRadioButton allbtn = new JRadioButton("Anywhere in the article");
+	private final JRadioButton titlebtn = new JRadioButton("In the title of the article");
+	private final JLabel lblDoi = new JLabel("DOI");
+	private final JTextField DOIText = new JTextField();
+	private final JLabel lblIsbn = new JLabel("ISBN");
+	private final JTextField ISBNText = new JTextField();
+	private final JLabel lblSourceType = new JLabel("Source Type");
+	private final JTextField SourceTypeText = new JTextField();
+	private final JLabel lblSourceTitle = new JLabel("Source Title");
+	private final JTextField SourceTitleText = new JTextField();
+	private final JLabel lblNewLabel = new JLabel("Result:");
+	private final JLabel resultLabel = new JLabel("0");
 	
 	/**
 	 * Launch the application.
@@ -100,11 +96,7 @@ public class authorSearch extends JFrame {
 	 */
 	public authorSearch() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1041, 673);
-//		contentPane = new JPanel();
-//		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-//		contentPane.setLayout(new BorderLayout(0, 0));
-//		setContentPane(contentPane);
+		setBounds(100, 100, 1074, 727);
 		
 		setTitle("Scopus");
 		
@@ -151,8 +143,6 @@ public class authorSearch extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 					
-				//do nothing
-				
 			}});
 		
 		
@@ -187,14 +177,14 @@ public class authorSearch extends JFrame {
 		getContentPane().add(panel, BorderLayout.CENTER);
 		panel.setLayout(null);
 		lblAuthorNames.setFont(new Font("Lucida Grande", Font.PLAIN, 13));
-		lblAuthorNames.setBounds(16, 46, 126, 29);
+		lblAuthorNames.setBounds(43, 46, 37, 29);
 		
 		panel.add(lblAuthorNames);
 		titleText.setColumns(10);
-		titleText.setBounds(131, 51, 712, 20);
+		titleText.setBounds(131, 51, 793, 20);
 		
 		panel.add(titleText);
-		btnSearch.setBounds(875, 51, 77, 20);
+		btnSearch.setBounds(938, 85, 91, 20);
 		
 		btnSearch.addActionListener(new ActionListener() {
 
@@ -227,110 +217,38 @@ public class authorSearch extends JFrame {
 		
 		
 		panel.add(btnSearch);
-		button_1.setBounds(875, 85, 91, 20);
+		button_1.setBounds(938, 194, 91, 20);
 		
 		panel.add(button_1);
-		label_3.setBounds(16, 137, 181, 16);
+		label_3.setBounds(43, 269, 181, 16);
 		
 		panel.add(label_3);
 		lblExculdeTheseAuthors.setFont(new Font("Lucida Grande", Font.PLAIN, 13));
-		lblExculdeTheseAuthors.setBounds(16, 86, 84, 16);
+		lblExculdeTheseAuthors.setBounds(43, 86, 84, 16);
 		
 		panel.add(lblExculdeTheseAuthors);
-		textField_2.setColumns(10);
-		textField_2.setBounds(131, 86, 712, 20);
+		authorText.setColumns(10);
+		authorText.setBounds(131, 86, 793, 20);
 		
-		panel.add(textField_2);
-		textField_3.setColumns(10);
-		textField_3.setBounds(198, 131, 67, 28);
+		panel.add(authorText);
+		YearFrom.setColumns(10);
+		YearFrom.setBounds(221, 263, 67, 28);
 		
-		panel.add(textField_3);
-		label_5.setBounds(277, 137, 23, 16);
+		panel.add(YearFrom);
+		label_5.setBounds(300, 269, 23, 16);
 		
 		panel.add(label_5);
-		textField_4.setColumns(10);
-		textField_4.setBounds(297, 131, 67, 28);
+		YearTo.setColumns(10);
+		YearTo.setBounds(330, 263, 67, 28);
 		
-		panel.add(textField_4);
+		panel.add(YearTo);
 		label_6.setOpaque(true);
 		label_6.setForeground(Color.BLACK);
 		label_6.setBackground(Color.WHITE);
-		label_6.setBounds(6, 248, 1009, 16);
+		label_6.setBounds(6, 301, 1062, 16);
 		
 		panel.add(label_6);
-		label_7.setBounds(33, 276, 61, 16);
-		
-		panel.add(label_7);
-		label_8.setBounds(33, 300, 61, 16);
-		
-		panel.add(label_8);
-		label_9.setBounds(183, 300, 42, 16);
-		
-		panel.add(label_9);
-		label_10.setBounds(34, 328, 70, 16);
-		
-		panel.add(label_10);
-		label_11.setBounds(106, 276, 61, 16);
-		
-		panel.add(label_11);
-		label_12.setBounds(116, 300, 61, 16);
-		
-		panel.add(label_12);
-		label_13.setBounds(116, 328, 61, 16);
-		
-		panel.add(label_13);
-		label_14.setBounds(269, 276, 61, 16);
-		
-		panel.add(label_14);
-		label_15.setBounds(183, 276, 84, 16);
-		
-		panel.add(label_15);
-		label_16.setBounds(183, 332, 97, 16);
-		
-		panel.add(label_16);
-		label_17.setBounds(347, 276, 97, 16);
-		
-		panel.add(label_17);
-		label_18.setBounds(347, 300, 107, 16);
-		
-		panel.add(label_18);
-		label_19.setBounds(239, 300, 61, 16);
-		
-		panel.add(label_19);
-		label_20.setBounds(292, 332, 61, 16);
-		
-		panel.add(label_20);
-		label_21.setBounds(449, 328, 61, 16);
-		
-		panel.add(label_21);
-		label_22.setBounds(463, 276, 61, 16);
-		
-		panel.add(label_22);
-		label_23.setBounds(347, 332, 61, 16);
-		
-		panel.add(label_23);
-		label_24.setBounds(566, 276, 61, 16);
-		
-		panel.add(label_24);
-		label_25.setBounds(566, 300, 61, 16);
-		
-		panel.add(label_25);
-		label_26.setBounds(566, 328, 78, 16);
-		
-		panel.add(label_26);
-		label_27.setBounds(449, 300, 61, 16);
-		
-		panel.add(label_27);
-		label_28.setBounds(639, 276, 61, 16);
-		
-		panel.add(label_28);
-		label_29.setBounds(639, 300, 61, 16);
-		
-		panel.add(label_29);
-		label_30.setBounds(639, 332, 61, 16);
-		
-		panel.add(label_30);
-		scrollPane.setBounds(29, 371, 964, 216);
+		scrollPane.setBounds(43, 362, 986, 275);
 		
 		panel.add(scrollPane);
 		
@@ -338,6 +256,10 @@ public class authorSearch extends JFrame {
 		JTable table = new JTable();
 		
 		scrollPane.setViewportView(table);
+		
+		/**
+		 * Create a table for store result
+		 * */
 		
 		DefaultTableModel TableModel = new DefaultTableModel()
 		{
@@ -352,10 +274,7 @@ public class authorSearch extends JFrame {
 					case 2:
 						return String.class;
 					case 3:
-						return String.class;
-					case 4:
-						return String.class;
-						
+						return String.class;		
 					default:
 							return String.class;
 				}
@@ -363,19 +282,65 @@ public class authorSearch extends JFrame {
 		};
 		
 		addColumn(TableModel,table);
+		lblWhereMyWord.setBounds(43, 114, 151, 16);
+		
+		panel.add(lblWhereMyWord);
+		allbtn.setBounds(206, 110, 192, 23);
+		
+		panel.add(allbtn);
+		titlebtn.setBounds(421, 110, 199, 23);
+		
+		panel.add(titlebtn);
+		lblDoi.setBounds(43, 142, 61, 16);
+		
+		ButtonGroup group = new ButtonGroup();
+		group.add(allbtn);
+		group.add(titlebtn);
+		
+		panel.add(lblDoi);
+		DOIText.setColumns(10);
+		DOIText.setBounds(131, 136, 793, 20);
+		
+		panel.add(DOIText);
+		lblIsbn.setBounds(43, 167, 61, 16);
+		
+		panel.add(lblIsbn);
+		ISBNText.setColumns(10);
+		ISBNText.setBounds(131, 161, 793, 20);
+		
+		panel.add(ISBNText);
+		lblSourceType.setBounds(43, 195, 84, 16);
+		
+		panel.add(lblSourceType);
+		SourceTypeText.setColumns(10);
+		SourceTypeText.setBounds(131, 193, 793, 20);
+		
+		panel.add(SourceTypeText);
+		lblSourceTitle.setBounds(43, 230, 84, 16);
+		
+		panel.add(lblSourceTitle);
+		SourceTitleText.setColumns(10);
+		SourceTitleText.setBounds(131, 225, 793, 20);
+		
+		panel.add(SourceTitleText);
+		lblNewLabel.setBounds(43, 329, 61, 16);
+		
+		panel.add(lblNewLabel);
+		resultLabel.setBounds(102, 329, 61, 16);
+		
+		panel.add(resultLabel);
 		
 	}
+	
+	/**
+	 * The add column function
+	 * */
 	public void addColumn(DefaultTableModel TableModel, JTable table)
 	{
 		table.setModel(TableModel);
-		TableModel.addColumn("Cites");
-		TableModel.addColumn("Per year");
-		TableModel.addColumn("Rank");
+		TableModel.addColumn("Year");
 		TableModel.addColumn("Author");
 		TableModel.addColumn("Title");
-		TableModel.addColumn("Year");
-		TableModel.addColumn("Publication");
-		TableModel.addColumn("Publisher");
-		TableModel.addColumn("Type");
+		TableModel.addColumn("URL");
 	}
 }
