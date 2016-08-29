@@ -50,7 +50,7 @@ public class JournalSearch extends JFrame {
 	
 	
 	private DefaultTableModel TableModel;
-	private JTable table = new JTable();
+	private JTable table = new JTable(TableModel);
 	//Menu Bar and Menu Item
 	private final JMenuBar menuBar = new JMenuBar();
 	private final JMenu mnFile = new JMenu("File");
@@ -185,6 +185,7 @@ public class JournalSearch extends JFrame {
 	 */
 	private void initialize() {
 		
+		//set result counter label to zero (ram)
 		rescount.setText("0");
 		
 		yhi.setBounds(336, 280, 56, 28);
@@ -382,7 +383,7 @@ public class JournalSearch extends JFrame {
 				phrase = phrase.replace(' ', '+');
 				
 				
-				//checkboxes
+				//checkboxes (find which boxes are checked in search anywhere option - Ram)
 				String btndot = "";
 				
 				if(awbtn.isSelected() == true)
@@ -453,7 +454,7 @@ public class JournalSearch extends JFrame {
 						//Proxy proxy = new Proxy(Proxy.Type.HTTP, InetSocketAddress.createUnresolved(proxyAdress, proxyPort));
 						
 											
-						//randomise the time between searches to help bypass capcha
+						//randomise the time between searches to help bypass capcha () ram
 						int timeoutnum = 30000; 
 						
 						//https://scholar.google.com/scholar?q=lol&hl=en&as_sdt=0,5
@@ -585,9 +586,14 @@ public class JournalSearch extends JFrame {
 							rescount.setText(Integer.toString(x) + " / " + tot_j_num); 
 							rescount.paintImmediately(rescount.getVisibleRect());
 							
-		
-							TableModel.addRow(new Object[]{false, cbArray.get(x), authorArray.get(x), titleArray.get(x),year, gs_abs.get(x),gs_cited_by.get(x)});
+							int row = table.getRowCount();
+							TableModel.insertRow(row, new Object[]{false, cbArray.get(x), authorArray.get(x), titleArray.get(x), year, gs_abs.get(x), gs_cited_by.get(x)});
 							//table.repaint();
+							
+							
+							
+							//Object[] obj = new Object[]{false, cbArray.get(x), authorArray.get(x), titleArray.get(x), year, gs_abs.get(x), gs_cited_by.get(x) };
+							//TableModel.addRow(obj);
 							
 												
 							System.out.println( authorArray.get(x));
