@@ -49,8 +49,8 @@ public class JournalSearch extends JFrame {
 	private JTextField withphr;
 	
 	
-	private DefaultTableModel TableModel;
-	private JTable table = new JTable(TableModel);
+	private DefaultTableModel TableModel2;
+	private JTable table = new JTable();
 	//Menu Bar and Menu Item
 	private final JMenuBar menuBar = new JMenuBar();
 	private final JMenu mnFile = new JMenu("File");
@@ -366,11 +366,11 @@ public class JournalSearch extends JFrame {
 			{
 				//search button
 				
-				int rowCount = TableModel.getRowCount();
+				int rowCount = TableModel2.getRowCount();
 				//Remove rows one by one from the end of the table
 				for (int x = rowCount - 1; x >= 0; x--) 
 				{
-				    TableModel.removeRow(x);
+				    TableModel2.removeRow(x);
 				}
 				
 				//get journal title
@@ -587,20 +587,22 @@ public class JournalSearch extends JFrame {
 							rescount.paintImmediately(rescount.getVisibleRect());
 							
 							int row = table.getRowCount();
-							TableModel.insertRow(row, new Object[]{false, cbArray.get(x), authorArray.get(x), titleArray.get(x), year, gs_abs.get(x), gs_cited_by.get(x)});
+							//TableModel.insertRow(row, new Object[]{false, cbArray.get(x), authorArray.get(x), titleArray.get(x), year, gs_abs.get(x), gs_cited_by.get(x)});
+							//
+							
+							
+							
+							Object[] obj = new Object[]{false, cbArray.get(x), authorArray.get(x), titleArray.get(x), year, gs_abs.get(x), gs_cited_by.get(x) };
+							//TableModel2.addRow(obj);
+							TableModel2.insertRow(row, obj);
+							TableModel2.fireTableDataChanged();
+							table.invalidate();
 							//table.repaint();
-							
-							
-							
-							//Object[] obj = new Object[]{false, cbArray.get(x), authorArray.get(x), titleArray.get(x), year, gs_abs.get(x), gs_cited_by.get(x) };
-							//TableModel.addRow(obj);
-							
-												
-							System.out.println( authorArray.get(x));
+							//System.out.println( authorArray.get(x));
 							
 						}
 						
-						Thread.sleep(3000 + (int)(Math.random() * 8000));
+						//Thread.sleep(3000 + (int)(Math.random() * 8000));
 						
 						
 						
@@ -625,11 +627,11 @@ public class JournalSearch extends JFrame {
 			{
 				//clear all button
 				
-				int rowCount = TableModel.getRowCount();
+				int rowCount = TableModel2.getRowCount();
 				//Remove rows one by one from the end of the table
 				for (int x = rowCount - 1; x >= 0; x--) 
 				{
-				    TableModel.removeRow(x);
+				    TableModel2.removeRow(x);
 				}
 			}
 		});
@@ -691,7 +693,7 @@ public class JournalSearch extends JFrame {
 		
 		scroll.setViewportView(table);
 		
-		TableModel = new DefaultTableModel()
+		TableModel2 = new DefaultTableModel()
 		{
 			public Class<?> getColumnClass(int column)
 			{
@@ -717,7 +719,7 @@ public class JournalSearch extends JFrame {
 			}
 		};
 		
-		addColumn(TableModel,table);
+		addColumn(TableModel2,table);
 		lblNewLabel_4.setBounds(43, 141, 123, 16);
 		
 		frmGoogleScholarTool.getContentPane().add(lblNewLabel_4);
@@ -762,13 +764,14 @@ public class JournalSearch extends JFrame {
 	 
 	public void addColumn(DefaultTableModel TableModel, JTable table)
 	{
-		table.setModel(TableModel);
-		TableModel.addColumn("Select");
-		TableModel.addColumn("Cites");
-		TableModel.addColumn("Author");
-		TableModel.addColumn("Title");
-		TableModel.addColumn("Year");
-		TableModel.addColumn("Abstract");
-		TableModel.addColumn("URL");	
+		table.setModel(TableModel2);
+		TableModel2.addColumn("Select");
+		TableModel2.addColumn("Cites");
+		TableModel2.addColumn("Author");
+		TableModel2.addColumn("Title");
+		TableModel2.addColumn("Year");
+		TableModel2.addColumn("Abstract");
+		TableModel2.addColumn("URL");
+		
 	}
 }
