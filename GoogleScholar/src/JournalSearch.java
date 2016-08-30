@@ -9,6 +9,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.EnumSet;
+import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.Vector;
@@ -31,8 +32,9 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
+import javax.xml.ws.Response;
 
-
+import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -94,6 +96,7 @@ public class JournalSearch extends JFrame {
 	private  ArrayList<String> doiArray = new ArrayList<String>();
 	private  ArrayList<String> gs_cited_by = new ArrayList<String>();
 	private  ArrayList<String> gs_abs = new ArrayList<String>();
+	
 	private final JLabel lblNewLabel_4 = new JLabel("Without the words:");
 	private final JTextField excl = new JTextField();
 	private final JLabel lblNewLabel_5 = new JLabel("Where my words occur:");
@@ -104,7 +107,16 @@ public class JournalSearch extends JFrame {
 	private final JTextField AuthorField = new JTextField();
 	private final JTextField publishedField = new JTextField();
 	private JLabel rescount = new JLabel("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
-	
+	private String tot_j = "";
+	private Map<String, String> cookies;
+	//String apisid;
+	//String gsp;
+	//String hsid;
+	//String nid ;
+	//String ogpc ;
+	//String sapisid ;
+	//String sid;
+	//String ssid ;
 	
 	/**
 	 * Launch the application.
@@ -458,21 +470,62 @@ public class JournalSearch extends JFrame {
 						//https://scholar.google.com/scholar?q=lol&hl=en&as_sdt=0,5
 							String url = "https://scholar.google.com/scholar?as_q="+title+"&as_epq="+phrase+"&as_oq="+ atleast + "&as_eq=" + exclude + "&as_occt=" + btndot +"&as_sauthors=" + authorlist + "&as_publication=" + category + "&as_ylo="+yrlow+"&as_yhi="+yrhi+"&start="+count+"&btnG=&hl=en&as_sdt=0%2C5&google_abuse=GOOGLE_ABUSE_EXEMPTION%3DID%3Df44924af39543aff:TM%3D1470099997:C%3Dc:IP%3D203.10.91.86-:S%3DAPGng0sxcpuaPbdkZfpOfmudLAW2Y5x5RA%3B+path%3D/%3B+domain%3Dgoogle.com%3B+expires%3DTue,+02-Aug-2016+04:06:37+GMT";
 						//String url = "https://scholar.google.com/scholar?as_q="+ title +"&as_epq=" + phrase + "&as_oq=&as_eq=" + exclude + "&as_occt=title&as_sauthors=&as_publication=&as_ylo=" + yrlow + "&as_yhi=" + yrhi +"&start="+count+ "&btnG=&hl=en&as_sdt=0%2C5";
-
+									
+							Connection.Response res;
+							
+							
+							//add cookies (ram)
+							
 							System.out.println(url);
-							Document doc = Jsoup.connect(url).userAgent("Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:25.0) Gecko/20100101 Firefox/25.0")  
-						         // .proxy(proxy)
+							if(cookies != null)
+							{
+									 res = Jsoup.connect(url).userAgent("Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:25.0) Gecko/20100101 Firefox/25.0")  
+								         // .proxy(proxy)
 								   .referrer("http://www.google.com")   
 						           .timeout(timeoutnum)
 						           .followRedirects(true)
-						           .get();
+						           .cookies(cookies)
+						           .execute();
+									
+							}
+							else{
+								
+								res = Jsoup.connect(url).userAgent("Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:25.0) Gecko/20100101 Firefox/25.0")  
+								         // .proxy(proxy)
+								   .referrer("http://www.google.com")   
+						           .timeout(timeoutnum)
+						           .followRedirects(true)
+						           .execute();
+								
+							}
+							
+							Document doc = res.parse();
+							
+							//This will get you cookies
+							cookies = res.cookies();
+							
+							/*
+							apisid = res.cookie("APISID");
+							gsp = res.cookie("GSP");
+							hsid = res.cookie("HSID");
+							nid = res.cookie("NID");
+							ogpc = res.cookie("OGPC");
+							sapisid = res.cookie("SAPISID");
+							sid = res.cookie("SID");
+							ssid = res.cookie("SSID");
+							*/
+							
+							
+							
 						System.out.println(doc.title());
+						
+						//get total number of results only on the first time around
 						if(count<10){
 				            Element gs_ab_md = doc.getElementById("gs_ab_md");
 				            String Jnum = gs_ab_md.text();
 				            String[] a = Jnum.split("[A-Za-z]+");
 				            String[] tot_temp = a[1].split(",");
-				            String tot_j = "";
+				            
 				            for (int j = 0; j < tot_temp.length;j++){
 				                tot_j+=tot_temp[j];
 				            }
@@ -584,15 +637,18 @@ public class JournalSearch extends JFrame {
 							rescount.setText(Integer.toString(x) + " / " + tot_j_num); 
 							rescount.paintImmediately(rescount.getVisibleRect());
 							
-							int row = table.getRowCount();
+							//int row = table.getRowCount();
 							//TableModel.insertRow(row, new Object[]{false, cbArray.get(x), authorArray.get(x), titleArray.get(x), year, gs_abs.get(x), gs_cited_by.get(x)});
 							//
+							DefaultTableModel model = (DefaultTableModel) table.getModel();
 							
-							Object[] obj = new Object[]{false, cbArray.get(x), authorArray.get(x), titleArray.get(x), year, gs_abs.get(x), gs_cited_by.get(x) };
-							//TableModel2.addRow(obj);
-							TableModel2.insertRow(row, obj);
-							TableModel2.fireTableDataChanged();
-							table.invalidate();
+							//Object[] obj = new Object[]{false, cbArray.get(x), authorArray.get(x), titleArray.get(x), year, gs_abs.get(x), gs_cited_by.get(x) };
+							model.addRow(new Object[]{false, cbArray.get(x), authorArray.get(x), titleArray.get(x), year, gs_abs.get(x), gs_cited_by.get(x)});
+							model.fireTableChanged(null);
+							table.repaint();
+							//TableModel2.insertRow(row, obj);
+							//TableModel2.fireTableDataChanged();
+							//table.invalidate();
 							//table.repaint();
 							//System.out.println( authorArray.get(x));
 							
@@ -602,7 +658,7 @@ public class JournalSearch extends JFrame {
 						
 						
 						
-				}while(count < tot_j_num || count < 20);
+				}while(count < tot_j_num && count < 100);
 						
 			    //for loop updating tables used to be here. moved it so it would update 10 at a time
 						
@@ -760,14 +816,14 @@ public class JournalSearch extends JFrame {
 	 
 	public void addColumn(DefaultTableModel TableModel, JTable table)
 	{
-		table.setModel(TableModel2);
-		TableModel2.addColumn("Select");
-		TableModel2.addColumn("Cites");
-		TableModel2.addColumn("Author");
-		TableModel2.addColumn("Title");
-		TableModel2.addColumn("Year");
-		TableModel2.addColumn("Abstract");
-		TableModel2.addColumn("URL");
+		table.setModel(TableModel);
+		TableModel.addColumn("Select");
+		TableModel.addColumn("Cites");
+		TableModel.addColumn("Author");
+		TableModel.addColumn("Title");
+		TableModel.addColumn("Year");
+		TableModel.addColumn("Abstract");
+		TableModel.addColumn("URL");
 		
 	}
 }
