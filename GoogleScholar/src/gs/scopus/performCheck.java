@@ -20,7 +20,7 @@ public class performCheck {
 		//a.SetMAX(10000);Set the number of results
 		
 		//Do Search function
-		a.Search();
+		//a.Search();
 		//Write Results to File
 		a.WriteToExcel();
 		//a.RemoveFile(); Remove all XML file

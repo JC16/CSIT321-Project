@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
+import gs.scopus.Result;
 import gs.scopus.SearchArticle;
 
 import javax.swing.JLabel;
@@ -26,6 +27,7 @@ import java.awt.Color;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JRadioButton;
+import javax.swing.JComboBox;
 
 public class authorSearch extends JFrame {
 
@@ -64,12 +66,10 @@ public class authorSearch extends JFrame {
 	private final JTextField titleText = new JTextField();
 	private final JButton btnSearch = new JButton("Search");
 	private final JButton button_1 = new JButton("Clear all");
-	private final JLabel label_3 = new JLabel("Year of Publication between");
+	private final JLabel lblYearOfPublication = new JLabel("Year of Publication");
 	private final JLabel lblExculdeTheseAuthors = new JLabel("Author");
 	private final JTextField authorText = new JTextField();
 	private final JTextField YearFrom = new JTextField();
-	private final JLabel label_5 = new JLabel("to");
-	private final JTextField YearTo = new JTextField();
 	private final JLabel label_6 = new JLabel("Result", SwingConstants.CENTER);
 	private final JScrollPane scrollPane = new JScrollPane();
 	
@@ -82,11 +82,17 @@ public class authorSearch extends JFrame {
 	private final JLabel lblIsbn = new JLabel("ISBN");
 	private final JTextField ISBNText = new JTextField();
 	private final JLabel lblSourceType = new JLabel("Source Type");
-	private final JTextField SourceTypeText = new JTextField();
 	private final JLabel lblSourceTitle = new JLabel("Source Title");
 	private final JTextField SourceTitleText = new JTextField();
 	private final JLabel lblNewLabel = new JLabel("Result:");
 	private final JLabel resultLabel = new JLabel("0");
+	
+	private DefaultTableModel TableModel;
+	private JTable table = new JTable();
+	
+	String[] message = {"Journal","Book","Book Series","Conference Proceeding","Report","Trade Publication"};
+	
+	private final JComboBox SourceCombo = new JComboBox(message);
 	
 	/**
 	 * Launch the application.
@@ -196,13 +202,90 @@ public class authorSearch extends JFrame {
 				
 				String searchTitle = titleText.getText();
 				
+				String author =authorText.getText();
+				
+				String DOI = DOIText.getText();
+				
+				String ISBN = ISBNText.getText();
+				
+				String sourceType = (String)SourceCombo.getSelectedItem();
+				
+				String sourceTitle = SourceTitleText.getText();
+				
+				String year = YearFrom.getText();
+				
+//				String btncheck = "";
+//				
+//				if(allbtn.isSelected() == true)
+//				{
+//					btncheck = "all";
+//					
+//				}
+//				else if(titlebtn.isSelected() == true)
+//				{
+//					btncheck = "title";					
+//				}
+				
 				try {
-					scopus.SetKeyWord(searchTitle);
+					
 					scopus.SetApi("12073f3b09b9676bde9e2d7cff098aa0");
 					scopus.SetMAX(100);
-					scopus.Search();
-					scopus.WriteToExcel();
-					scopus.RemoveFile();
+					
+					if(!searchTitle.isEmpty() && allbtn.isSelected())
+					{
+						scopus.SetKeyWord(searchTitle);
+						scopus.Search(0);
+					}
+					else if(!searchTitle.isEmpty()&&titlebtn.isSelected())
+					{
+						scopus.SetKeyWord(searchTitle);
+						scopus.Search(1);
+					}
+					else if(!author.isEmpty())
+					{
+						scopus.SetKeyWord(author);
+						scopus.Search(2);
+					}
+					else if(!ISBN.isEmpty())
+					{
+						scopus.SetKeyWord(ISBN);
+						scopus.Search(3);
+					}
+					else if(!searchTitle.isEmpty() && !year.isEmpty())
+					{
+						scopus.SetKeyWord(searchTitle);
+						scopus.SetYear(year);
+						scopus.Search(4);
+					}
+					else if(!DOI.isEmpty())
+					{
+						scopus.SetKeyWord(DOI);
+						scopus.Search(5);
+					}
+					else if(!searchTitle.isEmpty() && !author.isEmpty())
+					{
+						scopus.SetKeyWord(searchTitle);
+						scopus.SetAuthor(author);
+						scopus.Search(6);
+					}
+					else if(!searchTitle.isEmpty() && !sourceType.isEmpty())
+					{
+						scopus.SetKeyWord(searchTitle);
+						scopus.SetType(checkType(sourceType));
+						scopus.Search(7);
+					}
+					else if(!sourceTitle.isEmpty())
+					{
+						scopus.SetKeyWord(sourceTitle);
+						scopus.Search(8);
+					}
+					
+					
+					for(Result x : scopus.GetResults())
+					{
+						TableModel.addRow(new Object[]{x.GetYear(),x.GetAuthor(),x.GetTitle(),x.GetUrl()});
+					}
+					
 					
 					
 				} catch (UnsupportedEncodingException e1) {
@@ -222,9 +305,9 @@ public class authorSearch extends JFrame {
 		button_1.setBounds(938, 194, 91, 20);
 		
 		panel.add(button_1);
-		label_3.setBounds(43, 269, 181, 16);
+		lblYearOfPublication.setBounds(43, 269, 124, 16);
 		
-		panel.add(label_3);
+		panel.add(lblYearOfPublication);
 		lblExculdeTheseAuthors.setFont(new Font("Lucida Grande", Font.PLAIN, 13));
 		lblExculdeTheseAuthors.setBounds(43, 86, 84, 16);
 		
@@ -234,16 +317,9 @@ public class authorSearch extends JFrame {
 		
 		panel.add(authorText);
 		YearFrom.setColumns(10);
-		YearFrom.setBounds(221, 263, 67, 28);
+		YearFrom.setBounds(166, 263, 67, 28);
 		
 		panel.add(YearFrom);
-		label_5.setBounds(300, 269, 23, 16);
-		
-		panel.add(label_5);
-		YearTo.setColumns(10);
-		YearTo.setBounds(330, 263, 67, 28);
-		
-		panel.add(YearTo);
 		label_6.setOpaque(true);
 		label_6.setForeground(Color.BLACK);
 		label_6.setBackground(Color.WHITE);
@@ -255,15 +331,13 @@ public class authorSearch extends JFrame {
 		panel.add(scrollPane);
 		
 		
-		JTable table = new JTable();
-		
 		scrollPane.setViewportView(table);
 		
 		/**
 		 * Create a table for store result
 		 * */
 		
-		DefaultTableModel TableModel = new DefaultTableModel()
+		TableModel = new DefaultTableModel()
 		{
 			public Class<?> getColumnClass(int column)
 			{
@@ -314,10 +388,6 @@ public class authorSearch extends JFrame {
 		lblSourceType.setBounds(43, 195, 84, 16);
 		
 		panel.add(lblSourceType);
-		SourceTypeText.setColumns(10);
-		SourceTypeText.setBounds(131, 193, 793, 20);
-		
-		panel.add(SourceTypeText);
 		lblSourceTitle.setBounds(43, 230, 84, 16);
 		
 		panel.add(lblSourceTitle);
@@ -331,8 +401,57 @@ public class authorSearch extends JFrame {
 		resultLabel.setBounds(102, 329, 61, 16);
 		
 		panel.add(resultLabel);
+		SourceCombo.setBounds(131, 191, 178, 27);
+		
+		
+//		SourceCombo.addActionListener(new ActionListener(){
+//
+//			@Override
+//			public void actionPerformed(ActionEvent e) {
+//				
+//				String msg = (String)SourceCombo.getSelectedItem();
+//				
+//				System.out.println(msg);
+//				
+//				
+//			}});
+		
+		panel.add(SourceCombo);
+			
 		
 	}
+	
+	
+	public String checkType(String comboResult)
+	{
+		
+		if(comboResult.equals("Journal"))
+		{
+			return "j";
+		}
+		else if(comboResult.equals("Book"))
+		{
+			return "b";
+		}
+		else if(comboResult.equals("Book Series"))
+		{
+			return "k";
+		}
+		else if(comboResult.equals("Conference Proceeding"))
+		{
+			return "p";
+		}
+		else if(comboResult.equals("Report"))
+		{
+			return "r";
+		}
+		else
+		{
+			return "d";
+		}
+		
+	}
+	
 	
 	/**
 	 * The add column function

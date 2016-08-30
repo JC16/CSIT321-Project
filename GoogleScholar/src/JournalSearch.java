@@ -289,9 +289,7 @@ public class JournalSearch extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-					
-				//do nothing
-				
+			
 			}});
 		
 		mnView.add(mntmJournalImpact);
@@ -589,8 +587,6 @@ public class JournalSearch extends JFrame {
 							int row = table.getRowCount();
 							//TableModel.insertRow(row, new Object[]{false, cbArray.get(x), authorArray.get(x), titleArray.get(x), year, gs_abs.get(x), gs_cited_by.get(x)});
 							//
-							
-							
 							
 							Object[] obj = new Object[]{false, cbArray.get(x), authorArray.get(x), titleArray.get(x), year, gs_abs.get(x), gs_cited_by.get(x) };
 							//TableModel2.addRow(obj);

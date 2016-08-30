@@ -38,6 +38,9 @@ public class SearchArticle{
 	private int total_results = 0;
 	private int MAX = 5000;
 	private int count = 0;
+	private String author;
+	private String year;
+	private String type;
 	
 	public SearchArticle()
 	{
@@ -71,15 +74,109 @@ public class SearchArticle{
 		return this.results_num;
 	}
 	
-	private void CombineUrl( int order)
+	/*
+	 Mode & Usage:
+	 0: Search all for Keyword
+	 	a.SetKeyWord("heart");
+	 	a.Search(0);
+	 1: Search title for Keyword
+	 	a.SetKeyWord("heart");
+	 	a.Search(1); 
+	 2: Search author name for Keyword
+	 	a.SetKeyWord("scott");
+	 	a.Search(2);
+	 3: Search ISSN for Keyword
+	 	a.SetKeyWord("123");
+	 	a.Search(3);
+	 4: Search title for Keyword and only return the article whose publication year is after specific year
+	 	a.SetKeyWord("heart");
+	 	a.SetYear(2009);
+	 	a.Search(4);
+	 5: Search DOI for Keyword
+	 	a.SetKeyWord("s11-/2007.sa");
+	 	a.Search(5);
+	 6: Search title for Keyword and only return the article whose author name satisfy the required author
+	 	a.SetKeyWord("heart");
+	 	a.SetAuthor("scott");
+	 	a.Search(6);
+	 7: Search title for Keyword and only return the article with specific type
+	 	a.SetKeyWord("heart");
+	 	a.SetType("j");
+	 	a.Search(7);
+	 		Type of results:
+				j Journal
+				b Book
+				k Book Series
+				p Conference Proceeding
+				r Report
+				d Trade Publication
+				
+	 8: Search Publisher for Keyword
+	 	a.SetKeyWord("pacific");
+	 	a.Search(8);
+	 
+	 */
+	
+	private void CombineUrl( int order, int mode)
 	{
 		String startCurr= "&start=" + Integer.toString(order * 25);
-		this.url = source + FirstPartQuery + KeyWord + SecondPartQuery + ApiKey + startCurr + AcceptForm;
+		if (mode == 0)
+		{
+			this.url = source + FirstPartQuery + KeyWord + SecondPartQuery + ApiKey + startCurr + AcceptForm;
+		}
+		else if (mode == 1)
+		{
+			this.url = source + "query=TITLE(\"" + KeyWord + SecondPartQuery + ApiKey + startCurr + AcceptForm;
+		}
+		else if (mode == 2)
+		{
+			this.url = source + "query=AUTHOR-NAME(" + KeyWord + ")&apiKey=" + ApiKey + startCurr + AcceptForm;
+		}
+		else if (mode == 3)
+		{
+			this.url = source + "query=ISSN(" + KeyWord + ")&apiKey=" + ApiKey + startCurr + AcceptForm;
+		}
+		else if (mode == 4)
+		{
+			this.url = source + "query=TITLE(\"" + KeyWord + "\")and(aft," + this.year + ")&apiKey=" + ApiKey + startCurr + AcceptForm;
+		}
+		else if (mode == 5)
+		{
+			this.url = source + "query=DOI(" + KeyWord + ")&apiKey=" + ApiKey + startCurr + AcceptForm;
+		}
+		else if (mode == 6)
+		{
+			this.url = source + "query=TITLE(\"" + KeyWord + "\")\"and\"AUTHOR-NAME(" + this.author + ")&apiKey=" + ApiKey + startCurr + AcceptForm;
+		}
+		else if (mode == 7)
+		{
+			this.url = source + "query=TITLE(\"" + KeyWord + "\")\"and\"SRCTYPE(" + this.type + ")&apiKey=" + ApiKey + startCurr + AcceptForm;
+		}
+		else if (mode == 8)
+		{
+			this.url = source + "query=SRCTITLE(" + KeyWord + ")&apiKey=" + ApiKey + startCurr + AcceptForm;
+		}
+		
 	}
 	
-	public void Search() throws Exception
+	public void SetAuthor(String authorname)
 	{
-		this.SearchOnce(0);
+		this.author = authorname;
+	}
+	
+	public void SetYear(String year)
+	{
+		this.year = year;
+	}
+	
+	public void SetType(String type)
+	{
+		this.type = type;
+	}
+	
+	public void Search(int mode) throws Exception
+	{
+		this.SearchOnce(0, mode);
 		this.FindResultsNum();
 		
 		if (this.total_results > MAX)
@@ -93,7 +190,7 @@ public class SearchArticle{
 		
 		for (int i = 0; i < count; i++)
 		{
-			A athread = new A(i);
+			A athread = new A(i, mode);
 			athread.start();
 			THREADS.add(athread);
 		}
@@ -116,9 +213,11 @@ public class SearchArticle{
 	
 	class A extends Thread {
 		private int i;
-		public A (int i)
+		private int mode;
+		public A (int i, int mode)
 		{
 			this.i = i;
+			this.mode = mode;
 		}
 		
 		public void run()
@@ -126,7 +225,7 @@ public class SearchArticle{
 			try 
 			{
 				//System.out.println(Integer.toString(i*25));
-				if (SearchOnce(i))
+				if (SearchOnce(i, mode))
 					AnalyseResults(i);
 			} 
 			catch (Exception e) {
@@ -136,11 +235,11 @@ public class SearchArticle{
 	};
 	
 	
-	public boolean SearchOnce(int order) throws Exception
+	public boolean SearchOnce(int order, int mode) throws Exception
 	{
 		boolean rev = false;
 		
-		this.CombineUrl(order);
+		this.CombineUrl(order, mode);
 		
 		
 		URL obj = new URL(url);
