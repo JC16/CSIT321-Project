@@ -16,6 +16,9 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 
 import javax.swing.JTextField;
@@ -28,6 +31,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JRadioButton;
 import javax.swing.JComboBox;
+import javax.swing.JFileChooser;
+import javax.swing.table.TableModel;
 
 public class ScopusSearch extends JFrame {
 
@@ -35,7 +40,6 @@ public class ScopusSearch extends JFrame {
 	//Hello
 	//test commit
 
-	
 	/**
 	 * Define interface variable
 	 * 
@@ -52,8 +56,8 @@ public class ScopusSearch extends JFrame {
 	private final JMenuItem mntmDelete = new JMenuItem("Delete");
 	private final JMenuItem mntmCopyResult = new JMenuItem("Copy Result");
 	private final JMenu mnView = new JMenu("View");
-	private final JMenuItem mntmJournalImpact = new JMenuItem("Journal Search");
-	private final JMenuItem mntmAuthorImapct = new JMenuItem("Author Search");
+	private final JMenuItem mntmJournalImpact = new JMenuItem("Google Scholar Search");
+	private final JMenuItem mntmAuthorImapct = new JMenuItem("Scopus Search");
 	private final JMenuItem mntmGeneralCitationSearch = new JMenuItem("General Search");
 	private final JMenu mnTool = new JMenu("Tool");
 	private final JMenuItem mntmNewMenuItem_2 = new JMenuItem("Clear data");
@@ -98,7 +102,6 @@ public class ScopusSearch extends JFrame {
 	 * Launch the application.
 	 */
 
-
 	/**
 	 * Constructor of the Scopus search
 	 * Create the frame.
@@ -115,6 +118,37 @@ public class ScopusSearch extends JFrame {
 		menuBar.add(mnFile);
 		
 		mnFile.add(mntmNewMenuItem);
+		
+		mntmNewMenuItem_1.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent arg0) 
+			{
+				 JFileChooser fc = new JFileChooser();
+	                int option = fc.showSaveDialog(ScopusSearch.this);
+	                if(option == JFileChooser.APPROVE_OPTION){
+	                    String filename = fc.getSelectedFile().getName(); 
+	                    String path = fc.getSelectedFile().getParentFile().getPath();
+
+						int len = filename.length();
+						String ext = "";
+						String file = "";
+
+						if(len > 4){
+							ext = filename.substring(len-4, len);
+						}
+
+						if(ext.equals(".csv")){
+							file = path + "/" + filename; 
+						}else{
+							file = path + "/" + filename + ".csv"; 
+						}
+						//System.out.println(filename);
+						//System.out.println(path);
+						writeToExcel(table, new File(file));
+	                }
+			}
+		});
+		
 		
 		mnFile.add(mntmNewMenuItem_1);
 		
@@ -270,14 +304,11 @@ public class ScopusSearch extends JFrame {
 						scopus.Search(8);
 					}
 					
-					
 					for(Result x : scopus.GetResults())
 					{
 						TableModel.addRow(new Object[]{x.GetYear(),x.GetAuthor(),x.GetTitle(),x.GetUrl()});
 					}
-					
-					
-					
+				
 				} catch (UnsupportedEncodingException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -290,9 +321,23 @@ public class ScopusSearch extends JFrame {
 			
 		});
 		
-		
 		panel.add(btnSearch);
 		button_1.setBounds(938, 194, 91, 20);
+		
+		
+		button_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) 
+			{
+				//clear all button
+				
+				int rowCount = TableModel.getRowCount();
+				//Remove rows one by one from the end of the table
+				for (int x = rowCount - 1; x >= 0; x--) 
+				{
+				    TableModel.removeRow(x);
+				}
+			}
+		});
 		
 		panel.add(button_1);
 		lblYearOfPublication.setBounds(43, 269, 124, 16);
@@ -395,7 +440,6 @@ public class ScopusSearch extends JFrame {
 				
 		panel.add(SourceCombo);
 			
-		
 	}
 	
 	/**
@@ -405,7 +449,6 @@ public class ScopusSearch extends JFrame {
 	 * Input String combo box result
 	 * 
 	 * Output String to determine the type
-	 * 
 	 * 
 	 * */
 	public String checkType(String comboResult)
@@ -451,4 +494,44 @@ public class ScopusSearch extends JFrame {
 		TableModel.addColumn("Title");
 		TableModel.addColumn("URL");
 	}
+	/**
+	 * 
+	 * Write to excel function
+	 * Input Java Jtable and File.
+	 * 
+	 * THis function will write the JTable information to excel file
+	 * 
+	 * 
+	 * */
+	private void writeToExcel(JTable table, File file)
+	{
+		
+		try{
+			TableModel model = table.getModel();
+			//file.setPosixFilePermisions(f1.toPath(), EnumSet.of(OWNER_READ, OWNER_WRITE, OWNER_EXECUTE, GROUP_READ, GROUP_EXECUTE));
+	        FileWriter excel = new FileWriter(file);
+
+	        for(int i = 0; i < model.getColumnCount(); i++){
+	            excel.write(model.getColumnName(i) + ",");
+	        }
+
+	        excel.write("\n");
+	        
+	        System.out.println(model.getRowCount());
+	        System.out.println(model.getColumnCount());
+	        
+	        for(int i=0; i< model.getRowCount(); i++) {
+	            for(int j=0; j < model.getColumnCount(); j++) {
+	            	//("\"" + x.GetYear() + "\"" + ",");
+	                excel.write("\"" +model.getValueAt(i,j).toString()+ "\"" + ",");
+	            }
+	            excel.write("\n");
+	        }
+
+	        excel.close();
+
+	    }catch(IOException e){ System.out.println(e); }
+		
+	}
+	
 }
