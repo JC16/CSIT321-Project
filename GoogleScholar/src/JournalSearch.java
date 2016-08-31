@@ -154,6 +154,17 @@ public class JournalSearch extends JFrame {
 	 * 
 	 * */
 	
+	
+	/**
+	 * 
+	 * Write to excel function
+	 * Input Java Jtable and File.
+	 * 
+	 * THis function will write the JTable information to excel file
+	 * 
+	 * 
+	 * */
+	
 	private void writeToExcel(JTable table, File file)
 	{
 		
@@ -186,6 +197,13 @@ public class JournalSearch extends JFrame {
 	}
 	
 	
+	/**
+	 * 
+	 * Constructor of the class
+	 * For google scholar search
+	 * 
+	 * 
+	 * */
 	public JournalSearch() 
 	{
 		initialize();
@@ -658,7 +676,7 @@ public class JournalSearch extends JFrame {
 						
 						
 						
-				}while(count < tot_j_num && count < 100);
+				}while(count < tot_j_num && count < 10000);
 						
 			    //for loop updating tables used to be here. moved it so it would update 10 at a time
 						
@@ -813,7 +831,16 @@ public class JournalSearch extends JFrame {
 		
 	}
 	
-	 
+	 /**
+	  * 
+	  * Add column function
+	  * 
+	  * Input the table model and Jtable
+	  * 
+	  * This function will add the deafult column for the Jtable
+	  * 
+	  * 
+	  * */
 	public void addColumn(DefaultTableModel TableModel, JTable table)
 	{
 		table.setModel(TableModel);

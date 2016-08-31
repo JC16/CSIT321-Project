@@ -42,6 +42,13 @@ public class SearchArticle{
 	private String year;
 	private String type;
 	
+	
+	/**
+	 * 
+	 * The default constructor for the scopus search
+	 * 
+	 * */
+	
 	public SearchArticle()
 	{
 		this.KeyWord = "";
@@ -53,22 +60,48 @@ public class SearchArticle{
 		dir.mkdir();
 	}
 	
+	
+	/**
+	 * 
+	 * Set the maximum search reuslt of scopus
+	 * Input int
+	 * 
+	 * */
 	public void SetMAX(int i)
 	{
 		this.MAX = i;
 	}
 	
+	/**
+	 * 
+	 * Set the api key for scopus
+	 * Input String
+	 * 
+	 * 
+	 * */
 	public void SetApi(String api) throws UnsupportedEncodingException
 	{
 		this.ApiKey = URLEncoder.encode(api, "utf-8");
 	}
 	
+	/**
+	 * 
+	 * Set the key word for search
+	 * 
+	 * Input String
+	 * 
+	 * */
 	public void SetKeyWord(String Key) throws UnsupportedEncodingException
 	{
 		this.Title = Key;
 		this.KeyWord = URLEncoder.encode(Key, "utf-8");
 	}
 	
+	/**
+	 * 
+	 * Return the number of results
+	 * 
+	 * */
 	public int GetResultsNum()
 	{
 		return this.results_num;

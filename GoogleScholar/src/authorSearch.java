@@ -100,7 +100,9 @@ public class authorSearch extends JFrame {
 
 
 	/**
+	 * Constructor of the Scopus search
 	 * Create the frame.
+	 * 
 	 */
 	public authorSearch() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -213,18 +215,6 @@ public class authorSearch extends JFrame {
 				String sourceTitle = SourceTitleText.getText();
 				
 				String year = YearFrom.getText();
-				
-//				String btncheck = "";
-//				
-//				if(allbtn.isSelected() == true)
-//				{
-//					btncheck = "all";
-//					
-//				}
-//				else if(titlebtn.isSelected() == true)
-//				{
-//					btncheck = "title";					
-//				}
 				
 				try {
 					
@@ -402,26 +392,22 @@ public class authorSearch extends JFrame {
 		
 		panel.add(resultLabel);
 		SourceCombo.setBounds(131, 191, 178, 27);
-		
-		
-//		SourceCombo.addActionListener(new ActionListener(){
-//
-//			@Override
-//			public void actionPerformed(ActionEvent e) {
-//				
-//				String msg = (String)SourceCombo.getSelectedItem();
-//				
-//				System.out.println(msg);
-//				
-//				
-//			}});
-		
+				
 		panel.add(SourceCombo);
 			
 		
 	}
 	
-	
+	/**
+	 * 
+	 * Function to check the source type
+	 * 
+	 * Input String combo box result
+	 * 
+	 * Output String to determine the type
+	 * 
+	 * 
+	 * */
 	public String checkType(String comboResult)
 	{
 		
@@ -455,6 +441,8 @@ public class authorSearch extends JFrame {
 	
 	/**
 	 * The add column function
+	 * Add the column for Jtable
+	 * 
 	 * */
 	public void addColumn(DefaultTableModel TableModel, JTable table)
 	{

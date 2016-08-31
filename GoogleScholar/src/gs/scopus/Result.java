@@ -1,6 +1,13 @@
 package gs.scopus;
 
-
+/**
+ * 
+ * A result class
+ * 
+ * It will save the result from Scopus
+ * 
+ * 
+ * */
 public class Result {
 	private String title;
 	private String eid;
@@ -8,6 +15,14 @@ public class Result {
 	private String year;
 	private String url;
 	
+	
+	
+	
+	/**
+	 * 
+	 * The constructor of the class
+	 * 
+	 * */
 	public Result(String t, String e, String au, String y, String u)
 	{
 		this.title = t;
@@ -17,6 +32,11 @@ public class Result {
 		this.url = u;
 	}
 	
+	/**
+	 * 
+	 * The print function
+	 * 
+	 * */
 	public void print()
 	{
 		System.out.println("---------------------------------------");
@@ -27,6 +47,13 @@ public class Result {
 		System.out.println("Eid: " + this.eid);
 	}
 	
+	
+	/**
+	 * 
+	 * The accessor and mutator for the class
+	 * 
+	 * 
+	 * */
 	public String GetTitle()
 	{
 		return this.title;
