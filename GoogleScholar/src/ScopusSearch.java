@@ -29,7 +29,7 @@ import javax.swing.JTable;
 import javax.swing.JRadioButton;
 import javax.swing.JComboBox;
 
-public class authorSearch extends JFrame {
+public class ScopusSearch extends JFrame {
 
 	private JPanel contentPane;
 	//Hello
@@ -104,7 +104,7 @@ public class authorSearch extends JFrame {
 	 * Create the frame.
 	 * 
 	 */
-	public authorSearch() {
+	public ScopusSearch() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1074, 727);
 		
@@ -141,7 +141,7 @@ public class authorSearch extends JFrame {
 					
 				dispose();
 				
-				JournalSearch jurFrame = new JournalSearch();
+				GoogleScholarSearch jurFrame = new GoogleScholarSearch();
 				
 				
 			}});
@@ -437,7 +437,6 @@ public class authorSearch extends JFrame {
 		}
 		
 	}
-	
 	
 	/**
 	 * The add column function

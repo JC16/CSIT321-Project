@@ -43,13 +43,12 @@ import javax.swing.JTextPane;
 import javax.swing.JRadioButton;
 
 
-public class JournalSearch extends JFrame {
+public class GoogleScholarSearch extends JFrame {
 
 	
 	private JFrame frmGoogleScholarTool;
 	private JTextField journalt;
 	private JTextField withphr;
-	
 	
 	private DefaultTableModel TableModel2;
 	private JTable table = new JTable();
@@ -164,7 +163,6 @@ public class JournalSearch extends JFrame {
 	 * 
 	 * 
 	 * */
-	
 	private void writeToExcel(JTable table, File file)
 	{
 		
@@ -204,7 +202,7 @@ public class JournalSearch extends JFrame {
 	 * 
 	 * 
 	 * */
-	public JournalSearch() 
+	public GoogleScholarSearch() 
 	{
 		initialize();
 		frmGoogleScholarTool.setVisible(true);
@@ -263,7 +261,7 @@ public class JournalSearch extends JFrame {
 			public void actionPerformed(ActionEvent arg0) 
 			{
 				 JFileChooser fc = new JFileChooser();
-	                int option = fc.showSaveDialog(JournalSearch.this);
+	                int option = fc.showSaveDialog(GoogleScholarSearch.this);
 	                if(option == JFileChooser.APPROVE_OPTION){
 	                    String filename = fc.getSelectedFile().getName(); 
 	                    String path = fc.getSelectedFile().getParentFile().getPath();
@@ -331,7 +329,7 @@ public class JournalSearch extends JFrame {
 					
 				frmGoogleScholarTool.dispose();
 				
-				authorSearch frame = new authorSearch();
+				ScopusSearch frame = new ScopusSearch();
 				frame.setVisible(true);
 				
 			}});
@@ -651,7 +649,6 @@ public class JournalSearch extends JFrame {
 							//TableModel.addRow(new Object[]{false, "col3", authorArray[x], titleArray[x], year});
 							//TableModel.addRow(new Object[]{false, "col3", authorArray[x], titleArray[x], year,"hello","hello","hello"});
 							
-			
 							rescount.setText(Integer.toString(x) + " / " + tot_j_num); 
 							rescount.paintImmediately(rescount.getVisibleRect());
 							
@@ -837,7 +834,7 @@ public class JournalSearch extends JFrame {
 	  * 
 	  * Input the table model and Jtable
 	  * 
-	  * This function will add the deafult column for the Jtable
+	  * This function will add the default column for the Jtable
 	  * 
 	  * 
 	  * */

@@ -136,7 +136,7 @@ public class mainPage extends JFrame {
 				//frmGoogleScholarTool.setVisible(false);
 				frmGoogleScholarTool.dispose();
 				
-				JournalSearch jurFrame = new JournalSearch();
+				GoogleScholarSearch jurFrame = new GoogleScholarSearch();
 				
 				
 			}});
@@ -151,7 +151,7 @@ public class mainPage extends JFrame {
 				
 				frmGoogleScholarTool.dispose();
 				
-				authorSearch frame = new authorSearch();
+				ScopusSearch frame = new ScopusSearch();
 				frame.setVisible(true);
 				
 			}});
@@ -197,7 +197,7 @@ public class mainPage extends JFrame {
 				
 				frmGoogleScholarTool.dispose();
 				
-				JournalSearch jurFrame = new JournalSearch();
+				GoogleScholarSearch jurFrame = new GoogleScholarSearch();
 				
 			}
 		});
@@ -209,7 +209,7 @@ public class mainPage extends JFrame {
 				
 				frmGoogleScholarTool.dispose();
 				
-				authorSearch AFrame = new authorSearch();
+				ScopusSearch AFrame = new ScopusSearch();
 				AFrame.setVisible(true);
 				
 			}

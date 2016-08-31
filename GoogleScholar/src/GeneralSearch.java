@@ -152,7 +152,7 @@ public class GeneralSearch extends JFrame {
 					
 				dispose();
 				
-				JournalSearch jurFrame = new JournalSearch();
+				GoogleScholarSearch jurFrame = new GoogleScholarSearch();
 				
 				
 			}});
@@ -166,7 +166,7 @@ public class GeneralSearch extends JFrame {
 					
 				dispose();
 				
-				authorSearch frame = new authorSearch();
+				ScopusSearch frame = new ScopusSearch();
 				frame.setVisible(true);
 				
 			}});
