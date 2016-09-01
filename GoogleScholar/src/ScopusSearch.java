@@ -37,9 +37,7 @@ import javax.swing.table.TableModel;
 public class ScopusSearch extends JFrame {
 
 	private JPanel contentPane;
-	//Hello
-	//test commit
-
+	
 	/**
 	 * Define interface variable
 	 * 
@@ -500,7 +498,6 @@ public class ScopusSearch extends JFrame {
 	 * Input Java Jtable and File.
 	 * 
 	 * THis function will write the JTable information to excel file
-	 * 
 	 * 
 	 * */
 	private void writeToExcel(JTable table, File file)

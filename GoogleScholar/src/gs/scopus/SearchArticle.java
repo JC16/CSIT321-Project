@@ -14,41 +14,51 @@ import org.w3c.dom.NodeList;
 import org.w3c.dom.Node;
 import org.w3c.dom.Element;
 
-//83aa66cba1a30f9de1d570ba4695fb84
-//http://api.elsevier.com/content/search/scopus?query=TITLE("heart")&apiKey=83aa66cba1a30f9de1d570ba4695fb84&view=FULL&httpAccept=application/xml
-//http://api.elsevier.com/content/search/scopus?query=TITLE("heart")&apiKey=3440376615883768a3aa21e106fd5096&view=FULL&httpAccept=application/xml
-
-//http://api.elsevier.com/content/abstract/eid/2-s2.0-0031737331?apiKey=f2f228c33b5a670222a5562b44c9ff35&view=FULL&httpAccept=application/xml
-//http://api.elsevier.com/content/search/index:SCOPUS?query=TITLE(%22Horizon%202000:%20economic%20viability%20and%20political%20realities%22)&apiKey=43f81841d27681e01e22a01525e5ea90&view=COMPLETE&httpAccept=application/xml
-
+/*
+ Author Google Scholar Group
+ Date: 31-08-2016
+ Purpose: Scopus Search Function
+ */
 
 public class SearchArticle{
+	//User input key word for searching
 	private String KeyWord;
+	//Api Key for Scopus Search
 	private String ApiKey;
+	//User input title
 	private String Title;
+	//Source website for searching
 	private final String source = "http://api.elsevier.com/content/search/scopus?";
+	//query format 1
 	private final String FirstPartQuery = "query=ALL(\"";
+	//query format 2
 	private final String SecondPartQuery = "\")&apiKey=";
+	//query format 3 (obtain xml file/respone)
 	private final String AcceptForm = "&httpAccept=application/xml";
+	//http request header
 	private String url;
+	//Number of result for each request
 	private int results_num = 0;
+	//Results container
 	private ArrayList<Result> results;
+	//eid is a sort of identifier for scopus
 	private String eid;
+	//response code of http response
 	private int status = 0;
+	//Actual results number for one search
 	private int total_results = 0;
+	//max results number of one request (user can change)
 	private int MAX = 5000;
+	//Sub request for each query
 	private int count = 0;
+	//extra attribute for some sorts of searching
 	private String author;
+	//extra attribute for some sorts of searching
 	private String year;
+	//extra attribute for some sorts of searching
 	private String type;
 	
-	
-	/**
-	 * 
-	 * The default constructor for the scopus search
-	 * 
-	 * */
-	
+	//Constructor (including creating a directory for storing xml files)
 	public SearchArticle()
 	{
 		this.KeyWord = "";
@@ -60,48 +70,27 @@ public class SearchArticle{
 		dir.mkdir();
 	}
 	
-	
-	/**
-	 * 
-	 * Set the maximum search reuslt of scopus
-	 * Input int
-	 * 
-	 * */
+	//Set max results number of searching
 	public void SetMAX(int i)
 	{
 		this.MAX = i;
 	}
 	
-	/**
-	 * 
-	 * Set the api key for scopus
-	 * Input String
-	 * 
-	 * 
-	 * */
+	//Maintain the api key
 	public void SetApi(String api) throws UnsupportedEncodingException
 	{
 		this.ApiKey = URLEncoder.encode(api, "utf-8");
 	}
 	
-	/**
-	 * 
-	 * Set the key word for search
-	 * 
-	 * Input String
-	 * 
-	 * */
+	//Obtain the Key word from user 
 	public void SetKeyWord(String Key) throws UnsupportedEncodingException
 	{
 		this.Title = Key;
 		this.KeyWord = URLEncoder.encode(Key, "utf-8");
 	}
 	
-	/**
-	 * 
-	 * Return the number of results
-	 * 
-	 * */
+	//Get the total results of one query
+	//For computing the actual results number
 	public int GetResultsNum()
 	{
 		return this.results_num;
@@ -149,7 +138,6 @@ public class SearchArticle{
 	 	a.Search(8);
 	 
 	 */
-	
 	private void CombineUrl( int order, int mode)
 	{
 		String startCurr= "&start=" + Integer.toString(order * 25);
@@ -192,26 +180,33 @@ public class SearchArticle{
 		
 	}
 	
+	//setting extra attribute 
 	public void SetAuthor(String authorname)
 	{
 		this.author = authorname;
 	}
 	
+	//setting extra attribute 
 	public void SetYear(String year)
 	{
 		this.year = year;
 	}
 	
+	//setting extra attribute 
 	public void SetType(String type)
 	{
 		this.type = type;
 	}
 	
+	//Main search function
 	public void Search(int mode) throws Exception
 	{
+		//First try to get the result number of one query
 		this.SearchOnce(0, mode);
+		//Get the number
 		this.FindResultsNum();
 		
+		//Computing the actual number for each query
 		if (this.total_results > MAX)
 			count = MAX/25;
 		else if (this.total_results >= 25)
@@ -219,8 +214,10 @@ public class SearchArticle{
 		else
 			count = 1;
 		
+		//Build threads
 		ArrayList<A> THREADS = new ArrayList<A>();
 		
+		//Allocation each sub searching for one threads
 		for (int i = 0; i < count; i++)
 		{
 			A athread = new A(i, mode);
@@ -228,6 +225,7 @@ public class SearchArticle{
 			THREADS.add(athread);
 		}
 		
+		//Waiting for each sub thread ends
 		for (int i = 0; i < THREADS.size(); i++)
 		{
 			THREADS.get(i).join();
@@ -244,9 +242,12 @@ public class SearchArticle{
 		
 	}
 	
+	//Multi-threading implementation
 	class A extends Thread {
 		private int i;
 		private int mode;
+		
+		//mode: specify the searching mode
 		public A (int i, int mode)
 		{
 			this.i = i;
@@ -267,14 +268,15 @@ public class SearchArticle{
 		}
 	};
 	
-	
+	//Sub query searching
 	public boolean SearchOnce(int order, int mode) throws Exception
 	{
 		boolean rev = false;
 		
+		//Build http request header
 		this.CombineUrl(order, mode);
 		
-		
+		//Http request 
 		URL obj = new URL(url);
 		HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 
@@ -283,6 +285,7 @@ public class SearchArticle{
 		
 		int responseCode = con.getResponseCode();
 		
+		//Check the success of searching
 		if (responseCode != 200)
 		{
 			//System.out.println("Cannot search. Error Code: " + responseCode);
@@ -293,6 +296,7 @@ public class SearchArticle{
 			rev = true;
 
 		this.status = responseCode;
+		//Obtain response data
 		BufferedReader in = new BufferedReader(
 		        new InputStreamReader(con.getInputStream()));
 		String inputLine;
@@ -303,6 +307,7 @@ public class SearchArticle{
 		}
 		in.close();
 		
+		//Write data to file
 		String filename = this.FilenameCombiner(order);
 		FileWriter out = null;
 		out = new FileWriter (filename);
@@ -312,6 +317,7 @@ public class SearchArticle{
 		return rev;
 	}
 	
+	//file name format: SearchResultX.xml, X is an integer
 	private String FilenameCombiner(int i)
 	{
 		
@@ -322,9 +328,12 @@ public class SearchArticle{
 		return rev.toString();
 	}
 	
+	//First search to get the results number of each query
+	//For example, User search key word "Heart", Scopus return 100000 results
 	public void FindResultsNum() throws Exception
 	{
 		try {
+			//Analysis xml file
 		String filename = this.FilenameCombiner(0);
 		File inputFile = new File(filename);
         DocumentBuilderFactory dbFactory 
@@ -332,6 +341,7 @@ public class SearchArticle{
         DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
         Document doc = dBuilder.parse(inputFile);
         doc.getDocumentElement().normalize();
+        //Get the value of search-results element
         NodeList nList = doc.getElementsByTagName("search-results");
         Node nNode = nList.item(0);
         
@@ -348,10 +358,12 @@ public class SearchArticle{
         
 	}
 
+	//xml file analysis function
 	public void AnalyseResults(int order) throws Exception
 	{
 		try {
 		
+			//Open file and load data
 		String filename = this.FilenameCombiner(order);
 		File inputFile = new File(filename);
         DocumentBuilderFactory dbFactory 
@@ -363,12 +375,13 @@ public class SearchArticle{
         Document doc = dBuilder.parse(inputFile);
         doc.getDocumentElement().normalize();
 
+        //One Entry represent One Result of query
         NodeList nList = doc.getElementsByTagName("entry");
         
         
         this.results_num = nList.getLength();
         
-        
+        //Set data
         for (int i = 0; i < nList.getLength(); i++)
         {
         	Node nNode = nList.item(i);
@@ -417,6 +430,7 @@ public class SearchArticle{
         				
         		
         		Result temp = new Result (tempTitle, tempEid, tempAuthor, tempDate, tempUrl);
+        		//Append one record to Array List
         		results.add(temp);
         		//System.out.println(tempTitle + " Added!");
         	}
@@ -430,11 +444,13 @@ public class SearchArticle{
 
 	}
 	
+	//Return searching results
 	public ArrayList<Result> GetResults()
 	{
 		return this.results;
 	}
 	
+	//Display results
 	public void PrintResults()
 	{
 		/*
@@ -449,6 +465,7 @@ public class SearchArticle{
 			x.print();
 	}
 	
+	//Function for Ciation Verification (Not implementation)
 	public boolean IfFound()
 	{
 		boolean rev = false;
@@ -478,6 +495,7 @@ public class SearchArticle{
 		return this.status;
 	}
 	
+	//Write result to file
 	public void WriteToExcel() throws Exception
 	{
 		FileWriter out = null;
@@ -497,7 +515,7 @@ public class SearchArticle{
 
 	}
 	
-	
+	//Clear temp xml file for storing xml file
     private boolean deleteDir(File dir) {
         if (dir.isDirectory()) {
             String[] children = dir.list();
@@ -511,6 +529,7 @@ public class SearchArticle{
         return dir.delete();
     }
     
+    //Clear temp directory for storing xml file
     public void RemoveFile()
     {
     	File afile = new File("SearchResult");

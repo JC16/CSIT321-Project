@@ -445,9 +445,7 @@ public class GoogleScholarSearch extends JFrame {
 				String exclude = excl.getText();
 				exclude = exclude.replace(' ', '+');
 				
-				
-				
-				
+			
 //				private String[] titleArray =new String[0];
 //				private String[] authorArray = new String[0];
 //				private String[] cbArray = new String[0];
