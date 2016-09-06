@@ -55,7 +55,6 @@ public class GoogleScholarSearch extends JFrame {
 	//Menu Bar and Menu Item
 	private final JMenuBar menuBar = new JMenuBar();
 	private final JMenu mnFile = new JMenu("File");
-	private final JMenuItem mntmNewMenuItem = new JMenuItem("Import Data");
 	private final JMenuItem mntmNewMenuItem_1 = new JMenuItem("Save as CSV");
 	
 	private final JMenuItem mntmExit = new JMenuItem("Exit");
@@ -67,13 +66,9 @@ public class GoogleScholarSearch extends JFrame {
 	private final JMenuItem mntmDelete = new JMenuItem("Delete");
 	private final JMenuItem mntmCopyResult = new JMenuItem("Copy Result");
 	private final JMenu mnView = new JMenu("View");
-	private final JMenuItem mntmJournalImpact = new JMenuItem("Journal Search");
-	private final JMenuItem mntmAuthorImapct = new JMenuItem("Author Search");
+	private final JMenuItem mntmJournalImpact = new JMenuItem("Google Scholar search");
+	private final JMenuItem mntmAuthorImapct = new JMenuItem("Scopus Search");
 	private final JMenuItem mntmGeneralCitationSearch = new JMenuItem("General Search");
-	private final JMenu mnTool = new JMenu("Tool");
-	private final JMenuItem mntmNewMenuItem_2 = new JMenuItem("Clear data");
-	private final JMenuItem mntmClearCache = new JMenuItem("Clear Cache");
-	private final JMenuItem mntmP = new JMenuItem("Preference");
 	private final JMenu mnHelp = new JMenu("Help");
 	private final JMenuItem mntmAboutThisProgram = new JMenuItem("About this program");
 	private final JLabel lblNewLabel_1 = new JLabel("Year of Publication between");
@@ -254,8 +249,6 @@ public class GoogleScholarSearch extends JFrame {
 		*/
 		menuBar.add(mnFile);
 		
-		mnFile.add(mntmNewMenuItem);
-		
 		mntmNewMenuItem_1.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent arg0) 
@@ -351,14 +344,6 @@ public class GoogleScholarSearch extends JFrame {
 			}});
 		
 		mnView.add(mntmGeneralCitationSearch);
-		
-		menuBar.add(mnTool);
-		
-		mnTool.add(mntmClearCache);
-		
-		mnTool.add(mntmNewMenuItem_2);
-		
-		mnTool.add(mntmP);
 		
 		menuBar.add(mnHelp);
 		

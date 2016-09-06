@@ -44,7 +44,6 @@ public class ScopusSearch extends JFrame {
 	 * */
 	private final JMenuBar menuBar = new JMenuBar();
 	private final JMenu mnFile = new JMenu("File");
-	private final JMenuItem mntmNewMenuItem = new JMenuItem("Import Data");
 	private final JMenuItem mntmNewMenuItem_1 = new JMenuItem("Save as CSV");
 	private final JMenuItem mntmExit = new JMenuItem("Exit");
 	private final JMenu mnEdit = new JMenu("Edit");
@@ -57,10 +56,6 @@ public class ScopusSearch extends JFrame {
 	private final JMenuItem mntmJournalImpact = new JMenuItem("Google Scholar Search");
 	private final JMenuItem mntmAuthorImapct = new JMenuItem("Scopus Search");
 	private final JMenuItem mntmGeneralCitationSearch = new JMenuItem("General Search");
-	private final JMenu mnTool = new JMenu("Tool");
-	private final JMenuItem mntmNewMenuItem_2 = new JMenuItem("Clear data");
-	private final JMenuItem mntmClearCache = new JMenuItem("Clear Cache");
-	private final JMenuItem mntmP = new JMenuItem("Preference");
 	private final JMenu mnHelp = new JMenu("Help");
 	private final JMenuItem mntmAboutThisProgram = new JMenuItem("About this program");
 	private final JPanel panel = new JPanel();
@@ -114,8 +109,6 @@ public class ScopusSearch extends JFrame {
 		setJMenuBar(menuBar);
 		
 		menuBar.add(mnFile);
-		
-		mnFile.add(mntmNewMenuItem);
 		
 		mntmNewMenuItem_1.addActionListener(new ActionListener() 
 		{
@@ -203,14 +196,6 @@ public class ScopusSearch extends JFrame {
 			}});
 		
 		mnView.add(mntmGeneralCitationSearch);
-		
-		menuBar.add(mnTool);
-		
-		mnTool.add(mntmClearCache);
-		
-		mnTool.add(mntmNewMenuItem_2);
-		
-		mnTool.add(mntmP);
 		
 		menuBar.add(mnHelp);
 		
@@ -306,6 +291,10 @@ public class ScopusSearch extends JFrame {
 					{
 						TableModel.addRow(new Object[]{x.GetYear(),x.GetAuthor(),x.GetTitle(),x.GetUrl()});
 					}
+					
+					
+					resultLabel.setText(Integer.toString(TableModel.getRowCount()));
+					
 				
 				} catch (UnsupportedEncodingException e1) {
 					// TODO Auto-generated catch block
