@@ -536,6 +536,8 @@ public class SearchArticle{
     	
     	 if (deleteDir(afile))
     		 System.out.println("Succeed");
+    	 
+    	 results.clear();
     }
     
     

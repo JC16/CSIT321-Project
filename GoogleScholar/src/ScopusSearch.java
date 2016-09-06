@@ -6,9 +6,11 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
+import javax.swing.JProgressBar;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
+import gs.progressBar.ProgressBar;
 import gs.scopus.Result;
 import gs.scopus.SearchArticle;
 
@@ -20,17 +22,23 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.net.MalformedURLException;
 
 import javax.swing.JTextField;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import java.awt.Choice;
 import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
+
 import java.awt.Color;
+import java.awt.Cursor;
+
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JRadioButton;
 import javax.swing.JComboBox;
+import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 import javax.swing.table.TableModel;
 
@@ -90,6 +98,10 @@ public class ScopusSearch extends JFrame {
 	String[] message = {"Journal","Book","Book Series","Conference Proceeding","Report","Trade Publication"};
 	
 	private final JComboBox SourceCombo = new JComboBox(message);
+	private final JLabel lblMaximumResultPer = new JLabel("Maximum result per search");
+	private final JTextField MaxText = new JTextField();
+	private ProgressBar bar;
+	
 	
 	/**
 	 * Launch the application.
@@ -101,14 +113,23 @@ public class ScopusSearch extends JFrame {
 	 * 
 	 */
 	public ScopusSearch() {
+		MaxText.setBounds(223, 261, 78, 28);
+		MaxText.setColumns(10);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1074, 727);
-		
+		setLocationRelativeTo(null);
 		setTitle("Scopus");
 		
 		setJMenuBar(menuBar);
 		
 		menuBar.add(mnFile);
+		
+		try {
+			bar = new ProgressBar();
+		} catch (MalformedURLException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
 		
 		mntmNewMenuItem_1.addActionListener(new ActionListener() 
 		{
@@ -204,11 +225,11 @@ public class ScopusSearch extends JFrame {
 		getContentPane().add(panel, BorderLayout.CENTER);
 		panel.setLayout(null);
 		lblAuthorNames.setFont(new Font("Lucida Grande", Font.PLAIN, 13));
-		lblAuthorNames.setBounds(43, 46, 37, 29);
+		lblAuthorNames.setBounds(43, 18, 37, 29);
 		
 		panel.add(lblAuthorNames);
 		titleText.setColumns(10);
-		titleText.setBounds(131, 51, 793, 20);
+		titleText.setBounds(131, 22, 793, 20);
 		
 		panel.add(titleText);
 		btnSearch.setBounds(938, 85, 91, 20);
@@ -217,8 +238,12 @@ public class ScopusSearch extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
 				
+				try {
+					
+				
+				// TODO Auto-generated method stub
+						
 				String searchTitle = titleText.getText();
 				
 				String author =authorText.getText();
@@ -231,12 +256,21 @@ public class ScopusSearch extends JFrame {
 				
 				String sourceTitle = SourceTitleText.getText();
 				
+				String maxResult = MaxText.getText();
+				
 				String year = YearFrom.getText();
 				
-				try {
 					
 					scopus.SetApi("12073f3b09b9676bde9e2d7cff098aa0");
-					scopus.SetMAX(100);
+					//scopus.SetMAX(100);
+					
+					scopus.SetMAX(Integer.parseInt(maxResult));
+					//System.out.println(Integer.parseInt(maxResult));
+					
+					bar.setVisible(true);
+					
+					setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+					
 					
 					if(!searchTitle.isEmpty() && allbtn.isSelected())
 					{
@@ -295,6 +329,9 @@ public class ScopusSearch extends JFrame {
 					
 					resultLabel.setText(Integer.toString(TableModel.getRowCount()));
 					
+					bar.setVisible(false);
+					
+					setCursor(null);
 				
 				} catch (UnsupportedEncodingException e1) {
 					// TODO Auto-generated catch block
@@ -323,23 +360,31 @@ public class ScopusSearch extends JFrame {
 				{
 				    TableModel.removeRow(x);
 				}
+				TableModel.setRowCount(0);
+				scopus.RemoveFile();
+				
+				resultLabel.setText("0");
+				
+				File dir = new File("./SearchResult");
+				dir.mkdir();
+				
 			}
 		});
 		
 		panel.add(button_1);
-		lblYearOfPublication.setBounds(43, 269, 124, 16);
+		lblYearOfPublication.setBounds(43, 238, 124, 16);
 		
 		panel.add(lblYearOfPublication);
 		lblExculdeTheseAuthors.setFont(new Font("Lucida Grande", Font.PLAIN, 13));
-		lblExculdeTheseAuthors.setBounds(43, 86, 84, 16);
+		lblExculdeTheseAuthors.setBounds(43, 59, 84, 16);
 		
 		panel.add(lblExculdeTheseAuthors);
 		authorText.setColumns(10);
-		authorText.setBounds(131, 86, 793, 20);
+		authorText.setBounds(131, 59, 793, 20);
 		
 		panel.add(authorText);
 		YearFrom.setColumns(10);
-		YearFrom.setBounds(166, 263, 67, 28);
+		YearFrom.setBounds(167, 232, 67, 28);
 		
 		panel.add(YearFrom);
 		label_6.setOpaque(true);
@@ -380,16 +425,16 @@ public class ScopusSearch extends JFrame {
 		};
 		
 		addColumn(TableModel,table);
-		lblWhereMyWord.setBounds(43, 114, 151, 16);
+		lblWhereMyWord.setBounds(43, 86, 151, 16);
 		
 		panel.add(lblWhereMyWord);
-		allbtn.setBounds(206, 110, 192, 23);
+		allbtn.setBounds(195, 82, 192, 23);
 		
 		panel.add(allbtn);
-		titlebtn.setBounds(421, 110, 199, 23);
+		titlebtn.setBounds(399, 82, 199, 23);
 		
 		panel.add(titlebtn);
-		lblDoi.setBounds(43, 142, 61, 16);
+		lblDoi.setBounds(43, 114, 61, 16);
 		
 		ButtonGroup group = new ButtonGroup();
 		group.add(allbtn);
@@ -397,24 +442,24 @@ public class ScopusSearch extends JFrame {
 		
 		panel.add(lblDoi);
 		DOIText.setColumns(10);
-		DOIText.setBounds(131, 136, 793, 20);
+		DOIText.setBounds(131, 112, 793, 20);
 		
 		panel.add(DOIText);
-		lblIsbn.setBounds(43, 167, 61, 16);
+		lblIsbn.setBounds(43, 142, 61, 16);
 		
 		panel.add(lblIsbn);
 		ISBNText.setColumns(10);
-		ISBNText.setBounds(131, 161, 793, 20);
+		ISBNText.setBounds(131, 140, 793, 20);
 		
 		panel.add(ISBNText);
-		lblSourceType.setBounds(43, 195, 84, 16);
+		lblSourceType.setBounds(43, 176, 84, 16);
 		
 		panel.add(lblSourceType);
-		lblSourceTitle.setBounds(43, 230, 84, 16);
+		lblSourceTitle.setBounds(43, 208, 84, 16);
 		
 		panel.add(lblSourceTitle);
 		SourceTitleText.setColumns(10);
-		SourceTitleText.setBounds(131, 225, 793, 20);
+		SourceTitleText.setBounds(131, 206, 793, 20);
 		
 		panel.add(SourceTitleText);
 		lblNewLabel.setBounds(43, 329, 61, 16);
@@ -423,9 +468,14 @@ public class ScopusSearch extends JFrame {
 		resultLabel.setBounds(102, 329, 61, 16);
 		
 		panel.add(resultLabel);
-		SourceCombo.setBounds(131, 191, 178, 27);
+		SourceCombo.setBounds(131, 172, 178, 27);
 				
 		panel.add(SourceCombo);
+		lblMaximumResultPer.setBounds(43, 266, 184, 16);
+		
+		panel.add(lblMaximumResultPer);
+		
+		panel.add(MaxText);
 			
 	}
 	
@@ -519,5 +569,5 @@ public class ScopusSearch extends JFrame {
 	    }catch(IOException e){ System.out.println(e); }
 		
 	}
-	
+		
 }
