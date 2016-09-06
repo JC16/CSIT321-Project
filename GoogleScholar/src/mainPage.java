@@ -78,6 +78,7 @@ public class mainPage extends JFrame {
 		frmGoogleScholarTool.setTitle("Scholar Search Tool");
 		frmGoogleScholarTool.setBounds(100, 100, 1074, 727);
 		frmGoogleScholarTool.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmGoogleScholarTool.setLocationRelativeTo(null);
 		
 		//JMenuBar menuBar = new JMenuBar();
 		frmGoogleScholarTool.setJMenuBar(menuBar);

@@ -28,6 +28,7 @@ public class ProgressBar extends JFrame {
 		
 		
 		URL url = this.getClass().getResource("/progress/ProgressBar.gif");
+		//URL url = new URL("http://www.mytreedb.com/uploads/mytreedb/loader/ajax_loader_gray_512.gif");
 		ImageIcon icon = new ImageIcon(url);
 	    JLabel label = new JLabel(icon);
 	    label.setBounds(5, 20, 66, 66);
@@ -37,7 +38,7 @@ public class ProgressBar extends JFrame {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.pack();
 		this.setLocationRelativeTo(null);
-		//this.setVisible(true);
+		this.setVisible(true);
 		this.toFront();
 	}
 

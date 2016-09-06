@@ -201,6 +201,7 @@ public class GoogleScholarSearch extends JFrame {
 	{
 		initialize();
 		frmGoogleScholarTool.setVisible(true);
+		
 	}
 
 	/**
@@ -223,6 +224,7 @@ public class GoogleScholarSearch extends JFrame {
 		frmGoogleScholarTool.setTitle("Google Scholar Search");
 		frmGoogleScholarTool.setBounds(100, 100, 1074, 727);
 		frmGoogleScholarTool.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmGoogleScholarTool.setLocationRelativeTo(null);
 		
 		//JMenuBar menuBar = new JMenuBar();
 		frmGoogleScholarTool.setJMenuBar(menuBar);

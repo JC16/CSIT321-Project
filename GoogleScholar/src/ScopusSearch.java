@@ -189,7 +189,6 @@ public class ScopusSearch extends JFrame {
 				
 				GoogleScholarSearch jurFrame = new GoogleScholarSearch();
 				
-				
 			}});
 		
 		mnView.add(mntmJournalImpact);
