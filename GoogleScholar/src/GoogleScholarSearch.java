@@ -826,6 +826,7 @@ public class GoogleScholarSearch extends JFrame {
 	public void addColumn(DefaultTableModel TableModel, JTable table)
 	{
 		table.setModel(TableModel);
+		table.setAutoCreateRowSorter(true);
 		TableModel.addColumn("Select");
 		TableModel.addColumn("Cites");
 		TableModel.addColumn("Author");

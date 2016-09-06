@@ -123,6 +123,7 @@ public class ScopusSearch extends JFrame {
 		setJMenuBar(menuBar);
 		
 		menuBar.add(mnFile);
+	
 		
 		try {
 			bar = new ProgressBar();
@@ -325,7 +326,6 @@ public class ScopusSearch extends JFrame {
 						TableModel.addRow(new Object[]{x.GetYear(),x.GetAuthor(),x.GetTitle(),x.GetUrl()});
 					}
 					
-					
 					resultLabel.setText(Integer.toString(TableModel.getRowCount()));
 					
 					bar.setVisible(false);
@@ -525,6 +525,7 @@ public class ScopusSearch extends JFrame {
 	public void addColumn(DefaultTableModel TableModel, JTable table)
 	{
 		table.setModel(TableModel);
+		table.setAutoCreateRowSorter(true);
 		TableModel.addColumn("Year");
 		TableModel.addColumn("Author");
 		TableModel.addColumn("Title");
