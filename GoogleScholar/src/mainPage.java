@@ -111,7 +111,7 @@ public class mainPage extends JFrame {
 		frmGoogleScholarTool.getContentPane().add(panel);
 		panel.setLayout(null);
 		lblGoogleScholarSearch.setForeground(new Color(255, 255, 255));
-		lblGoogleScholarSearch.setBounds(372, 71, 390, 57);
+		lblGoogleScholarSearch.setBounds(358, 56, 390, 57);
 		panel.add(lblGoogleScholarSearch);
 		lblGoogleScholarSearch.setFont(new Font("Lucida Grande", Font.PLAIN, 40));
 		

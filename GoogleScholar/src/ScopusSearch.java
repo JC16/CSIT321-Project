@@ -232,7 +232,7 @@ public class ScopusSearch extends JFrame {
 		titleText.setBounds(131, 22, 793, 20);
 		
 		panel.add(titleText);
-		btnSearch.setBounds(938, 85, 91, 20);
+		btnSearch.setBounds(950, 58, 91, 20);
 		
 		btnSearch.addActionListener(new ActionListener() {
 
@@ -345,7 +345,7 @@ public class ScopusSearch extends JFrame {
 		});
 		
 		panel.add(btnSearch);
-		button_1.setBounds(938, 194, 91, 20);
+		button_1.setBounds(950, 101, 91, 20);
 		
 		
 		button_1.addActionListener(new ActionListener() {
@@ -383,7 +383,7 @@ public class ScopusSearch extends JFrame {
 		
 		panel.add(authorText);
 		YearFrom.setColumns(10);
-		YearFrom.setBounds(167, 232, 67, 28);
+		YearFrom.setBounds(223, 232, 78, 28);
 		
 		panel.add(YearFrom);
 		label_6.setOpaque(true);
