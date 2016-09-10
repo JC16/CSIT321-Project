@@ -46,7 +46,7 @@ public class SwingEmailSender extends JFrame {
 	private GridBagConstraints constraints = new GridBagConstraints();
 	
 	public SwingEmailSender() {
-		super("Swing E-mail Sender Program");
+		super("Send feedback");
 		
 		// set up layout
 		setLayout(new GridBagLayout());
