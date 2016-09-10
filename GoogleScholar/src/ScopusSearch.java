@@ -5,6 +5,7 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import javax.swing.border.EmptyBorder;
@@ -23,9 +24,11 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
+import java.net.URL;
 
 import javax.swing.JTextField;
 import javax.swing.ButtonGroup;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.Choice;
 import javax.swing.SwingConstants;
@@ -234,13 +237,17 @@ public class ScopusSearch extends JFrame {
 		panel.add(titleText);
 		btnSearch.setBounds(950, 58, 91, 20);
 		
-		btnSearch.addActionListener(new ActionListener() {
+		btnSearch.addActionListener(new java.awt.event.ActionListener() {
 
 			@Override
-			public void actionPerformed(ActionEvent e) {
+			public void actionPerformed(final java.awt.event.ActionEvent e) {
 				
 				try {
 					
+					
+
+					
+//						
 				
 				// TODO Auto-generated method stub
 						
@@ -329,6 +336,8 @@ public class ScopusSearch extends JFrame {
 					resultLabel.setText(Integer.toString(TableModel.getRowCount()));
 					
 					bar.setVisible(false);
+					
+					//pframe.setVisible(false);
 					
 					setCursor(null);
 				
@@ -569,5 +578,5 @@ public class ScopusSearch extends JFrame {
 	    }catch(IOException e){ System.out.println(e); }
 		
 	}
-		
+	
 }

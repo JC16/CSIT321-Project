@@ -9,6 +9,7 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
@@ -35,6 +36,7 @@ public class ProgressBar extends JFrame {
 	
 		this.setUndecorated(true);
 		this.getContentPane().add(label);
+		
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.pack();
 		this.setLocationRelativeTo(null);
