@@ -453,7 +453,7 @@ public class GoogleScholarSearch extends JFrame {
 //					private  ArrayList<String> gs_abs = new ArrayList<String>();
 
 						do{
-						
+						int outofexce = 0;
 						System.out.println(count);
 						
 						//working proxy list (dont use one ip too much)
@@ -542,6 +542,7 @@ public class GoogleScholarSearch extends JFrame {
 						
 						for (Element link:gstitle)
 			            {
+							
 			            	String gs_rt = link.getElementsByClass("gs_rt").tagName("a").text();
 			            	gs_rt = gs_rt.replace("[PDF]", "");
 			            	gs_rt = gs_rt.replace("[HTML]", "");
@@ -565,6 +566,7 @@ public class GoogleScholarSearch extends JFrame {
 						
 						for (Element element : elements)
 						{
+							outofexce++;
 						gstitle = element.select(".gs_fl a[href]");
 						for(Element link : gstitle)
 						{
@@ -614,10 +616,10 @@ public class GoogleScholarSearch extends JFrame {
 			            }
 			            
 						
-						count+=10;
-						System.out.println(count);
+						count+=outofexce;
+						System.out.println(outofexce);
 						
-						for(int x = count-10; x < count; x++)
+						for(int x = count-outofexce; x < count; x++)
 						{
 							Matcher matcher = yearPattern.matcher(authorArray.get(x));
 							
@@ -634,7 +636,7 @@ public class GoogleScholarSearch extends JFrame {
 							//TableModel.addRow(new Object[]{false, "col3", authorArray[x], titleArray[x], year});
 							//TableModel.addRow(new Object[]{false, "col3", authorArray[x], titleArray[x], year,"hello","hello","hello"});
 							
-							rescount.setText(Integer.toString(x) + " / " + tot_j_num); 
+							rescount.setText(count + " / " + tot_j_num); 
 							rescount.paintImmediately(rescount.getVisibleRect());
 							
 							//int row = table.getRowCount();
@@ -643,7 +645,7 @@ public class GoogleScholarSearch extends JFrame {
 							DefaultTableModel model = (DefaultTableModel) table.getModel();
 							
 							//Object[] obj = new Object[]{false, cbArray.get(x), authorArray.get(x), titleArray.get(x), year, gs_abs.get(x), gs_cited_by.get(x) };
-							model.addRow(new Object[]{false, cbArray.get(x), authorArray.get(x), titleArray.get(x), year, gs_abs.get(x), gs_cited_by.get(x)});
+							model.addRow(new Object[]{cbArray.get(x), authorArray.get(x), titleArray.get(x), year, gs_abs.get(x), gs_cited_by.get(x)});
 							model.fireTableChanged(null);
 							table.repaint();
 							//TableModel2.insertRow(row, obj);
@@ -658,7 +660,7 @@ public class GoogleScholarSearch extends JFrame {
 						
 						
 						
-				}while(count < tot_j_num && count < 10000);
+				}while(count < tot_j_num && count < 10);
 						
 			    //for loop updating tables used to be here. moved it so it would update 10 at a time
 						
@@ -752,7 +754,7 @@ public class GoogleScholarSearch extends JFrame {
 				switch(column)
 				{
 					case 0:
-						return Boolean.class;
+						return String.class;
 					case 1:
 						return String.class;
 					case 2:
@@ -760,8 +762,6 @@ public class GoogleScholarSearch extends JFrame {
 					case 3:
 						return String.class;
 					case 4:
-						return String.class;
-					case 5:
 						return String.class;
 						
 					default:
@@ -827,7 +827,6 @@ public class GoogleScholarSearch extends JFrame {
 	{
 		table.setModel(TableModel);
 		table.setAutoCreateRowSorter(true);
-		TableModel.addColumn("Select");
 		TableModel.addColumn("Cites");
 		TableModel.addColumn("Author");
 		TableModel.addColumn("Title");
