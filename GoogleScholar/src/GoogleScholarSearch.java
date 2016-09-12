@@ -361,6 +361,13 @@ public class GoogleScholarSearch extends JFrame {
 			{
 				//search button
 				
+				authorArray.clear();
+				cbArray.clear();
+				doiArray.clear();
+				gs_cited_by.clear();
+				gs_abs.clear();
+				
+				
 				bar.setVisible(true);
 				
 				setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -553,7 +560,6 @@ public class GoogleScholarSearch extends JFrame {
 
 
 			            }
-						
 						
 						for (Element element : elements)
 						{
