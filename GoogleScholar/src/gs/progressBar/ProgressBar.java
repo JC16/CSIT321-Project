@@ -27,7 +27,6 @@ public class ProgressBar extends JFrame {
 	 */
 	public ProgressBar() throws MalformedURLException {
 		
-		
 		URL url = this.getClass().getResource("/progress/ProgressBar.gif");
 		//URL url = new URL("http://www.mytreedb.com/uploads/mytreedb/loader/ajax_loader_gray_512.gif");
 		ImageIcon icon = new ImageIcon(url);

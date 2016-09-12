@@ -1,5 +1,6 @@
 import java.awt.Choice;
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -16,6 +17,7 @@ import java.util.Vector;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.net.InetSocketAddress;
+import java.net.MalformedURLException;
 import java.net.Proxy;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
@@ -39,6 +41,9 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+
+import gs.progressBar.ProgressBar;
+
 import javax.swing.JTextPane;
 import javax.swing.JRadioButton;
 
@@ -103,41 +108,11 @@ public class GoogleScholarSearch extends JFrame {
 	private JLabel rescount = new JLabel("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
 	private String tot_j = "";
 	private Map<String, String> cookies;
-	//String apisid;
-	//String gsp;
-	//String hsid;
-	//String nid ;
-	//String ogpc ;
-	//String sapisid ;
-	//String sid;
-	//String ssid ;
+	private ProgressBar bar;
 	
 	/**
 	 * Launch the application.
 	 */
-
-	/*public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					JournalSearch window = new JournalSearch();
-					window.frmGoogleScholarTool.setVisible(true);
-					
-			
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the application.
-	 */
-		
-	/**
-	 *  GET DATA FROM JTABLE
-	 * */
 
 	
 	/**
@@ -228,6 +203,13 @@ public class GoogleScholarSearch extends JFrame {
 		
 		//JMenuBar menuBar = new JMenuBar();
 		frmGoogleScholarTool.setJMenuBar(menuBar);
+		
+		try {
+			bar = new ProgressBar();
+		} catch (MalformedURLException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
 		
 		
 		//JMenu mnNewMenu = new JMenu("File");
@@ -379,6 +361,15 @@ public class GoogleScholarSearch extends JFrame {
 			{
 				//search button
 				
+				bar.setVisible(true);
+				
+				setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+				
+				rescount.setText("0");
+				
+				int count = 0;
+				int tot_j_num=0;
+				
 				int rowCount = TableModel2.getRowCount();
 				//Remove rows one by one from the end of the table
 				for (int x = rowCount - 1; x >= 0; x--) 
@@ -439,8 +430,6 @@ public class GoogleScholarSearch extends JFrame {
 //				private String[] doiArray = new String[0];
 //				private String[] gs_cited_by = new String[0];
 //				private String[] gs_abs = new String[0];
-				int count = 0;
-				int tot_j_num=0;
 				try
 				{
 					
@@ -536,6 +525,8 @@ public class GoogleScholarSearch extends JFrame {
 				            System.out.println(tot_j_num);
 				            rescount.setText("0 / " + tot_j);
 						}
+						
+						tot_j = "";
 						
 						Elements gstitle = doc.getElementsByClass("gs_ri");
 						Elements elements = doc.select("div.gs_r");
@@ -663,7 +654,10 @@ public class GoogleScholarSearch extends JFrame {
 				}while(count < tot_j_num && count < 10);
 						
 			    //for loop updating tables used to be here. moved it so it would update 10 at a time
+				
+				bar.setVisible(false);
 						
+				setCursor(null);
 				
 				}catch (Exception e)
 				{

@@ -244,11 +244,7 @@ public class ScopusSearch extends JFrame {
 				
 				try {
 					
-					
-
-					
-//						
-				
+		
 				// TODO Auto-generated method stub
 						
 				String searchTitle = titleText.getText();
@@ -336,8 +332,6 @@ public class ScopusSearch extends JFrame {
 					resultLabel.setText(Integer.toString(TableModel.getRowCount()));
 					
 					bar.setVisible(false);
-					
-					//pframe.setVisible(false);
 					
 					setCursor(null);
 				
