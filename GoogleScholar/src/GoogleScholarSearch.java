@@ -147,8 +147,8 @@ public class GoogleScholarSearch extends JFrame {
 
 	        excel.write("\n");
 	        
-	        System.out.println(model.getRowCount());
-	        System.out.println(model.getColumnCount());
+	        //System.out.println(model.getRowCount());
+	        //System.out.println(model.getColumnCount());
 	        
 	        for(int i=0; i< model.getRowCount(); i++) {
 	            for(int j=0; j < model.getColumnCount(); j++) {
@@ -443,7 +443,7 @@ public class GoogleScholarSearch extends JFrame {
 
 						do{
 						int outofexce = 0;
-						System.out.println(count);
+						//System.out.println(count);
 						
 						//working proxy list (dont use one ip too much)
 						//220.101.93.3:3128
@@ -466,7 +466,7 @@ public class GoogleScholarSearch extends JFrame {
 							
 							//add cookies (ram)
 							
-							System.out.println(url);
+							//System.out.println(url);
 							if(cookies != null)
 							{
 									 res = Jsoup.connect(url).userAgent("Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:25.0) Gecko/20100101 Firefox/25.0")  
@@ -507,7 +507,7 @@ public class GoogleScholarSearch extends JFrame {
 							
 							
 							
-						System.out.println(doc.title());
+						//System.out.println(doc.title());
 						
 						//get total number of results only on the first time around
 						if(count<10){
@@ -522,7 +522,7 @@ public class GoogleScholarSearch extends JFrame {
 				            tot_j=tot_j.trim();
 
 				            tot_j_num = Integer.parseInt(tot_j);
-				            System.out.println(tot_j_num);
+				            //System.out.println(tot_j_num);
 				            rescount.setText("0 / " + tot_j);
 						}
 						
@@ -608,7 +608,7 @@ public class GoogleScholarSearch extends JFrame {
 			            
 						
 						count+=outofexce;
-						System.out.println(outofexce);
+						//System.out.println(outofexce);
 						
 						for(int x = count-outofexce; x < count; x++)
 						{
