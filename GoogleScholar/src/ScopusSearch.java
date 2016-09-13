@@ -104,6 +104,7 @@ public class ScopusSearch extends JFrame {
 	private final JLabel lblMaximumResultPer = new JLabel("Maximum result per search");
 	private final JTextField MaxText = new JTextField();
 	private ProgressBar bar;
+	private final JMenuItem mntmShowDefaultCsv = new JMenuItem("Show Default CSV");
 	
 	
 	/**
@@ -167,6 +168,32 @@ public class ScopusSearch extends JFrame {
 		
 		
 		mnFile.add(mntmNewMenuItem_1);
+		
+		mntmShowDefaultCsv.addActionListener(new ActionListener()
+		{
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				
+				String dir = "Working Directory = " +
+			              System.getProperty("user.dir");
+				
+//				System.out.println("Working Directory = " +
+//			              System.getProperty("user.dir"));
+				
+				JFrame frame = new JFrame("Scholar search tool");
+			    
+			    // show a joptionpane dialog using showMessageDialog
+			    JOptionPane.showMessageDialog(frame,
+			        "The default CSV file is saved in: \n'" + dir + "ScopusTemp.csv"+".");
+				
+			}
+			
+		});
+		
+		
+		mnFile.add(mntmShowDefaultCsv);
 		
 		mnFile.add(mntmExit);
 		
@@ -323,6 +350,8 @@ public class ScopusSearch extends JFrame {
 						scopus.SetKeyWord(sourceTitle);
 						scopus.Search(8);
 					}
+					
+					scopus.WriteToExcel();
 					
 					for(Result x : scopus.GetResults())
 					{

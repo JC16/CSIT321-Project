@@ -1,101 +1,26 @@
 Year,Author,Title,Url
-"2013","Lotfy P.","Performance evaluation of AODV under dos attacks",https://www.scopus.com/inward/record.uri?partnerID=HzOxMe3b&scp=84881453314&origin=inward
-"2012","Farajollah-Zadeh L.","Intra-mode topology control scheduling: Based on the learning automata",https://www.scopus.com/inward/record.uri?partnerID=HzOxMe3b&scp=84866151674&origin=inward
-"2015","Liu J.","A novel OLSR protocol with mobility prediction",https://www.scopus.com/inward/record.uri?partnerID=HzOxMe3b&scp=84964265991&origin=inward
-"2014","Sharma D.","AODV-OF: An overhearing based reactive routing protocol for mobile Ad hoc networks",https://www.scopus.com/inward/record.uri?partnerID=HzOxMe3b&scp=84903831941&origin=inward
-"2013","Keshavarz H.","Using routing table flag to improve performance of AODV routing protocol for VANETs environment",https://www.scopus.com/inward/record.uri?partnerID=HzOxMe3b&scp=84876250401&origin=inward
-"2007","Lee Y.","A lightweight implementation of RSVP-TE protocol for MPLS-TE signaling",https://www.scopus.com/inward/record.uri?partnerID=HzOxMe3b&scp=33947192449&origin=inward
-"2016","Anand C.","Localized DoS Attack Detection Architecture for Reliable Data Transmission Over Wireless Sensor Network",https://www.scopus.com/inward/record.uri?partnerID=HzOxMe3b&scp=84960434885&origin=inward
-"2010","Yujun L.","The research on an AODV-BRL to increase reliability and reduce routing overhead in MANET",https://www.scopus.com/inward/record.uri?partnerID=HzOxMe3b&scp=78649535307&origin=inward
-"2013","Mostajeran E.","A novel improved neighbor discovery method for an Intelligent-AODV in Mobile Ad hoc Networks",https://www.scopus.com/inward/record.uri?partnerID=HzOxMe3b&scp=84883478234&origin=inward
-"2011","Qin D.","Self-adaptive broadcasting algorithm based on a fairly converging model for mobile Ad Hoc network",https://www.scopus.com/inward/record.uri?partnerID=HzOxMe3b&scp=79958745528&origin=inward
-"2012","Ayash M.","Improved AODV routing protocol to cope with high overhead in high mobility MANETs",https://www.scopus.com/inward/record.uri?partnerID=HzOxMe3b&scp=84867726555&origin=inward
-"2005","Lee Y.","Implementing a scalable RSVP-TE protocol reducing message overhead in MPLS network",https://www.scopus.com/inward/record.uri?partnerID=HzOxMe3b&scp=84867380968&origin=inward
-"2005","Gu J.","Overhead reducing method for link state based routing protocols in Ad hoc networks",https://www.scopus.com/inward/record.uri?partnerID=HzOxMe3b&scp=24344435909&origin=inward
-"2015","Jacobsson M.","Estimating packet delivery ratio for arbitrary packet sizes over wireless links",https://www.scopus.com/inward/record.uri?partnerID=HzOxMe3b&scp=84927749861&origin=inward
-"2010","Shirali M.","Topology control scheduling: Based on the distributed learning automata",https://www.scopus.com/inward/record.uri?partnerID=HzOxMe3b&scp=78549242658&origin=inward
-"2000","Jacobi J.","Hello, get me rewrite",https://www.scopus.com/inward/record.uri?partnerID=HzOxMe3b&scp=77950634643&origin=inward
-"2010","Egeland G.","A model for the loss of hello-messages in a wireless mesh network",https://www.scopus.com/inward/record.uri?partnerID=HzOxMe3b&scp=77955384534&origin=inward
-"2012","Liu A.","Research on the scheme that LEACH resist HELLO flooding attack",https://www.scopus.com/inward/record.uri?partnerID=HzOxMe3b&scp=84861954630&origin=inward
-"1999","Anon","Hello Europe",https://www.scopus.com/inward/record.uri?partnerID=HzOxMe3b&scp=0033356684&origin=inward
-"2004","","The best known brand of wood-free brush-coated papers in Europe. PaperNet to distribute Hello",https://www.scopus.com/inward/record.uri?partnerID=HzOxMe3b&scp=23144439604&origin=inward
-"2012","Valera A.","Analysis of Hello-based link failure detection in wireless ad hoc networks",https://www.scopus.com/inward/record.uri?partnerID=HzOxMe3b&scp=84871940639&origin=inward
-"2014","Carah N.","Profiling Hello Sunday Morning: Who are the participants?",https://www.scopus.com/inward/record.uri?partnerID=HzOxMe3b&scp=84906458624&origin=inward
-"2007","Razafindralambo T.","Analysis of the impact of hello protocol parameters over a wireless network self-organization",https://www.scopus.com/inward/record.uri?partnerID=HzOxMe3b&scp=42149145259&origin=inward
-"2014","Choi Y.","Improvement of AODV routing protocol through dynamic route change using hello message",https://www.scopus.com/inward/record.uri?partnerID=HzOxMe3b&scp=84920135544&origin=inward
-"2004","","Hello!",https://www.scopus.com/inward/record.uri?partnerID=HzOxMe3b&scp=69349106300&origin=inward
-"2016","Bai J.","Hello message scheme enhancement in CRMANET",https://www.scopus.com/inward/record.uri?partnerID=HzOxMe3b&scp=84978099925&origin=inward
-"2013","Li C.","Hello scheme for vehicular ad hoc networks: Analysis and design",https://www.scopus.com/inward/record.uri?partnerID=HzOxMe3b&scp=84878060922&origin=inward
-"2016","Son T.","Fuzzy inference system for mobility prediction to control HELLO broadcasting in MANET",https://www.scopus.com/inward/record.uri?partnerID=HzOxMe3b&scp=84961127458&origin=inward
-"2002","Chakeres I.","The utility of hello messages for determining link connectivity",https://www.scopus.com/inward/record.uri?partnerID=HzOxMe3b&scp=34047192060&origin=inward
-"2005","Giruka V.","Hello protocols for ad-hoc networks: Overhead and accuracy tradeoffs",https://www.scopus.com/inward/record.uri?partnerID=HzOxMe3b&scp=47049116040&origin=inward
-"2004","Hong S.","A Synchronized Hello Exchange Mechanism to enhance IEEE 802.11 PSM in mobile Ad hoc network",https://www.scopus.com/inward/record.uri?partnerID=HzOxMe3b&scp=13944263606&origin=inward
-"2013","Adel-Aissanou K.","A stochastic model to study the impact of the transmission frequency of hello messages on the connectivity of ad hoc networks",https://www.scopus.com/inward/record.uri?partnerID=HzOxMe3b&scp=84920255779&origin=inward
-"2016","Mahajan M.","Design and Simulation of a Blacklisting Technique for Detection of Hello flood Attack on LEACH Protocol",https://www.scopus.com/inward/record.uri?partnerID=HzOxMe3b&scp=84964886459&origin=inward
-"2005","Mase K.","Multihop hello guided routing-reactive for mobile ad hoc networks",https://www.scopus.com/inward/record.uri?partnerID=HzOxMe3b&scp=67649130544&origin=inward
-"2014","Magotra S.","Detection of HELLO flood attack on LEACH protocol",https://www.scopus.com/inward/record.uri?partnerID=HzOxMe3b&scp=84899070224&origin=inward
-"2013","Fang S.","Characterization of hello message exchange to estimate sensor node's neighborhood residual energy distribution in initialization phase",https://www.scopus.com/inward/record.uri?partnerID=HzOxMe3b&scp=84876739789&origin=inward
-"2010","Al-Doori M.","Context aware architecture for sending adaptive HELLO messages in VANET",https://www.scopus.com/inward/record.uri?partnerID=HzOxMe3b&scp=78649984109&origin=inward
-"2005","Asami S.","Differential HELLO technique for multihop wireless network routing protocols in dense environments",https://www.scopus.com/inward/record.uri?partnerID=HzOxMe3b&scp=27544465210&origin=inward
-"2005","Cobb J.","Hello again: Stabilization of the Hello protocol in OSPF",https://www.scopus.com/inward/record.uri?partnerID=HzOxMe3b&scp=22144442464&origin=inward
-"2013","Han S.","An adaptive hello messaging scheme for neighbor discovery in on-demand MANET routing protocols",https://www.scopus.com/inward/record.uri?partnerID=HzOxMe3b&scp=84878697967&origin=inward
-"2003","","Hello Digital for numerical printing",https://www.scopus.com/inward/record.uri?partnerID=HzOxMe3b&scp=11844256943&origin=inward
-"2015","Sharma D.","An adaptive hello process for overhead reduction in MANETs",https://www.scopus.com/inward/record.uri?partnerID=HzOxMe3b&scp=84957998844&origin=inward
-"2010","Oliveira R.","The impact of node's mobility on link-detection based on routing hello messages",https://www.scopus.com/inward/record.uri?partnerID=HzOxMe3b&scp=77955033527&origin=inward
-"2013","Hosany S.","Theory and strategies of anthropomorphic brand characters from Peter Rabbit, Mickey Mouse, and Ronald McDonald, to Hello Kitty",https://www.scopus.com/inward/record.uri?partnerID=HzOxMe3b&scp=84875377529&origin=inward
-"2009","Fang S.","Characterization of hello message exchange for estimating distribution of network residual energy",https://www.scopus.com/inward/record.uri?partnerID=HzOxMe3b&scp=70450239703&origin=inward
-"2007","Ingelrest F.","A turnover based adaptive HELLO protocol for mobile ad hoc and sensor networks",https://www.scopus.com/inward/record.uri?partnerID=HzOxMe3b&scp=57849136929&origin=inward
-"2013","He D.","An energy efficient adaptive HELLO algorithm for mobile ad hoc networks",https://www.scopus.com/inward/record.uri?partnerID=HzOxMe3b&scp=84889660801&origin=inward
-"2015","Rehan M.","Zoomout HELLO: A novel 1-hop broadcast scheme to improve network QoS for VANET on highways",https://www.scopus.com/inward/record.uri?partnerID=HzOxMe3b&scp=84921534647&origin=inward
-"2005","Mase K.","A novel routing paradigm for mobile ad hoc networks multihop hello guided routing (MHGR)",https://www.scopus.com/inward/record.uri?partnerID=HzOxMe3b&scp=26444446532&origin=inward
-"1993","Ichikawa S.","Cooperative route-searching behavior of multi-robot system using hello-call communication",https://www.scopus.com/inward/record.uri?partnerID=HzOxMe3b&scp=0027807898&origin=inward
-"2000","Rushton M.","Hello sailors!",https://www.scopus.com/inward/record.uri?partnerID=HzOxMe3b&scp=0034291498&origin=inward
-"2003","Jankovic S.","Greaves says hello to Hello!",https://www.scopus.com/inward/record.uri?partnerID=HzOxMe3b&scp=0037415783&origin=inward
-"2015","Fan G.","Puncture reduction in percutaneous transforaminal endoscopic discectomy with HE's Lumbar LOcation (HELLO) system: A cadaver study",https://www.scopus.com/inward/record.uri?partnerID=HzOxMe3b&scp=84958212403&origin=inward
-"2007","Lee S.","An effective local repair scheme using candidate node and hello message in AODV",https://www.scopus.com/inward/record.uri?partnerID=HzOxMe3b&scp=38149048323&origin=inward
-"2011","Gadaleta F.","Hello rootKitty: A lightweight invariance-enforcing framework",https://www.scopus.com/inward/record.uri?partnerID=HzOxMe3b&scp=80054795218&origin=inward
-"2004","Prante T.","Ambient Agoras - InfoRiver, SIAM, Hello.Wall",https://www.scopus.com/inward/record.uri?partnerID=HzOxMe3b&scp=77950332670&origin=inward
-"2008","Lai A.","Ignoring Hello Kitty: Globalization and resistance in Austria",https://www.scopus.com/inward/record.uri?partnerID=HzOxMe3b&scp=38649094611&origin=inward
-"2007","Dolinsky M.","Hello World (Illuminated Script)",https://www.scopus.com/inward/record.uri?partnerID=HzOxMe3b&scp=35348865073&origin=inward
-"2004","Jang S.","Hello-fish: Interacting with pet fishes through animated digital wallpaper on a screen",https://www.scopus.com/inward/record.uri?partnerID=HzOxMe3b&scp=35048831515&origin=inward
-"2014","Sun W.","Hello: A generic flexible protocol for neighbor discovery",https://www.scopus.com/inward/record.uri?partnerID=HzOxMe3b&scp=84904414125&origin=inward
-"2015","Fan G.","Significant improvement of puncture accuracy and fluoroscopy reduction in percutaneous transforaminal endoscopic discectomy with novel lumbar location system preliminary report of prospective hello study",https://www.scopus.com/inward/record.uri?partnerID=HzOxMe3b&scp=84952685602&origin=inward
-"2015","Isomura K.","The evolution of characters business models in Japan: Duffy, Hello Kitty, and Kumamon",https://www.scopus.com/inward/record.uri?partnerID=HzOxMe3b&scp=84937566492&origin=inward
-"2012","Van Dongen J.","Exploring the reach and program use of hello world, an email-based health promotion program for pregnant women in the Netherlands",https://www.scopus.com/inward/record.uri?partnerID=HzOxMe3b&scp=84866484259&origin=inward
-"1996","Ruskay S.","Saying hello again: a new approach to bereavement counseling.",https://www.scopus.com/inward/record.uri?partnerID=HzOxMe3b&scp=0030320662&origin=inward
-"2005","Clendenin M.","'Hello software' Taiwan's mantra",https://www.scopus.com/inward/record.uri?partnerID=HzOxMe3b&scp=25644453405&origin=inward
-"2011","Scharinger M.","You had me at "Hello": Rapid extraction of dialect information from spoken words",https://www.scopus.com/inward/record.uri?partnerID=HzOxMe3b&scp=79957451861&origin=inward
-"2012","Tibbles A.","Hello Sailor! How maritime museums are addressing the experience of gay seafarers",https://www.scopus.com/inward/record.uri?partnerID=HzOxMe3b&scp=84858217574&origin=inward
-"2013","Hiyama M.","Performance analysis of OLSR with ETX-ff for different HELLO packet interval in a MANET testbed",https://www.scopus.com/inward/record.uri?partnerID=HzOxMe3b&scp=84881165423&origin=inward
-"2008","Erbaugh M.","China expands its courtesy: Saying "hello" to Strangers",https://www.scopus.com/inward/record.uri?partnerID=HzOxMe3b&scp=43049142297&origin=inward
-"2014","Van Den Bulck H.","Bye bye "Hello ladies?" In-vision announcers as continuity technique in a European postlinear television landscape: The case of flanders and Norway",https://www.scopus.com/inward/record.uri?partnerID=HzOxMe3b&scp=84904120605&origin=inward
-"2012","Ernst R.","Adaptive hello for the neighborhood discovery protocol",https://www.scopus.com/inward/record.uri?partnerID=HzOxMe3b&scp=84874330445&origin=inward
-"2011","Sayad Haghighi M.","Stochastic modeling of hello flooding in slotted CSMA/CA wireless sensor networks",https://www.scopus.com/inward/record.uri?partnerID=HzOxMe3b&scp=82055208345&origin=inward
-"2006","Gomez C.","AHR: A two-state adaptive mechanism for link connectivity maintenance in AODV",https://www.scopus.com/inward/record.uri?partnerID=HzOxMe3b&scp=33745934815&origin=inward
-"2007","Liu C.","High efficiency AODV routing protocol based on link availability prediction in MANETs",https://www.scopus.com/inward/record.uri?partnerID=HzOxMe3b&scp=39149112822&origin=inward
-"2007","Ren Z.","A cross-layer improved efficient AODV routing algorithm",https://www.scopus.com/inward/record.uri?partnerID=HzOxMe3b&scp=34250367543&origin=inward
-"2013","Kulla E.","Effect of AODV HELLO packets for different mobility degrees",https://www.scopus.com/inward/record.uri?partnerID=HzOxMe3b&scp=84885203793&origin=inward
-"2013","Nayebi A.","Optimum hello interval for a connected homogeneous topology in mobile wireless sensor networks",https://www.scopus.com/inward/record.uri?partnerID=HzOxMe3b&scp=84879931481&origin=inward
-"2011","Zaidi Z.","Analysis of link break detection using HELLO messages",https://www.scopus.com/inward/record.uri?partnerID=HzOxMe3b&scp=83055180323&origin=inward
-"2008","Hu G.","Improvement of routing technology based on no-hello-message for wireless sensor networks",https://www.scopus.com/inward/record.uri?partnerID=HzOxMe3b&scp=42549089763&origin=inward
-"2013","Hiyama M.","Investigating the effect of HELLO validity time of OLSR in a MANET testbed",https://www.scopus.com/inward/record.uri?partnerID=HzOxMe3b&scp=84893280604&origin=inward
-"2013","Hiyama M.","Experimental results of a manet testbed for different settings of hello packets of olsr protocol",https://www.scopus.com/inward/record.uri?partnerID=HzOxMe3b&scp=84892664091&origin=inward
-"1997","Tobe M.","Intelligent hello dial system - Natural language yellow page service on the internet",https://www.scopus.com/inward/record.uri?partnerID=HzOxMe3b&scp=0031336361&origin=inward
-"2013","Hiyama M.","Investigation of OLSR behavior for different HELLO packets intervals in a MANET testbed",https://www.scopus.com/inward/record.uri?partnerID=HzOxMe3b&scp=84881071448&origin=inward
-"2014","Zadin A.","Effect of HELLO interval duration on stable routing for mobile ad hoc networks",https://www.scopus.com/inward/record.uri?partnerID=HzOxMe3b&scp=84908428564&origin=inward
-"2015","Saghar K.","RAEED: A solution for hello flood attack",https://www.scopus.com/inward/record.uri?partnerID=HzOxMe3b&scp=84926395860&origin=inward
-"2016","Pennay A.","Hello Sunday Morning: Alcohol, (non)consumption and selfhood",https://www.scopus.com/inward/record.uri?partnerID=HzOxMe3b&scp=84958122192&origin=inward
-"2013","Sheela D.","Security services for DoS, hello flooding and traffic analysis in WSN using mobile agents",https://www.scopus.com/inward/record.uri?partnerID=HzOxMe3b&scp=84884255516&origin=inward
-"2005","Gomez C.","Evaluating performance of real ad-hoc networks using AODV with hello message mechanism for maintaining local connectivity",https://www.scopus.com/inward/record.uri?partnerID=HzOxMe3b&scp=34047209106&origin=inward
-"2015","Carah N.","Profiling hello sunday morning: Who are the participants?",https://www.scopus.com/inward/record.uri?partnerID=HzOxMe3b&scp=84920731740&origin=inward
-"2009","Cha W.","Reactive and reliable neighbor discovery protocols in wireless networks",https://www.scopus.com/inward/record.uri?partnerID=HzOxMe3b&scp=67649883241&origin=inward
-"2009","Quan S.","On parameter settings of network keep-alive protocol for failure detection",https://www.scopus.com/inward/record.uri?partnerID=HzOxMe3b&scp=74549199393&origin=inward
-"2011","Li X.","Mobility prediction based neighborhood discovery in mobile AD HOC networks",https://www.scopus.com/inward/record.uri?partnerID=HzOxMe3b&scp=79956044545&origin=inward
-"2010","Yu J.","A solution to outdated neighbor problem in wireless sensor networks",https://www.scopus.com/inward/record.uri?partnerID=HzOxMe3b&scp=77958596444&origin=inward
-"2011","Fatima M.","RDCLRP-route discovery by cross layer routing protocol for manet using fuzzy logic",https://www.scopus.com/inward/record.uri?partnerID=HzOxMe3b&scp=79955094526&origin=inward
-"2010","Ahmad-Kassem A.","Adapting dynamically neighbourhood table entry lifetime in wireless sensor networks",https://www.scopus.com/inward/record.uri?partnerID=HzOxMe3b&scp=79952130486&origin=inward
-"2012","Li C.","Adaptive fuzzy velocity-based routing for MANET",https://www.scopus.com/inward/record.uri?partnerID=HzOxMe3b&scp=81055133380&origin=inward
-"2010","Suman S.","Enhanced AODV for wireless networks",https://www.scopus.com/inward/record.uri?partnerID=HzOxMe3b&scp=77951179245&origin=inward
-"2015","Heni M.","Collision Avoidance in a Power Controller and Reactive Routing Protocol in Wireless Mobile Network",https://www.scopus.com/inward/record.uri?partnerID=HzOxMe3b&scp=84947484934&origin=inward
-"2008","Wang F.","A route flap suppression mechanism based on dynamic timers in OSPF network",https://www.scopus.com/inward/record.uri?partnerID=HzOxMe3b&scp=58349088309&origin=inward
-"2008","Wang H.","An enhanced AODV for mobile ad hoc network",https://www.scopus.com/inward/record.uri?partnerID=HzOxMe3b&scp=57849152592&origin=inward
+"1973","","Air pollution and health examined",https://www.scopus.com/inward/record.uri?partnerID=HzOxMe3b&scp=33947086704&origin=inward
+"1979","Rinse J.","Nutrition and health [4]",https://www.scopus.com/inward/record.uri?partnerID=HzOxMe3b&scp=33845559750&origin=inward
+"1986","Kirshenbaum K.","Smoking and health [3]",https://www.scopus.com/inward/record.uri?partnerID=HzOxMe3b&scp=33845374296&origin=inward
+"1989","Taber D.","Health and environment [2]",https://www.scopus.com/inward/record.uri?partnerID=HzOxMe3b&scp=33845184087&origin=inward
+"1988","","Chemistry and public health",https://www.scopus.com/inward/record.uri?partnerID=HzOxMe3b&scp=33845280216&origin=inward
+"1978","Jellinek S.","Occupational health and safety",https://www.scopus.com/inward/record.uri?partnerID=HzOxMe3b&scp=33947093924&origin=inward
+"1957","","LIVING AND WORKING CONDITIONS AND HEALTH",https://www.scopus.com/inward/record.uri?partnerID=HzOxMe3b&scp=49749167668&origin=inward
+"1979","","Radiation and health research urged at NIH",https://www.scopus.com/inward/record.uri?partnerID=HzOxMe3b&scp=33845559296&origin=inward
+"1936","","National and international health and welfare",https://www.scopus.com/inward/record.uri?partnerID=HzOxMe3b&scp=51149170410&origin=inward
+"1904","","Influence of boric acid and borax on digestion and health",https://www.scopus.com/inward/record.uri?partnerID=HzOxMe3b&scp=33645999886&origin=inward
+"1979","Weinberg F.","Nutrition and health [2]",https://www.scopus.com/inward/record.uri?partnerID=HzOxMe3b&scp=33845561606&origin=inward
+"1950","Murphy W.","Chemistry and public health",https://www.scopus.com/inward/record.uri?partnerID=HzOxMe3b&scp=33947563386&origin=inward
+"1981","Gibbs G.","IDENTIFICATION AND QUANTIFICATION OF HEALTH AND SAFETY RISKS IN MINING.",https://www.scopus.com/inward/record.uri?partnerID=HzOxMe3b&scp=0019543891&origin=inward
+"1948","BASS J.","Responsibilities and duties of Federal, state, and local health agencies",https://www.scopus.com/inward/record.uri?partnerID=HzOxMe3b&scp=84925019976&origin=inward
+"2007","George S.","The International classification of functioning, disability and health (ICF) and occupational therapy ICF und Ergotherapie",https://www.scopus.com/inward/record.uri?partnerID=HzOxMe3b&scp=34548659185&origin=inward
+"1978","","Medicare and Medicaid programs; maternal and child health and crippled children's services; social services programs for individuals and families--disclosure of ownership and related information: proposed rule.",https://www.scopus.com/inward/record.uri?partnerID=HzOxMe3b&scp=0018260457&origin=inward
+"1989","","From the Health Resources and Services Administration",https://www.scopus.com/inward/record.uri?partnerID=HzOxMe3b&scp=84948727111&origin=inward
+"1953","","Obesity a factor in modern nutrition and public health",https://www.scopus.com/inward/record.uri?partnerID=HzOxMe3b&scp=33947566440&origin=inward
+"2009","","The activity and future development of health physics and environmental science division of AESJ: Health physics and environmental science division",https://www.scopus.com/inward/record.uri?partnerID=HzOxMe3b&scp=67249142990&origin=inward
+"1984","Tomlinson M.","Museums and galleries: Planning and refurbishment of the public health engineering services",https://www.scopus.com/inward/record.uri?partnerID=HzOxMe3b&scp=48549108462&origin=inward
+"1924","","Ministry of health. sale of food and drugs acts. public health (milk and cream) regulations, 1912 and 1917",https://www.scopus.com/inward/record.uri?partnerID=HzOxMe3b&scp=37049156352&origin=inward
+"1993","Hanson D.","Occupational safety &amp; Health administration reform stranded",https://www.scopus.com/inward/record.uri?partnerID=HzOxMe3b&scp=33751386299&origin=inward
+"1979","","Communication research for health and family welfare",https://www.scopus.com/inward/record.uri?partnerID=HzOxMe3b&scp=0018714574&origin=inward
+"1975","Long J.","OSHA hears reaction to new health rules",https://www.scopus.com/inward/record.uri?partnerID=HzOxMe3b&scp=33847801472&origin=inward
+"1992","Layman P.","Sweden's troubled nobel industries struggles to regain fiscal health",https://www.scopus.com/inward/record.uri?partnerID=HzOxMe3b&scp=33751390788&origin=inward

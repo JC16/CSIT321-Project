@@ -499,7 +499,7 @@ public class SearchArticle{
 	public void WriteToExcel() throws Exception
 	{
 		FileWriter out = null;
-		out = new FileWriter ("Report.csv");
+		out = new FileWriter ("ScopusTemp.csv");
 				
 		out.write("Year" + "," + "Author" + "," + "Title" + "," + "Url" + "\n");
 		

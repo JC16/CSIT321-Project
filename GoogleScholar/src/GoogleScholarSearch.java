@@ -43,6 +43,7 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import gs.progressBar.ProgressBar;
+import gs.scopus.Result;
 
 import javax.swing.JTextPane;
 import javax.swing.JRadioButton;
@@ -109,6 +110,7 @@ public class GoogleScholarSearch extends JFrame {
 	private String tot_j = "";
 	private Map<String, String> cookies;
 	private ProgressBar bar;
+	private final JMenuItem mntmShowDefaultCsv = new JMenuItem("Show Default CSV");
 	
 	/**
 	 * Launch the application.
@@ -210,27 +212,7 @@ public class GoogleScholarSearch extends JFrame {
 			// TODO Auto-generated catch block
 			e2.printStackTrace();
 		}
-		
-		
-		//JMenu mnNewMenu = new JMenu("File");
-		//menuBar.add(mnNewMenu);
-		
-		/*JMenuItem mntmExit = new JMenuItem("Exit");
-		mntmExit.addActionListener(new ActionListener() 
-		{
-			public void actionPerformed(ActionEvent arg0) 
-			{
-				System.exit(0);
-			}
-		});
-		mnNewMenu.add(mntmExit);
-		
-		JMenu mnHelp = new JMenu("Help");
-		menuBar.add(mnHelp);
-		
-		JMenuItem mntmAbout = new JMenuItem("About");
-		mnHelp.add(mntmAbout);
-		*/
+	
 		menuBar.add(mnFile);
 		
 		mntmNewMenuItem_1.addActionListener(new ActionListener() 
@@ -272,6 +254,31 @@ public class GoogleScholarSearch extends JFrame {
 				System.exit(0);
 			}
 		});
+		
+		
+		mntmShowDefaultCsv.addActionListener(new ActionListener()
+		{
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				
+				String dir = "Working Directory = " +
+			              System.getProperty("user.dir");
+				
+//				System.out.println("Working Directory = " +
+//			              System.getProperty("user.dir"));
+				
+				JFrame frame = new JFrame("Scholar search tool");
+			    
+			    // show a joptionpane dialog using showMessageDialog
+			    JOptionPane.showMessageDialog(frame,
+			        "The default CSV file is saved in: \n'" + dir + "Google Temp.csv"+".");
+			}
+			
+		});
+		
+		mnFile.add(mntmShowDefaultCsv);
 		
 		
 		mnFile.add(mntmExit);
@@ -665,6 +672,8 @@ public class GoogleScholarSearch extends JFrame {
 						
 				setCursor(null);
 				
+				WriteToExcel();
+				
 				}catch (Exception e)
 				{
 			        e.printStackTrace();
@@ -834,5 +843,32 @@ public class GoogleScholarSearch extends JFrame {
 		TableModel.addColumn("Abstract");
 		TableModel.addColumn("URL");
 		
+	}
+	
+	
+	public void WriteToExcel() throws Exception
+	{
+		TableModel model = table.getModel();
+		//file.setPosixFilePermisions(f1.toPath(), EnumSet.of(OWNER_READ, OWNER_WRITE, OWNER_EXECUTE, GROUP_READ, GROUP_EXECUTE));
+        FileWriter excel = new FileWriter("Google Temp.csv");
+
+        for(int i = 0; i < model.getColumnCount(); i++){
+            excel.write(model.getColumnName(i) + ",");
+        }
+
+        excel.write("\n");
+        
+        //System.out.println(model.getRowCount());
+        //System.out.println(model.getColumnCount());
+        
+        for(int i=0; i< model.getRowCount(); i++) {
+            for(int j=0; j < model.getColumnCount(); j++) {
+            	//("\"" + x.GetYear() + "\"" + ",");
+                excel.write("\"" +model.getValueAt(i,j).toString()+ "\"" + ",");
+            }
+            excel.write("\n");
+        }
+
+        excel.close();
 	}
 }
