@@ -71,10 +71,9 @@ public class GoogleScholarSearch extends JFrame {
 	private final JMenuItem mntmPaste = new JMenuItem("Paste");
 	private final JMenuItem mntmDelete = new JMenuItem("Delete");
 	private final JMenuItem mntmCopyResult = new JMenuItem("Copy Result");
-	private final JMenu mnView = new JMenu("View");
+	private final JMenu mnView = new JMenu("Go");
 	private final JMenuItem mntmJournalImpact = new JMenuItem("Google Scholar search");
 	private final JMenuItem mntmAuthorImapct = new JMenuItem("Scopus Search");
-	private final JMenuItem mntmGeneralCitationSearch = new JMenuItem("General Search");
 	private final JMenu mnHelp = new JMenu("Help");
 	private final JMenuItem mntmAboutThisProgram = new JMenuItem("About this program");
 	private final JLabel lblNewLabel_1 = new JLabel("Year of Publication between");
@@ -111,6 +110,8 @@ public class GoogleScholarSearch extends JFrame {
 	private Map<String, String> cookies;
 	private ProgressBar bar;
 	private final JMenuItem mntmShowDefaultCsv = new JMenuItem("Show Default CSV");
+	private final JLabel lblNewLabel_7 = new JLabel("Maximum result per search");
+	private final JTextField maxResult = new JTextField();
 	
 	/**
 	 * Launch the application.
@@ -185,19 +186,22 @@ public class GoogleScholarSearch extends JFrame {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+		maxResult.setBounds(248, 290, 97, 28);
+		maxResult.setColumns(10);
 		
 		//set result counter label to zero (ram)
 		rescount.setText("0");
 		
-		yhi.setBounds(336, 280, 56, 28);
+		yhi.setBounds(346, 257, 56, 28);
 		yhi.setColumns(10);
-		ylo.setBounds(248, 280, 56, 28);
+		ylo.setBounds(248, 257, 56, 28);
 		ylo.setColumns(10);
 		
 		atleastone.setBounds(248, 99, 638, 28);
 		atleastone.setColumns(10);
 		frmGoogleScholarTool = new JFrame();
 		frmGoogleScholarTool.setFont(new Font("Dialog", Font.BOLD, 12));
+		frmGoogleScholarTool.setResizable(false);
 		frmGoogleScholarTool.setTitle("Google Scholar Search");
 		frmGoogleScholarTool.setBounds(100, 100, 1074, 727);
 		frmGoogleScholarTool.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -321,21 +325,6 @@ public class GoogleScholarSearch extends JFrame {
 		
 		mnView.add(mntmAuthorImapct);
 		
-		mntmGeneralCitationSearch.addActionListener(new ActionListener(){
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-					
-				frmGoogleScholarTool.dispose();
-				
-				GeneralSearch GFrame = new GeneralSearch();
-				GFrame.setVisible(true);
-				
-				
-			}});
-		
-		mnView.add(mntmGeneralCitationSearch);
-		
 		menuBar.add(mnHelp);
 		
 		mnHelp.add(mntmAboutThisProgram);
@@ -374,6 +363,13 @@ public class GoogleScholarSearch extends JFrame {
 				gs_cited_by.clear();
 				gs_abs.clear();
 				
+				
+				int max =100;
+				
+				if(maxResult.getText().length() >0)
+				{
+					max = Integer.parseInt(maxResult.getText());
+				}
 				
 				bar.setVisible(true);
 				
@@ -664,7 +660,7 @@ public class GoogleScholarSearch extends JFrame {
 						
 						
 						
-				}while(count < tot_j_num && count < 10);
+				}while(count < tot_j_num && count < max);
 						
 			    //for loop updating tables used to be here. moved it so it would update 10 at a time
 				
@@ -700,7 +696,7 @@ public class GoogleScholarSearch extends JFrame {
 		});
 		btnClearAll.setBounds(933, 157, 97, 20);
 		frmGoogleScholarTool.getContentPane().add(btnClearAll);
-		lblNewLabel_1.setBounds(43, 286, 181, 16);
+		lblNewLabel_1.setBounds(43, 263, 181, 16);
 		
 		frmGoogleScholarTool.getContentPane().add(lblNewLabel_1);
 		lblNewLabel_2.setBounds(43, 105, 193, 16);
@@ -710,7 +706,7 @@ public class GoogleScholarSearch extends JFrame {
 		frmGoogleScholarTool.getContentPane().add(atleastone);
 		
 		frmGoogleScholarTool.getContentPane().add(ylo);
-		lblAnd.setBounds(313, 286, 18, 16);
+		lblAnd.setBounds(316, 263, 18, 16);
 		
 		frmGoogleScholarTool.getContentPane().add(lblAnd);
 		
@@ -718,11 +714,11 @@ public class GoogleScholarSearch extends JFrame {
 		lblResult.setForeground(Color.BLACK);
 		lblResult.setBackground(new Color(255, 255, 255));
 		lblResult.setOpaque(true);
-		lblResult.setBounds(6, 320, 1062, 16);
+		lblResult.setBounds(6, 327, 1062, 16);
 		
 		frmGoogleScholarTool.getContentPane().add(lblResult);
 		lblNewLabel_3.setFont(new Font("Lucida Grande", Font.PLAIN, 12));
-		lblNewLabel_3.setBounds(43, 348, 52, 20);
+		lblNewLabel_3.setBounds(43, 355, 52, 20);
 		
 		frmGoogleScholarTool.getContentPane().add(lblNewLabel_3);
 		PaperLabel.setBounds(162, 335, 61, 16);
@@ -797,28 +793,33 @@ public class GoogleScholarSearch extends JFrame {
 		ttlbtn.setBounds(437, 175, 181, 23);
 		
 		frmGoogleScholarTool.getContentPane().add(ttlbtn);
-		lblReturnArticlesAuthored.setBounds(43, 215, 181, 16);
+		lblReturnArticlesAuthored.setBounds(43, 201, 181, 16);
 		
 		ButtonGroup group = new ButtonGroup();
 		group.add(awbtn);
 		group.add(ttlbtn);
 		
 		frmGoogleScholarTool.getContentPane().add(lblReturnArticlesAuthored);
-		lblNewLabel_6.setBounds(43, 243, 181, 16);
+		lblNewLabel_6.setBounds(43, 229, 181, 16);
 		
 		frmGoogleScholarTool.getContentPane().add(lblNewLabel_6);
 		AuthorField.setColumns(10);
-		AuthorField.setBounds(248, 209, 638, 28);
+		AuthorField.setBounds(248, 195, 638, 28);
 		
 		frmGoogleScholarTool.getContentPane().add(AuthorField);
 		publishedField.setColumns(10);
-		publishedField.setBounds(248, 240, 638, 28);
+		publishedField.setBounds(248, 223, 638, 28);
 		
 		frmGoogleScholarTool.getContentPane().add(publishedField);
 		
 		
-		rescount.setBounds(105, 352, 181, 14);
+		rescount.setBounds(107, 358, 181, 14);
 		frmGoogleScholarTool.getContentPane().add(rescount);
+		lblNewLabel_7.setBounds(43, 299, 181, 16);
+		
+		frmGoogleScholarTool.getContentPane().add(lblNewLabel_7);
+		
+		frmGoogleScholarTool.getContentPane().add(maxResult);
 		
 	}
 	

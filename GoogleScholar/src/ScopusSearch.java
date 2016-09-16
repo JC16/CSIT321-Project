@@ -63,10 +63,9 @@ public class ScopusSearch extends JFrame {
 	private final JMenuItem mntmPaste = new JMenuItem("Paste");
 	private final JMenuItem mntmDelete = new JMenuItem("Delete");
 	private final JMenuItem mntmCopyResult = new JMenuItem("Copy Result");
-	private final JMenu mnView = new JMenu("View");
+	private final JMenu mnView = new JMenu("Go");
 	private final JMenuItem mntmJournalImpact = new JMenuItem("Google Scholar Search");
 	private final JMenuItem mntmAuthorImapct = new JMenuItem("Scopus Search");
-	private final JMenuItem mntmGeneralCitationSearch = new JMenuItem("General Search");
 	private final JMenu mnHelp = new JMenu("Help");
 	private final JMenuItem mntmAboutThisProgram = new JMenuItem("About this program");
 	private final JPanel panel = new JPanel();
@@ -123,6 +122,7 @@ public class ScopusSearch extends JFrame {
 		setBounds(100, 100, 1074, 727);
 		setLocationRelativeTo(null);
 		setTitle("Scopus");
+		setResizable(false);
 		
 		setJMenuBar(menuBar);
 		
@@ -234,20 +234,6 @@ public class ScopusSearch extends JFrame {
 		
 		mnView.add(mntmAuthorImapct);
 		
-		mntmGeneralCitationSearch.addActionListener(new ActionListener(){
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-					
-				dispose();
-				
-				GeneralSearch GFrame = new GeneralSearch();
-				GFrame.setVisible(true);
-				
-			}});
-		
-		mnView.add(mntmGeneralCitationSearch);
-		
 		menuBar.add(mnHelp);
 		
 		mnHelp.add(mntmAboutThisProgram);
@@ -294,7 +280,13 @@ public class ScopusSearch extends JFrame {
 					scopus.SetApi("12073f3b09b9676bde9e2d7cff098aa0");
 					//scopus.SetMAX(100);
 					
-					scopus.SetMAX(Integer.parseInt(maxResult));
+					if(maxResult.length() >0)
+					{
+						scopus.SetMAX(Integer.parseInt(maxResult));
+					}
+					else{
+						scopus.SetMAX(25);
+					}
 					//System.out.println(Integer.parseInt(maxResult));
 					
 					bar.setVisible(true);
