@@ -35,6 +35,7 @@ public class SwingEmailSender extends JFrame {
 	private JLabel labelSubject = new JLabel("Subject: ");
 	
 	private JTextField fieldTo = new JTextField(30);
+	
 	private JTextField fieldSubject = new JTextField(30);
 	
 	private JButton buttonSend = new JButton("SEND");
@@ -82,6 +83,10 @@ public class SwingEmailSender extends JFrame {
 		
 		constraints.gridx = 1;
 		constraints.fill = GridBagConstraints.HORIZONTAL;
+		
+		fieldTo.setText("ytc426@uowmail.edu.au");
+		fieldTo.setEditable(false);
+		
 		add(fieldTo, constraints);
 		
 		constraints.gridx = 0;

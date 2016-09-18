@@ -212,6 +212,7 @@ public class GoogleScholarSearch extends JFrame {
 		
 		try {
 			bar = new ProgressBar();
+			//bar.setVisible(false);
 		} catch (MalformedURLException e2) {
 			// TODO Auto-generated catch block
 			e2.printStackTrace();

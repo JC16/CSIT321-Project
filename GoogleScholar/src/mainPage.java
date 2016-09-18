@@ -98,6 +98,7 @@ public class mainPage extends JFrame {
 		frmGoogleScholarTool.setBounds(100, 100, 1074, 727);
 		frmGoogleScholarTool.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmGoogleScholarTool.setLocationRelativeTo(null);
+		frmGoogleScholarTool.setResizable(false);
 		
 		frmGoogleScholarTool.getContentPane().setBackground(new Color(204,255,255));
 		
