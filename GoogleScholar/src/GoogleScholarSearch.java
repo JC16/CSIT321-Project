@@ -4,6 +4,7 @@ import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
@@ -34,6 +35,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
+import javax.swing.text.DefaultEditorKit;
 import javax.xml.ws.Response;
 
 import org.jsoup.Connection;
@@ -66,11 +68,9 @@ public class GoogleScholarSearch extends JFrame {
 	private final JMenuItem mntmExit = new JMenuItem("Exit");
 	
 	private final JMenu mnEdit = new JMenu("Edit");
-	private final JMenuItem mntmCut = new JMenuItem("Cut");
-	private final JMenuItem mntmCopy = new JMenuItem("Copy");
-	private final JMenuItem mntmPaste = new JMenuItem("Paste");
-	private final JMenuItem mntmDelete = new JMenuItem("Delete");
-	private final JMenuItem mntmCopyResult = new JMenuItem("Copy Result");
+	private final JMenuItem mntmCut = new JMenuItem(new DefaultEditorKit.CutAction());
+	private final JMenuItem mntmCopy = new JMenuItem(new DefaultEditorKit.CopyAction());
+	private final JMenuItem mntmPaste = new JMenuItem(new DefaultEditorKit.PasteAction());
 	private final JMenu mnView = new JMenu("Go");
 	private final JMenuItem mntmJournalImpact = new JMenuItem("Google Scholar search");
 	private final JMenuItem mntmAuthorImapct = new JMenuItem("Scopus Search");
@@ -290,15 +290,19 @@ public class GoogleScholarSearch extends JFrame {
 		
 		menuBar.add(mnEdit);
 		
+		mntmCut.setText("Cut");
+		mntmCut.setMnemonic(KeyEvent.VK_T);
+		
 		mnEdit.add(mntmCut);
+		
+		mntmCopy.setText("Copy");
+		mntmCopy.setMnemonic(KeyEvent.VK_C);
 		
 		mnEdit.add(mntmCopy);
 		
+		mntmPaste.setText("Paste");
+		mntmPaste.setMnemonic(KeyEvent.VK_P);
 		mnEdit.add(mntmPaste);
-		
-		mnEdit.add(mntmDelete);
-		
-		mnEdit.add(mntmCopyResult);
 		
 		menuBar.add(mnView);
 		
