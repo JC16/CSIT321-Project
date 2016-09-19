@@ -100,7 +100,7 @@ public class mainPage extends JFrame {
 		frmGoogleScholarTool.setLocationRelativeTo(null);
 		frmGoogleScholarTool.setResizable(false);
 		
-		frmGoogleScholarTool.getContentPane().setBackground(new Color(204,255,255));
+		frmGoogleScholarTool.getContentPane().setBackground(new Color(224,255,255));
 		
 		
 		frmGoogleScholarTool.getContentPane().setLayout(null);

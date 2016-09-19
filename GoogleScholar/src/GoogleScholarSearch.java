@@ -206,6 +206,7 @@ public class GoogleScholarSearch extends JFrame {
 		frmGoogleScholarTool.setBounds(100, 100, 1074, 727);
 		frmGoogleScholarTool.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmGoogleScholarTool.setLocationRelativeTo(null);
+		frmGoogleScholarTool.getContentPane().setBackground(new Color(224,255,255));
 		
 		//JMenuBar menuBar = new JMenuBar();
 		frmGoogleScholarTool.setJMenuBar(menuBar);
@@ -690,6 +691,17 @@ public class GoogleScholarSearch extends JFrame {
 			public void actionPerformed(ActionEvent arg0) 
 			{
 				//clear all button
+				
+				journalt.setText("");
+				withphr.setText("");
+				publishedField.setText("");
+				AuthorField.setText("");
+				maxResult.setText("");
+				atleastone.setText("");
+				ylo.setText("");
+				yhi.setText("");
+				excl.setText("");
+				
 				
 				int rowCount = TableModel2.getRowCount();
 				//Remove rows one by one from the end of the table

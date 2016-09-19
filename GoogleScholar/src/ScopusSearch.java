@@ -123,6 +123,7 @@ public class ScopusSearch extends JFrame {
 		setLocationRelativeTo(null);
 		setTitle("Scopus");
 		setResizable(false);
+		panel.setBackground(new Color(224, 255, 255));
 		
 		setJMenuBar(menuBar);
 		
@@ -390,6 +391,14 @@ public class ScopusSearch extends JFrame {
 			public void actionPerformed(ActionEvent arg0) 
 			{
 				//clear all button
+				
+				titleText.setText("");
+				authorText.setText("");
+				DOIText.setText("");
+				ISBNText.setText("");
+				SourceTitleText.setText("");
+				MaxText.setText("");
+				YearFrom.setText("");
 				
 				int rowCount = TableModel.getRowCount();
 				//Remove rows one by one from the end of the table
