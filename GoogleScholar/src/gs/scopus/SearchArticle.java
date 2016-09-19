@@ -136,6 +136,11 @@ public class SearchArticle{
 	 8: Search Publisher for Keyword
 	 	a.SetKeyWord("pacific");
 	 	a.Search(8);
+	 9: 
+	 	a.SetKeyWord("heart");
+	 	a.SetYear(2009);
+	 	a.SetAuthor("Jacks");
+	 	a.Search(9);
 	 
 	 */
 	private void CombineUrl( int order, int mode)
@@ -159,7 +164,8 @@ public class SearchArticle{
 		}
 		else if (mode == 4)
 		{
-			this.url = source + "query=TITLE(\"" + KeyWord + "\")and(aft," + this.year + ")&apiKey=" + ApiKey + startCurr + AcceptForm;
+			this.url = source + "query=TITLE(\"" + KeyWord + "\")and(IS," + this.year + ")&apiKey=" + ApiKey + startCurr + AcceptForm;
+			System.out.println(this.url);
 		}
 		else if (mode == 5)
 		{
@@ -176,6 +182,10 @@ public class SearchArticle{
 		else if (mode == 8)
 		{
 			this.url = source + "query=SRCTITLE(" + KeyWord + ")&apiKey=" + ApiKey + startCurr + AcceptForm;
+		}
+		else if(mode ==9)
+		{
+			this.url = source + "query=TITLE(\"" + KeyWord + "\")and(IS," + this.year + ")&AUTHOR-NAME(" + author + ")&apiKey=" + ApiKey + startCurr + AcceptForm;
 		}
 		
 	}

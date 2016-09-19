@@ -298,8 +298,15 @@ public class ScopusSearch extends JFrame {
 					
 					setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
 					
-					
-					if(!searchTitle.isEmpty() && allbtn.isSelected())
+					if((!searchTitle.isEmpty() && !author.isEmpty()) && !year.isEmpty())
+					{
+						scopus.SetKeyWord(searchTitle);
+						scopus.SetAuthor(author);
+						scopus.SetYear(year);
+						System.out.println("test");
+						scopus.Search(9);
+					}
+					else if(!searchTitle.isEmpty() && allbtn.isSelected())
 					{
 						scopus.SetKeyWord(searchTitle);
 						scopus.Search(0);
@@ -318,13 +325,14 @@ public class ScopusSearch extends JFrame {
 					{
 						scopus.SetKeyWord(ISBN);
 						scopus.Search(3);
-					}
+					}	
 					else if(!searchTitle.isEmpty() && !year.isEmpty())
 					{
 						scopus.SetKeyWord(searchTitle);
 						scopus.SetYear(year);
 						scopus.Search(4);
 					}
+					
 					else if(!DOI.isEmpty())
 					{
 						scopus.SetKeyWord(DOI);
@@ -354,6 +362,7 @@ public class ScopusSearch extends JFrame {
 					{
 						TableModel.addRow(new Object[]{x.GetYear(),x.GetAuthor(),x.GetTitle(),x.GetUrl()});
 					}
+					
 					
 					resultLabel.setText(Integer.toString(TableModel.getRowCount()));
 					
@@ -598,5 +607,4 @@ public class ScopusSearch extends JFrame {
 	    }catch(IOException e){ System.out.println(e); }
 		
 	}
-	
 }
