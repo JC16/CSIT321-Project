@@ -223,6 +223,7 @@ public class ScopusSearch extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 					
 				dispose();
+				bar.dispose();
 				
 				GoogleScholarSearch jurFrame = new GoogleScholarSearch();
 				
@@ -384,7 +385,7 @@ public class ScopusSearch extends JFrame {
 		});
 		
 		panel.add(btnSearch);
-		button_1.setBounds(950, 101, 91, 20);
+		button_1.setBounds(950, 141, 91, 20);
 		
 		
 		button_1.addActionListener(new ActionListener() {

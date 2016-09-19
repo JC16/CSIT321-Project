@@ -85,7 +85,7 @@ public class GoogleScholarSearch extends JFrame {
 	private final JLabel lblResult = new JLabel("Result",SwingConstants.CENTER);
 	private final JLabel lblNewLabel_3 = new JLabel("Results:");
 	private final JLabel PaperLabel = new JLabel("");
-	private final JButton btnHelp = new JButton("Help");
+	//private final JButton btnHelp = new JButton("Help");
 	private static Pattern yearPattern = Pattern.compile(" ([12][0-9][0-9][0-9])( |$)");
 	private static Pattern citeidPattern = Pattern.compile("/scholar\\?cites=([\\d]*)\\&");
 	private static Pattern doiPattern = Pattern.compile("id=doi:([^&]*)");
@@ -322,7 +322,7 @@ public class GoogleScholarSearch extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 					
 				frmGoogleScholarTool.dispose();
-				
+				bar.dispose();
 				ScopusSearch frame = new ScopusSearch();
 				frame.setVisible(true);
 				
@@ -741,27 +741,27 @@ public class GoogleScholarSearch extends JFrame {
 		PaperLabel.setBounds(162, 335, 61, 16);
 		
 		frmGoogleScholarTool.getContentPane().add(PaperLabel);
-		btnHelp.setBounds(933, 242, 97, 20);
-		
-		btnHelp.addActionListener(new ActionListener(){
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				
-				String help = "Journal Title: Enter the name of Journal you want to look up \n"
-							+ "Jounral ISSN: Enter the ISSN of Journal you want to look up\n"
-							+ "Exclude words: Enter any addtional words that most not appear in the return papers\n"
-							+ "Year of publication: Enter the range of the year which the paper had been publish\n"
-							+ "Data Source: The Data source for searching inforamtion";
-				
-				JOptionPane.showMessageDialog(frmGoogleScholarTool, help);
-			}
-			
-		});
-		
-		
-		frmGoogleScholarTool.getContentPane().add(btnHelp);
+//		btnHelp.setBounds(933, 242, 97, 20);
+//		
+//		btnHelp.addActionListener(new ActionListener(){
+//
+//			@Override
+//			public void actionPerformed(ActionEvent e) {
+//				// TODO Auto-generated method stub
+//				
+//				String help = "Journal Title: Enter the name of Journal you want to look up \n"
+//							+ "Jounral ISSN: Enter the ISSN of Journal you want to look up\n"
+//							+ "Exclude words: Enter any addtional words that most not appear in the return papers\n"
+//							+ "Year of publication: Enter the range of the year which the paper had been publish\n"
+//							+ "Data Source: The Data source for searching inforamtion";
+//				
+//				JOptionPane.showMessageDialog(frmGoogleScholarTool, help);
+//			}
+//			
+//		});
+//		
+//		
+//		frmGoogleScholarTool.getContentPane().add(btnHelp);
 		
 		JScrollPane scroll = new JScrollPane();
 		scroll.setBounds(43, 387, 987, 262);
