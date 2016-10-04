@@ -439,24 +439,9 @@ public class GoogleScholarSearch extends JFrame {
 				String exclude = excl.getText();
 				exclude = exclude.replace(' ', '+');
 				
-			
-//				private String[] titleArray =new String[0];
-//				private String[] authorArray = new String[0];
-//				private String[] cbArray = new String[0];
-//				private String[] doiArray = new String[0];
-//				private String[] gs_cited_by = new String[0];
-//				private String[] gs_abs = new String[0];
 				try
 				{
 					
-//					
-//					private ArrayList<String> titleArray = new ArrayList<String>();
-//					private  ArrayList<String> authorArray = new ArrayList<String>();
-//					private  ArrayList<String> cbArray = new ArrayList<String>();
-//					private  ArrayList<String> doiArray = new ArrayList<String>();
-//					private  ArrayList<String> gs_cited_by = new ArrayList<String>();
-//					private  ArrayList<String> gs_abs = new ArrayList<String>();
-
 						do{
 						int outofexce = 0;
 						//System.out.println(count);

@@ -97,6 +97,8 @@ public class ScopusSearch extends JFrame {
 	private DefaultTableModel TableModel;
 	private JTable table = new JTable();
 	
+	
+	//Declear the array for combobox
 	String[] message = {"Journal","Book","Book Series","Conference Proceeding","Report","Trade Publication"};
 	
 	private final JComboBox SourceCombo = new JComboBox(message);
@@ -137,6 +139,15 @@ public class ScopusSearch extends JFrame {
 			e2.printStackTrace();
 		}
 		
+		
+		/***
+		 *
+		 *	The save to Excel button
+		 *
+		 *	Once the user click this button it will save the JTable result to an Excel file
+		 *
+		 *
+		 **/
 		mntmNewMenuItem_1.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent arg0) 
@@ -170,6 +181,14 @@ public class ScopusSearch extends JFrame {
 		
 		mnFile.add(mntmNewMenuItem_1);
 		
+		
+		/**
+		 *  The show default CSV file button
+		 *  
+		 *  Once the user click this button it will show the default backup directory for the file 
+		 * 
+		 * 
+		 * */
 		mntmShowDefaultCsv.addActionListener(new ActionListener()
 		{
 
@@ -196,6 +215,21 @@ public class ScopusSearch extends JFrame {
 		
 		mnFile.add(mntmShowDefaultCsv);
 		
+		
+		/**
+		 * The Exit button
+		 * 
+		 * Once the user click this button the program will terminate
+		 * 
+		 * */
+		mntmExit.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent arg0) 
+			{
+				System.exit(0);
+			}
+		});
+		
 		mnFile.add(mntmExit);
 		
 		menuBar.add(mnEdit);
@@ -216,6 +250,14 @@ public class ScopusSearch extends JFrame {
 		mnEdit.add(mntmPaste);
 		
 		menuBar.add(mnView);
+		
+		
+		/**
+		 * The navigation button
+		 * 
+		 * Once the user click this button it will navigate the user to the Google scholar search page
+		 * 
+		 * */
 		
 		mntmJournalImpact.addActionListener(new ActionListener(){
 
