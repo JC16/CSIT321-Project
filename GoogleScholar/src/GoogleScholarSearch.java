@@ -74,8 +74,6 @@ public class GoogleScholarSearch extends JFrame {
 	private final JMenu mnView = new JMenu("Go");
 	private final JMenuItem mntmJournalImpact = new JMenuItem("Google Scholar search");
 	private final JMenuItem mntmAuthorImapct = new JMenuItem("Scopus Search");
-	private final JMenu mnHelp = new JMenu("Help");
-	private final JMenuItem mntmAboutThisProgram = new JMenuItem("About this program");
 	private final JLabel lblNewLabel_1 = new JLabel("Year of Publication between");
 	private final JLabel lblNewLabel_2 = new JLabel("With at least one of the words:");
 	private final JTextField atleastone = new JTextField();
@@ -330,10 +328,6 @@ public class GoogleScholarSearch extends JFrame {
 		
 		
 		mnView.add(mntmAuthorImapct);
-		
-		menuBar.add(mnHelp);
-		
-		mnHelp.add(mntmAboutThisProgram);
 		
 		
 		frmGoogleScholarTool.getContentPane().setLayout(null);

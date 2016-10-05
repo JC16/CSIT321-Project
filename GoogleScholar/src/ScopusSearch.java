@@ -63,11 +63,9 @@ public class ScopusSearch extends JFrame {
 	private final JMenuItem mntmCut = new JMenuItem(new DefaultEditorKit.CutAction());
 	private final JMenuItem mntmCopy = new JMenuItem(new DefaultEditorKit.CopyAction());
 	private final JMenuItem mntmPaste = new JMenuItem(new DefaultEditorKit.PasteAction());
-	private final JMenu mnView = new JMenu("Go");
+	private final JMenu mnView = new JMenu("Go To");
 	private final JMenuItem mntmJournalImpact = new JMenuItem("Google Scholar Search");
 	private final JMenuItem mntmAuthorImapct = new JMenuItem("Scopus Search");
-	private final JMenu mnHelp = new JMenu("Help");
-	private final JMenuItem mntmAboutThisProgram = new JMenuItem("About this program");
 	private final JPanel panel = new JPanel();
 	private final JLabel lblAuthorNames = new JLabel("Title");
 	private final JTextField titleText = new JTextField();
@@ -282,10 +280,6 @@ public class ScopusSearch extends JFrame {
 		
 		
 		mnView.add(mntmAuthorImapct);
-		
-		menuBar.add(mnHelp);
-		
-		mnHelp.add(mntmAboutThisProgram);
 		
 		getContentPane().add(panel, BorderLayout.CENTER);
 		panel.setLayout(null);
