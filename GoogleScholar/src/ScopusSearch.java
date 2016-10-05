@@ -63,7 +63,7 @@ public class ScopusSearch extends JFrame {
 	private final JMenuItem mntmCut = new JMenuItem(new DefaultEditorKit.CutAction());
 	private final JMenuItem mntmCopy = new JMenuItem(new DefaultEditorKit.CopyAction());
 	private final JMenuItem mntmPaste = new JMenuItem(new DefaultEditorKit.PasteAction());
-	private final JMenu mnView = new JMenu("Go To");
+	private final JMenu mnView = new JMenu("Go");
 	private final JMenuItem mntmJournalImpact = new JMenuItem("Google Scholar Search");
 	private final JMenuItem mntmAuthorImapct = new JMenuItem("Scopus Search");
 	private final JPanel panel = new JPanel();
