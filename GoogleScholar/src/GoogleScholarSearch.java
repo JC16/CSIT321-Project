@@ -783,10 +783,10 @@ public class GoogleScholarSearch extends JFrame {
 		lblNewLabel_5.setBounds(43, 173, 153, 16);
 		
 		frmGoogleScholarTool.getContentPane().add(lblNewLabel_5);
-		awbtn.setBounds(248, 175, 181, 23);
+		awbtn.setBounds(248, 170, 181, 23);
 		awbtn.setSelected(true);
 		frmGoogleScholarTool.getContentPane().add(awbtn);
-		ttlbtn.setBounds(437, 175, 181, 23);
+		ttlbtn.setBounds(437, 170, 181, 23);
 		
 		frmGoogleScholarTool.getContentPane().add(ttlbtn);
 		lblReturnArticlesAuthored.setBounds(43, 201, 181, 16);
