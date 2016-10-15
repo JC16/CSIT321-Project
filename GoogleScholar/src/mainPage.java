@@ -35,8 +35,26 @@ import java.awt.Panel;
 import java.awt.FlowLayout;
 import java.awt.Button;
 
+
+/**
+ * 
+ * The main page of the program
+ * 
+ * In this page it will show the search options for user to choose
+ * It will also show a button connect to our home page, and a button for send us feedback 
+ * 
+ * 
+ * */
+
+
 public class mainPage extends JFrame {
 
+	
+	
+	/**
+	 * All the GUI component
+	 */
+	
 	private JFrame frmGoogleScholarTool;
 	
 	
@@ -102,7 +120,9 @@ public class mainPage extends JFrame {
 		
 		frmGoogleScholarTool.getContentPane().setBackground(new Color(224,255,255));
 		
-		
+		/**
+		 * Navigate to The Google scholar search page 
+		 */
 		frmGoogleScholarTool.getContentPane().setLayout(null);
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -115,6 +135,10 @@ public class mainPage extends JFrame {
 		});
 		btnNewButton.setBounds(140, 298, 217, 76);
 		
+		
+		/**
+		 * Navigate to The Scopus search page
+		 */
 		frmGoogleScholarTool.getContentPane().add(btnNewButton);
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -154,7 +178,11 @@ public class mainPage extends JFrame {
 		frmGoogleScholarTool.getContentPane().add(lblNewLabel_2);
 		contactBtn.setBounds(572, 570, 177, 67);
 		
-		
+		/**
+		 * Visit our page button
+		 * 
+		 * Once the user clicks the button it will open their browser connect to our home page
+		 */
 		contactBtn.addActionListener(new ActionListener(){
 
 			@Override
@@ -170,6 +198,11 @@ public class mainPage extends JFrame {
 				}
 		    	
 			}});
+		
+		/**
+		 * Open the send us feedback frame.
+		 * We the JAVA Email API to let user send us a email feedback.
+		 */
 		
 		frmGoogleScholarTool.getContentPane().add(contactBtn);
 		feedbackBtn.setBounds(797, 570, 177, 67);
