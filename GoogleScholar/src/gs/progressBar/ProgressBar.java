@@ -24,11 +24,13 @@ public class ProgressBar extends JFrame {
 	/**
 	 * Create the frame.
 	 * @throws MalformedURLException 
+	 * 
+	 * The frame used to generate the progress bar
+	 * 
 	 */
 	public ProgressBar() throws MalformedURLException {
 		
 		URL url = this.getClass().getResource("/progress/ProgressBar.gif");
-		//URL url = new URL("http://www.mytreedb.com/uploads/mytreedb/loader/ajax_loader_gray_512.gif");
 		ImageIcon icon = new ImageIcon(url);
 	    JLabel label = new JLabel(icon);
 	    label.setBounds(5, 20, 66, 66);

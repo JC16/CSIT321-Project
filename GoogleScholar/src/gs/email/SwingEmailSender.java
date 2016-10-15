@@ -24,6 +24,18 @@ import javax.swing.UIManager;
 
 import gs.email.JFilePicker;
 
+
+/**
+ * 
+ * The email sender class
+ * 
+ * THis is the class for user to input the information which they 
+ * want to send through the email
+ * 
+ * 
+ * 
+ * */
+
 public class SwingEmailSender extends JFrame {
 	private ConfigUtility configUtil = new ConfigUtility();
 	
@@ -183,19 +195,4 @@ public class SwingEmailSender extends JFrame {
 		return true;
 	}
 	
-//	public static void main(String[] args) {
-//		// set look and feel to system dependent
-//		try {
-//			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-//		} catch (Exception ex) {
-//			ex.printStackTrace();
-//		}
-//		
-//		SwingUtilities.invokeLater(new Runnable() {
-//			@Override
-//			public void run() {
-//				new SwingEmailSender().setVisible(true);
-//			}
-//		});
-//	}
 }
