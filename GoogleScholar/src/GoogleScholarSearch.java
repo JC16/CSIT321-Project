@@ -526,25 +526,36 @@ public class GoogleScholarSearch extends JFrame {
 						Elements gstitle = doc.getElementsByClass("gs_ri");
 						Elements elements = doc.select("div.gs_r");
 						
-						for (Element link:gstitle)
+						//limit the title size
+						int gs_tit_size;
+
+						if (gstitle.size() > 10){
+							gs_tit_size=10;
+						}else{
+							gs_tit_size= gstitle.size();
+						}
+						
+						
+						for (int i =0; i < gs_tit_size; i++)
 			            {
-							
-			            	String gs_rt = link.getElementsByClass("gs_rt").tagName("a").text();
-			            	gs_rt = gs_rt.replace("[PDF]", "");
+							String gs_rt = gstitle.get(i).getElementsByClass("gs_rt").tagName("a").text();
+							gs_rt = gs_rt.replace("[PDF]", "");
 			            	gs_rt = gs_rt.replace("[HTML]", "");
 			            	gs_rt = gs_rt.replace("[BOOK][B]", "");
 			            	gs_rt = gs_rt.replace("[CITATION][C]", "");
 			            	gs_rt = gs_rt.trim();
-			            	//lnk = lnk.replaceAll("[B]", "");
-			            	String gs_rs = link.getElementsByClass("gs_rs").text();
+			            	String gs_rs = gstitle.get(i).getElementsByClass("gs_rs").text();
 			                
-			            	String gs_a = link.getElementsByClass("gs_a").tagName("div").text();
+			            	String gs_a = gstitle.get(i).getElementsByClass("gs_a").tagName("div").text();
 			            	
 			            	if (gs_rt.length()!=0 && gs_a.length() !=0 ) {
 			            		titleArray.add(gs_rt);
 			            		authorArray.add(gs_a);
-			            		gs_abs.add(gs_rs);		            		
-			            	}		            	
+			            		gs_abs.add(gs_rs);
+//								System.out.println("1.\t" + titleArray.get(i));
+//								System.out.println("2.\t"+authorArray.get(i));
+//								System.out.println("3.\t"+gs_abs.get(i));
+								}
 
 
 			            }
@@ -552,22 +563,20 @@ public class GoogleScholarSearch extends JFrame {
 						for (Element element : elements)
 						{
 							outofexce++;
-						gstitle = element.select(".gs_fl a[href]");
-						for(Element link : gstitle)
-						{
-							String text = link.text();
-							//System.out.println(text);
-							if(text.startsWith("Cited by "))
+							gstitle = element.select(".gs_fl a[href]");
+							for(Element link : gstitle)
 							{
+								String text = link.text();
+								//System.out.println(text);
+								if(text.startsWith("Cited by "))
+								{
 								
-								String cited = text;
-								cited = cited.substring(9);
-								cbArray.add(cited);
-								
-																
-							}
+									String cited = text;
+									cited = cited.substring(9);
+									cbArray.add(cited);									
+								}
 							
-						}
+							}
 									
 						}
 						
@@ -601,8 +610,11 @@ public class GoogleScholarSearch extends JFrame {
 			            }
 			            
 						
+			          //limit the out of exception
+						if (outofexce>10){
+							outofexce=10;
+						}
 						count+=outofexce;
-						//System.out.println(outofexce);
 						
 						for(int x = count-outofexce; x < count; x++)
 						{
