@@ -43,6 +43,7 @@ import java.awt.Button;
  * In this page it will show the search options for user to choose
  * It will also show a button connect to our home page, and a button for send us feedback 
  * 
+ * @author YiTai Chen
  * 
  * */
 

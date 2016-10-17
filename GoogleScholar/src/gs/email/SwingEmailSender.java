@@ -29,9 +29,18 @@ import gs.email.JFilePicker;
  * 
  * The email sender class
  * 
- * THis is the class for user to input the information which they 
+ * This is the class will create a frame for user to input the information which they 
  * want to send through the email
  * 
+ * @author YiTai Chen
+ * 
+ *   Reference code
+ * 
+ *   Title: Swing application for sending e-mail
+ *   Author: www.codejava.net
+ *   Date: 2016 
+ *   Last Updated: 14 August 2015
+ *   Availability: www.codejava.net
  * 
  * 
  * */

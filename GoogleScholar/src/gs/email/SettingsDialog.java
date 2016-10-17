@@ -18,9 +18,20 @@ import javax.swing.JTextField;
 
 /**
  * Displays a setting form that allows configuring SMTP settings. 
- * @author www.codejava.net
- *
- */
+ * 
+ * 
+ * @author YiTai Chen
+ * 
+ *   Reference code
+ * 
+ *   Title: Swing application for sending e-mail
+ *   Author: www.codejava.net
+ *   Date: 2016 
+ *   Last Updated: 14 August 2015
+ *   Availability: www.codejava.net
+ * 
+ * 
+ * */
 public class SettingsDialog extends JDialog {
 
 	private ConfigUtility configUtil;

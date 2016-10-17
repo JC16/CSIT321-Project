@@ -14,11 +14,16 @@ import org.w3c.dom.NodeList;
 import org.w3c.dom.Node;
 import org.w3c.dom.Element;
 
-/*
- Author Google Scholar Group
- Date: 31-08-2016
- Purpose: Scopus Search Function
- */
+
+/**
+ * 
+ * Date: 31-08-2016
+ * Purpose: Scopus Search Function
+ * 
+ * @author Hang Zhang
+ * 
+ * 
+ * */
 
 public class SearchArticle{
 	//User input key word for searching

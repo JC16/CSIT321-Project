@@ -6,6 +6,7 @@ package gs.scopus;
  * 
  * It will save the result from Scopus
  * 
+ * @author Hang Zhang
  * 
  * */
 public class Result {

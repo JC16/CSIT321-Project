@@ -10,9 +10,19 @@ import java.util.Properties;
 
 /**
  * A utility class that reads/saves SMTP settings from/to a properties file.
- * @author www.codejava.net
- *
- */
+ * 
+ * @author YiTai Chen
+ * 
+ *   Reference code
+ * 
+ *   Title: Swing application for sending e-mail
+ *   Author: www.codejava.net
+ *   Date: 2016 
+ *   Last Updated: 14 August 2015
+ *   Availability: www.codejava.net
+ * 
+ * 
+ * */
 public class ConfigUtility {
 	private File configFile = new File("smtp.properties"); 
 	private Properties configProps;
@@ -22,7 +32,7 @@ public class ConfigUtility {
 		// sets default properties
 		defaultProps.setProperty("mail.smtp.host", "smtp.gmail.com");
 		defaultProps.setProperty("mail.smtp.port", "587");
-		defaultProps.setProperty("mail.user", "tom@gmail.com");
+		defaultProps.setProperty("mail.user", "test@gmail.com");
 		defaultProps.setProperty("mail.password", "secret");
 		defaultProps.setProperty("mail.smtp.starttls.enable", "true");
 		defaultProps.setProperty("mail.smtp.auth", "true");

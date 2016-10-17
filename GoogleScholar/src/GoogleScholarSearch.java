@@ -50,6 +50,21 @@ import gs.scopus.Result;
 import javax.swing.JTextPane;
 import javax.swing.JRadioButton;
 
+/**
+ * 
+ * The page for Google scholar search
+ * 
+ * In this case user can use the search interface we provided to do the search
+ * The user can also export the download result to a file
+ * 
+ * @author YiTai Chen, Liuyang Li, Ramteen Taheri
+ * 
+ * Work distribution
+ * 
+ * YiTai Chen: Interface design, menuBar and menuFunctionality
+ * Liuyang Li and Ramteen Taheri: The search functionality to download information from Google Scholar
+ * 
+ * */
 
 public class GoogleScholarSearch extends JFrame {
 
@@ -438,7 +453,7 @@ public class GoogleScholarSearch extends JFrame {
 					
 						do{
 						int outofexce = 0;
-						//System.out.println(count);
+						
 						
 						//working proxy list (dont use one ip too much)
 						//220.101.93.3:3128
@@ -489,20 +504,6 @@ public class GoogleScholarSearch extends JFrame {
 							//This will get you cookies
 							cookies = res.cookies();
 							
-							/*
-							apisid = res.cookie("APISID");
-							gsp = res.cookie("GSP");
-							hsid = res.cookie("HSID");
-							nid = res.cookie("NID");
-							ogpc = res.cookie("OGPC");
-							sapisid = res.cookie("SAPISID");
-							sid = res.cookie("SID");
-							ssid = res.cookie("SSID");
-							*/
-							
-							
-							
-						//System.out.println(doc.title());
 						
 						//get total number of results only on the first time around
 						if(count<10){
@@ -517,7 +518,7 @@ public class GoogleScholarSearch extends JFrame {
 				            tot_j=tot_j.trim();
 
 				            tot_j_num = Integer.parseInt(tot_j);
-				            //System.out.println(tot_j_num);
+				            
 				            rescount.setText("0 / " + tot_j);
 						}
 						
@@ -552,9 +553,7 @@ public class GoogleScholarSearch extends JFrame {
 			            		titleArray.add(gs_rt);
 			            		authorArray.add(gs_a);
 			            		gs_abs.add(gs_rs);
-//								System.out.println("1.\t" + titleArray.get(i));
-//								System.out.println("2.\t"+authorArray.get(i));
-//								System.out.println("3.\t"+gs_abs.get(i));
+
 								}
 
 
@@ -589,11 +588,11 @@ public class GoogleScholarSearch extends JFrame {
 			                int find_url = String.valueOf(all_url).indexOf("/scholar?cites=");
 			                if (find_url != -1){
 			                    String temp_url = all_url.toString();
-			                    //temp_html[counter] = temp_url;
+			                    
 			                    String [] split_half = temp_url.split("<a href=\"");
 			                    for (int o = 0; o < split_half.length;o++){
 			                        if (split_half[o].trim() !="" && split_half[o]!=null){
-			                            //System.out.println(test[o]);
+			                            
 			                            temp_url = split_half[o];
 			                            String[] test2 = temp_url.split("\"",2);
 			                            for (int k = 0; k < test2.length;k++){
@@ -629,32 +628,17 @@ public class GoogleScholarSearch extends JFrame {
 							{
 								year = "n/a";
 							}
-
-							//TableModel.addRow(new Object[]{false, "col3", authorArray[x], titleArray[x], year});
-							//TableModel.addRow(new Object[]{false, "col3", authorArray[x], titleArray[x], year,"hello","hello","hello"});
 							
 							rescount.setText(count + " / " + tot_j_num); 
 							rescount.paintImmediately(rescount.getVisibleRect());
 							
-							//int row = table.getRowCount();
-							//TableModel.insertRow(row, new Object[]{false, cbArray.get(x), authorArray.get(x), titleArray.get(x), year, gs_abs.get(x), gs_cited_by.get(x)});
-							//
 							DefaultTableModel model = (DefaultTableModel) table.getModel();
 							
-							//Object[] obj = new Object[]{false, cbArray.get(x), authorArray.get(x), titleArray.get(x), year, gs_abs.get(x), gs_cited_by.get(x) };
 							model.addRow(new Object[]{cbArray.get(x), authorArray.get(x), titleArray.get(x), year, gs_abs.get(x), gs_cited_by.get(x)});
 							model.fireTableChanged(null);
 							table.repaint();
-							//TableModel2.insertRow(row, obj);
-							//TableModel2.fireTableDataChanged();
-							//table.invalidate();
-							//table.repaint();
-							//System.out.println( authorArray.get(x));
-							
+						
 						}
-						
-						//Thread.sleep(3000 + (int)(Math.random() * 8000));
-						
 						
 						
 				}while(count < tot_j_num && count < max);
@@ -732,27 +716,6 @@ public class GoogleScholarSearch extends JFrame {
 		PaperLabel.setBounds(162, 335, 61, 16);
 		
 		frmGoogleScholarTool.getContentPane().add(PaperLabel);
-//		btnHelp.setBounds(933, 242, 97, 20);
-//		
-//		btnHelp.addActionListener(new ActionListener(){
-//
-//			@Override
-//			public void actionPerformed(ActionEvent e) {
-//				// TODO Auto-generated method stub
-//				
-//				String help = "Journal Title: Enter the name of Journal you want to look up \n"
-//							+ "Jounral ISSN: Enter the ISSN of Journal you want to look up\n"
-//							+ "Exclude words: Enter any addtional words that most not appear in the return papers\n"
-//							+ "Year of publication: Enter the range of the year which the paper had been publish\n"
-//							+ "Data Source: The Data source for searching inforamtion";
-//				
-//				JOptionPane.showMessageDialog(frmGoogleScholarTool, help);
-//			}
-//			
-//		});
-//		
-//		
-//		frmGoogleScholarTool.getContentPane().add(btnHelp);
 		
 		JScrollPane scroll = new JScrollPane();
 		scroll.setBounds(43, 387, 987, 262);
@@ -858,7 +821,6 @@ public class GoogleScholarSearch extends JFrame {
 	public void WriteToExcel() throws Exception
 	{
 		TableModel model = table.getModel();
-		//file.setPosixFilePermisions(f1.toPath(), EnumSet.of(OWNER_READ, OWNER_WRITE, OWNER_EXECUTE, GROUP_READ, GROUP_EXECUTE));
         FileWriter excel = new FileWriter("Google Temp.csv");
 
         for(int i = 0; i < model.getColumnCount(); i++){
@@ -866,10 +828,7 @@ public class GoogleScholarSearch extends JFrame {
         }
 
         excel.write("\n");
-        
-        //System.out.println(model.getRowCount());
-        //System.out.println(model.getColumnCount());
-        
+                
         for(int i=0; i< model.getRowCount(); i++) {
             for(int j=0; j < model.getColumnCount(); j++) {
             	//("\"" + x.GetYear() + "\"" + ",");

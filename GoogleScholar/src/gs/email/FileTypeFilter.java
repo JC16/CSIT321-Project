@@ -3,6 +3,22 @@ package gs.email;
 import java.io.File;
 import javax.swing.filechooser.FileFilter;
 
+/**
+ * 
+ * Check the attachemtn file type
+ * 
+ * @author YiTai Chen
+ * 
+ *   Reference code
+ * 
+ *   Title: Swing application for sending e-mail
+ *   Author: www.codejava.net
+ *   Date: 2016 
+ *   Last Updated: 14 August 2015
+ *   Availability: www.codejava.net
+ * 
+ * 
+ * */
 public class FileTypeFilter extends FileFilter {
 
 	private String extension;

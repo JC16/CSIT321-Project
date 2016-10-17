@@ -47,6 +47,23 @@ import javax.swing.JFileChooser;
 import javax.swing.table.TableModel;
 import javax.swing.text.DefaultEditorKit;
 
+
+/**
+ * 
+ * The page is for Scopus search
+ * 
+ * In this case user can use the search interface we provided to do the search
+ * The user can also export the download result to a file
+ * 
+ * @author YiTai Chen, Hang Zhang
+ * 
+ * Work distribution
+ * 
+ * YiTai Chen: Interface design, menuBar and menuFunctionality
+ * Hang Zhang: The search functionality to download information from Scopus
+ * 
+ * */
+
 public class ScopusSearch extends JFrame {
 
 	private JPanel contentPane;

@@ -10,6 +10,22 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+/**
+ * 
+ * Pick the file for attachment
+ * 
+ * @author YiTai Chen
+ * 
+ *   Reference code
+ * 
+ *   Title: Swing application for sending e-mail
+ *   Author: www.codejava.net
+ *   Date: 2016 
+ *   Last Updated: 14 August 2015
+ *   Availability: www.codejava.net
+ * 
+ * 
+ * */
 public class JFilePicker extends JPanel {
 	private String textFieldLabel;
 	private String buttonLabel;

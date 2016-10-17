@@ -20,9 +20,19 @@ import javax.mail.internet.MimeMultipart;
 
 /**
  * A utility class that sends an e-mail message with attachments.
- * @author www.codejava.net
- *
- */
+ * 
+ * @author YiTai Chen
+ * 
+ *   Reference code
+ * 
+ *   Title: Swing application for sending e-mail
+ *   Author: www.codejava.net
+ *   Date: 2016 
+ *   Last Updated: 14 August 2015
+ *   Availability: www.codejava.net
+ * 
+ * 
+ * */
 public class EmailUtility {
 	public static void sendEmail(Properties smtpProperties, String toAddress,
 			String subject, String message, File[] attachFiles)

@@ -24,6 +24,8 @@ public class ProgressBar extends JFrame {
 	/**
 	 * Create the frame.
 	 * @throws MalformedURLException 
+	 * @author YiTai Chen
+	 * 
 	 * 
 	 * The frame used to generate the progress bar
 	 * 
